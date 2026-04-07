@@ -280,8 +280,9 @@ function renderBottomNav() {
   const isProjets = current === 'projets' || current === 'transmission';
 
   const mainItems = [
-    { href: 'expertise.html', icon: '✦',  label: 'Expertise', key: 'expertise' },
     { href: 'index.html',     icon: '🏠', label: 'Accueil',   key: 'accueil'   },
+    { href: 'expertise.html', icon: '✦',  label: 'Expertise', key: 'expertise' },
+    { href: 'projets.html',   icon: '💼', label: 'Projets',   key: 'projets'   },
     { href: 'a-propos.html',  icon: '👤', label: 'À propos',  key: 'a-propos'  },
   ];
 
@@ -314,10 +315,6 @@ function renderBottomNav() {
       </button>
 
       <div class="bottom-sheet" id="bottom-sheet" aria-hidden="true" role="menu">
-        <a href="projets.html" class="bottom-sheet-item${current === 'projets' ? ' active' : ''}" role="menuitem">
-          <span class="bottom-sheet-icon" aria-hidden="true">💼</span>
-          <span>Projets</span>
-        </a>
         <a href="transmission.html#enseignement" class="bottom-sheet-item${current === 'transmission' ? ' active' : ''}" role="menuitem">
           <span class="bottom-sheet-icon" aria-hidden="true">🎓</span>
           <span>Enseignement</span>
