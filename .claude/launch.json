@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Site Karine (npx serve)",
+      "runtimeExecutable": "/Users/Karine/.nvm/versions/node/v22.16.0/bin/node",
+      "runtimeArgs": ["/Users/Karine/Desktop/site-web-free/server.js"],
+      "port": 3000,
+      "autoPort": true
+    }
+  ]
+}

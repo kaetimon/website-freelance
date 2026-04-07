@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx --version)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(grep -rn \"\"card\"\" /Users/Karine/Desktop/site-web-free/*.html)",
+      "Bash(xargs ls:*)",
+      "Read(//usr/local/lib/node_modules/npm/bin/**)",
+      "Read(//Users/Karine/.nvm/versions/node/**)",
+      "Bash(/Users/Karine/.nvm/versions/node/v22.16.0/bin/node --version)",
+      "Bash(chmod +x /Users/Karine/Desktop/site-web-free/serve.sh)",
+      "Bash(xattr -d com.apple.quarantine /Users/Karine/Desktop/site-web-free/serve.sh)",
+      "Bash(xattr /Users/Karine/Desktop/site-web-free/serve.sh)",
+      "Read(//Users/Karine/Downloads/**)",
+      "Bash(python3 -c \":*)"
+    ]
+  }
+}
