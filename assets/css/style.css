@@ -1379,17 +1379,7 @@ p { color: var(--text-secondary); line-height: 1.75; }
   position: relative;
 }
 
-/* Ligne connectrice */
-.method-steps::before {
-  content: '';
-  position: absolute;
-  top: 36px;
-  left: calc(12.5% + 24px);
-  right: calc(12.5% + 24px);
-  height: 2px;
-  background: var(--gradient-main);
-  opacity: 0.25;
-}
+/* Ligne connectrice supprimée */
 
 .method-step {
   text-align: center;
@@ -2002,6 +1992,7 @@ p { color: var(--text-secondary); line-height: 1.75; }
 }
 .tool-card-name { font-weight: 600; font-size: var(--text-sm); color: var(--text-primary); margin: 0; }
 .tool-card-use { font-size: var(--text-xs); color: var(--text-muted); margin: 0; line-height: 1.4; }
+.tool-logo-img { width: 28px; height: 28px; object-fit: contain; display: block; }
 
 /* ─── Bouton outline light (sur fond sombre CTA) ─── */
 .btn-outline-light {
@@ -2293,7 +2284,7 @@ p { color: var(--text-secondary); line-height: 1.75; }
   transform-origin: left;
   transition: transform var(--tr-base);
 }
-.format-card:hover::after { transform: scaleX(1); }
+/* .format-card hover supprimé (non cliquable) */
 .format-card-icon { font-size: 1.5rem; }
 .format-card-duration {
   display: inline-block;
@@ -2339,10 +2330,9 @@ p { color: var(--text-secondary); line-height: 1.75; }
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  transition: border-color var(--tr-fast);
   cursor: default;
 }
-.intervention-item:hover { border-color: var(--border-strong); }
+/* .intervention-item hover supprimé (non cliquable) */
 .intervention-badge {
   display: inline-flex;
   align-items: center;
@@ -2486,15 +2476,15 @@ p { color: var(--text-secondary); line-height: 1.75; }
 /* Couleurs par card : liseré images + fond body au hover */
 .pcases-grid > .pcase-card:nth-child(1) {
   --pcase-hover-bg: linear-gradient(160deg, #312E81 0%, #4F46E5 100%);
-  --pcase-ring: rgba(99, 102, 241, 0.45);
+  --pcase-ring: rgba(99, 102, 241, 0.75);
 }
 .pcases-grid > .pcase-card:nth-child(2) {
   --pcase-hover-bg: linear-gradient(160deg, #92400E 0%, #F59E0B 100%);
-  --pcase-ring: rgba(245, 158, 11, 0.5);
+  --pcase-ring: rgba(245, 158, 11, 0.8);
 }
 .pcases-grid > .pcase-card:nth-child(3) {
   --pcase-hover-bg: linear-gradient(160deg, #064E3B 0%, #10B981 100%);
-  --pcase-ring: rgba(16, 185, 129, 0.45);
+  --pcase-ring: rgba(16, 185, 129, 0.75);
 }
 
 .pcase-card {
@@ -2527,7 +2517,6 @@ p { color: var(--text-secondary); line-height: 1.75; }
   margin: var(--space-md) var(--space-md) 0;
   flex-shrink: 0;
   z-index: 2;
-  overflow: hidden;
   transition: opacity 0.3s ease, height 0.4s cubic-bezier(0.4, 0, 0.2, 1), margin 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .pcase-card:hover .pcase-visuals {
@@ -2535,6 +2524,7 @@ p { color: var(--text-secondary); line-height: 1.75; }
   height: 0;
   margin-top: 0;
   margin-bottom: 0;
+  overflow: hidden;
 }
 .pcase-img {
   position: absolute;

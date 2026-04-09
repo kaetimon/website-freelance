@@ -32,16 +32,18 @@ function getCurrentPage() {
   const parts = window.location.pathname.split('/').filter(Boolean);
   const filename = (parts[parts.length - 1] || 'index').replace(/\.html$/, '');
   const parentDir = parts.length >= 2 ? parts[parts.length - 2] : '';
-  if (filename === 'expertise')     return 'expertise';
+  if (filename === 'expertise')                          return 'expertise';
   if (filename === 'projets' || parentDir === 'projets') return 'projets';
-  if (filename === 'transmission')  return 'transmission';
-  if (filename === 'a-propos')      return 'a-propos';
+  if (filename === 'enseignement')                       return 'enseignement';
+  if (filename === 'conferences')                        return 'conferences';
+  if (filename === 'transmission')                       return 'enseignement'; // legacy
+  if (filename === 'a-propos')                           return 'a-propos';
   return 'accueil';
 }
 
 function renderHeader() {
   const current = getCurrentPage();
-  const isProjets = current === 'projets' || current === 'transmission';
+  const isProjets = current === 'projets' || current === 'enseignement' || current === 'conferences';
   const p = getPathPrefix();
 
   return `
@@ -63,7 +65,7 @@ function renderHeader() {
             </li>
 
             <li>
-              <a href="${p}expertise.html"
+              <a href="${p}expertise"
                  class="nav-link${current === 'expertise' ? ' active' : ''}"
                  ${current === 'expertise' ? 'aria-current="page"' : ''}>Expertise</a>
             </li>
@@ -87,27 +89,27 @@ function renderHeader() {
                    aria-label="Sous-menu Interventions">
                 <div class="mega-inner">
 
-                  <a href="${p}projets.html" class="mega-featured">
+                  <a href="${p}projets" class="mega-featured">
                     <div class="mega-featured-badge">Core business</div>
                     <h3 class="mega-featured-title">Interventions produit</h3>
-                    <p class="mega-featured-desc">Structuration, design et accélération de produits digitaux — pour des équipes qui veulent vraiment avancer.</p>
+                    <p class="mega-featured-desc">Structuration, design et accélération de produits digitaux, pour des équipes qui veulent vraiment avancer.</p>
                     <span class="mega-featured-cta">Voir les projets →</span>
                   </a>
 
                   <div class="mega-col mega-col-cards">
-                    <a href="${p}transmission.html#enseignement" class="mega-card${current === 'transmission' ? ' active' : ''}">
+                    <a href="${p}enseignement" class="mega-card${current === 'enseignement' ? ' active' : ''}">
                       <span class="mega-card-icon" aria-hidden="true">🎓</span>
                       <div class="mega-card-body">
                         <p class="mega-card-title">Enseignement</p>
-                        <p class="mega-card-desc">Transmission en UX, stratégie produit et comportement utilisateur.</p>
+                        <p class="mega-card-desc">Cours en école de design et management : UX, stratégie produit, cognition.</p>
                         <span class="mega-card-cta">En savoir plus →</span>
                       </div>
                     </a>
-                    <a href="${p}transmission.html#conferences" class="mega-card${current === 'transmission' ? ' active' : ''}">
+                    <a href="${p}conferences" class="mega-card${current === 'conferences' ? ' active' : ''}">
                       <span class="mega-card-icon" aria-hidden="true">🎤</span>
                       <div class="mega-card-body">
                         <p class="mega-card-title">Conférences</p>
-                        <p class="mega-card-desc">Webinaires, prises de parole et formats autour du produit et de l'expérience utilisateur.</p>
+                        <p class="mega-card-desc">Webinaires, keynotes, tables rondes et masterclasses sur le produit et l'UX.</p>
                         <span class="mega-card-cta">Voir les formats →</span>
                       </div>
                     </a>
@@ -118,7 +120,7 @@ function renderHeader() {
             </li>
 
             <li>
-              <a href="${p}a-propos.html"
+              <a href="${p}a-propos"
                  class="nav-link${current === 'a-propos' ? ' active' : ''}"
                  ${current === 'a-propos' ? 'aria-current="page"' : ''}>À propos</a>
             </li>
@@ -152,9 +154,9 @@ function renderFooter() {
   const p = getPathPrefix();
   const navItems = [
     { href: `${getHomeHref()}`,      label: 'Accueil'   },
-    { href: `${p}expertise.html`,  label: 'Expertise' },
-    { href: `${p}projets.html`,    label: 'Interventions' },
-    { href: `${p}a-propos.html`,   label: 'À propos'  },
+    { href: `${p}expertise`,  label: 'Expertise' },
+    { href: `${p}projets`,    label: 'Interventions' },
+    { href: `${p}a-propos`,   label: 'À propos'  },
   ];
 
   const navHTML = navItems
@@ -307,14 +309,14 @@ function initMobileNav() {
 
 function renderBottomNav() {
   const current = getCurrentPage();
-  const isProjets = current === 'projets' || current === 'transmission';
+  const isProjets = current === 'projets' || current === 'enseignement' || current === 'conferences';
   const p = getPathPrefix();
 
   const mainItems = [
     { href: `${getHomeHref()}`,     icon: IC_HOME,  label: 'Accueil',       key: 'accueil',  cls: ''                       },
-    { href: `${p}expertise.html`, icon: IC_STAR,  label: 'Expertise',     key: 'expertise', cls: ''                      },
-    { href: `${p}projets.html`,   icon: IC_BRIEF, label: 'Interventions', key: 'projets',  cls: ''                       },
-    { href: `${p}a-propos.html`,  icon: IC_USER,  label: 'À propos',      key: 'a-propos', cls: ' bottom-nav-item--about' },
+    { href: `${p}expertise`, icon: IC_STAR,  label: 'Expertise',     key: 'expertise', cls: ''                      },
+    { href: `${p}projets`,   icon: IC_BRIEF, label: 'Interventions', key: 'projets',  cls: ''                       },
+    { href: `${p}a-propos`,  icon: IC_USER,  label: 'À propos',      key: 'a-propos', cls: ' bottom-nav-item--about' },
   ];
 
   const itemsHTML = mainItems.map(item => {
@@ -331,14 +333,14 @@ function renderBottomNav() {
 
   // Items directs pour tablette (masqués sur mobile)
   const tabletItemsHTML = `
-    <a href="${p}transmission.html#enseignement"
-       class="bottom-nav-item bottom-nav-item--tablet${current === 'transmission' ? ' active' : ''}"
+    <a href="${p}enseignement"
+       class="bottom-nav-item bottom-nav-item--tablet${current === 'enseignement' ? ' active' : ''}"
        aria-label="Enseignement">
       <span class="bottom-nav-icon" aria-hidden="true">${IC_GRAD}</span>
       <span class="bottom-nav-label">Enseign.</span>
     </a>
-    <a href="${p}transmission.html#conferences"
-       class="bottom-nav-item bottom-nav-item--tablet${current === 'transmission' ? ' active' : ''}"
+    <a href="${p}conferences"
+       class="bottom-nav-item bottom-nav-item--tablet${current === 'conferences' ? ' active' : ''}"
        aria-label="Conférences">
       <span class="bottom-nav-icon" aria-hidden="true">${IC_MIC}</span>
       <span class="bottom-nav-label">Confér.</span>
@@ -362,15 +364,15 @@ function renderBottomNav() {
       </button>
 
       <div class="bottom-sheet" id="bottom-sheet" aria-hidden="true" role="menu">
-        <a href="${p}transmission.html#enseignement" class="bottom-sheet-item${current === 'transmission' ? ' active' : ''}" role="menuitem">
+        <a href="${p}enseignement" class="bottom-sheet-item${current === 'enseignement' ? ' active' : ''}" role="menuitem">
           <span class="bottom-sheet-icon" aria-hidden="true">${IC_GRAD}</span>
           <span>Enseignement</span>
         </a>
-        <a href="${p}transmission.html#conferences" class="bottom-sheet-item" role="menuitem">
+        <a href="${p}conferences" class="bottom-sheet-item${current === 'conferences' ? ' active' : ''}" role="menuitem">
           <span class="bottom-sheet-icon" aria-hidden="true">${IC_MIC}</span>
           <span>Conférences</span>
         </a>
-        <a href="${p}a-propos.html" class="bottom-sheet-item bottom-sheet-item--about${current === 'a-propos' ? ' active' : ''}" role="menuitem">
+        <a href="${p}a-propos" class="bottom-sheet-item bottom-sheet-item--about${current === 'a-propos' ? ' active' : ''}" role="menuitem">
           <span class="bottom-sheet-icon" aria-hidden="true">${IC_USER}</span>
           <span>À propos</span>
         </a>
