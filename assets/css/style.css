@@ -2527,9 +2527,15 @@ p { color: var(--text-secondary); line-height: 1.75; }
   margin: var(--space-md) var(--space-md) 0;
   flex-shrink: 0;
   z-index: 2;
-  transition: opacity 0.35s ease;
+  overflow: hidden;
+  transition: opacity 0.3s ease, height 0.4s cubic-bezier(0.4, 0, 0.2, 1), margin 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.pcase-card:hover .pcase-visuals { opacity: 0; }
+.pcase-card:hover .pcase-visuals {
+  opacity: 0;
+  height: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
 .pcase-img {
   position: absolute;
   border-radius: var(--radius-lg);
@@ -2714,7 +2720,7 @@ p { color: var(--text-secondary); line-height: 1.75; }
 /* ── Mobile & tablette : description toujours visible, pas de hover coloré ── */
 @media (hover: none), (max-width: 1024px) {
   .pcase-card:hover { background: var(--bg-card) !important; }
-  .pcase-card:hover .pcase-visuals { opacity: 1 !important; }
+  .pcase-card:hover .pcase-visuals { opacity: 1 !important; height: 200px !important; margin: var(--space-md) var(--space-md) 0 !important; }
   .pcase-card:hover .pcase-tags .tag { background: var(--bg-alt); color: var(--violet); border-color: var(--border); }
   .pcase-card:hover .pcase-title { color: var(--text-primary); }
   .pcase-card:hover .pcase-client { color: var(--text-muted); }
