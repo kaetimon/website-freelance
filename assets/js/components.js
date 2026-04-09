@@ -23,6 +23,11 @@ function getPathPrefix() {
   return dirDepth > 0 ? '../'.repeat(dirDepth) : '';
 }
 
+function getHomeHref() {
+  const p = getPathPrefix();
+  return p === '' ? '/' : p;
+}
+
 function getCurrentPage() {
   const parts = window.location.pathname.split('/').filter(Boolean);
   const filename = (parts[parts.length - 1] || 'index').replace(/\.html$/, '');
@@ -44,7 +49,7 @@ function renderHeader() {
     <header class="site-header" id="site-header" role="banner">
       <div class="container header-inner">
 
-        <a href="${p}index.html" class="logo" aria-label="Karine Timoneda — Accueil">
+        <a href="${getHomeHref()}" class="logo" aria-label="Karine Timoneda — Accueil">
           Karine Timoneda
         </a>
 
@@ -52,7 +57,7 @@ function renderHeader() {
           <ul class="nav-list" role="list">
 
             <li>
-              <a href="${p}index.html"
+              <a href="${getHomeHref()}"
                  class="nav-link${current === 'accueil' ? ' active' : ''}"
                  ${current === 'accueil' ? 'aria-current="page"' : ''}>Accueil</a>
             </li>
@@ -146,7 +151,7 @@ function renderHeader() {
 function renderFooter() {
   const p = getPathPrefix();
   const navItems = [
-    { href: `${p}index.html`,      label: 'Accueil'   },
+    { href: `${getHomeHref()}`,      label: 'Accueil'   },
     { href: `${p}expertise.html`,  label: 'Expertise' },
     { href: `${p}projets.html`,    label: 'Interventions' },
     { href: `${p}a-propos.html`,   label: 'À propos'  },
@@ -306,7 +311,7 @@ function renderBottomNav() {
   const p = getPathPrefix();
 
   const mainItems = [
-    { href: `${p}index.html`,     icon: IC_HOME,  label: 'Accueil',       key: 'accueil',  cls: ''                       },
+    { href: `${getHomeHref()}`,     icon: IC_HOME,  label: 'Accueil',       key: 'accueil',  cls: ''                       },
     { href: `${p}expertise.html`, icon: IC_STAR,  label: 'Expertise',     key: 'expertise', cls: ''                      },
     { href: `${p}projets.html`,   icon: IC_BRIEF, label: 'Interventions', key: 'projets',  cls: ''                       },
     { href: `${p}a-propos.html`,  icon: IC_USER,  label: 'À propos',      key: 'a-propos', cls: ' bottom-nav-item--about' },
