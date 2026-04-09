@@ -4,10 +4,31 @@
  * La page active est détectée automatiquement via window.location.pathname.
  */
 
+// ─── SVG icons (monochromatic, stroke-based) ────────────────────────────────
+const IC_HOME  = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`;
+const IC_STAR  = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`;
+const IC_BRIEF = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>`;
+const IC_USER  = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`;
+const IC_GRAD  = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>`;
+const IC_MIC   = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>`;
+const IC_MORE  = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg>`;
+const IC_SUN   = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`;
+const IC_MOON  = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+
+function getPathPrefix() {
+  const parts = window.location.pathname.split('/').filter(Boolean);
+  const lastPart = parts[parts.length - 1] || '';
+  const isFile = lastPart.includes('.');
+  const dirDepth = isFile ? parts.length - 1 : parts.length;
+  return dirDepth > 0 ? '../'.repeat(dirDepth) : '';
+}
+
 function getCurrentPage() {
-  const filename = window.location.pathname.split('/').pop().replace(/\.html$/, '') || 'index';
+  const parts = window.location.pathname.split('/').filter(Boolean);
+  const filename = (parts[parts.length - 1] || 'index').replace(/\.html$/, '');
+  const parentDir = parts.length >= 2 ? parts[parts.length - 2] : '';
   if (filename === 'expertise')     return 'expertise';
-  if (filename === 'projets')       return 'projets';
+  if (filename === 'projets' || parentDir === 'projets') return 'projets';
   if (filename === 'transmission')  return 'transmission';
   if (filename === 'a-propos')      return 'a-propos';
   return 'accueil';
@@ -16,13 +37,14 @@ function getCurrentPage() {
 function renderHeader() {
   const current = getCurrentPage();
   const isProjets = current === 'projets' || current === 'transmission';
+  const p = getPathPrefix();
 
   return `
     <a href="#main-content" class="skip-link">Aller au contenu</a>
     <header class="site-header" id="site-header" role="banner">
       <div class="container header-inner">
 
-        <a href="index.html" class="logo" aria-label="Karine Timoneda — Accueil">
+        <a href="${p}index.html" class="logo" aria-label="Karine Timoneda — Accueil">
           Karine Timoneda
         </a>
 
@@ -30,13 +52,13 @@ function renderHeader() {
           <ul class="nav-list" role="list">
 
             <li>
-              <a href="index.html"
+              <a href="${p}index.html"
                  class="nav-link${current === 'accueil' ? ' active' : ''}"
                  ${current === 'accueil' ? 'aria-current="page"' : ''}>Accueil</a>
             </li>
 
             <li>
-              <a href="expertise.html"
+              <a href="${p}expertise.html"
                  class="nav-link${current === 'expertise' ? ' active' : ''}"
                  ${current === 'expertise' ? 'aria-current="page"' : ''}>Expertise</a>
             </li>
@@ -48,7 +70,7 @@ function renderHeader() {
                       aria-haspopup="true"
                       aria-controls="mega-projets"
                       ${isProjets ? 'aria-current="page"' : ''}>
-                Projets
+                Interventions
                 <svg class="mega-chevron" aria-hidden="true" width="12" height="12"
                      viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5"
@@ -57,20 +79,18 @@ function renderHeader() {
               </button>
 
               <div class="mega-menu" id="mega-projets" role="region"
-                   aria-label="Sous-menu Projets">
+                   aria-label="Sous-menu Interventions">
                 <div class="mega-inner">
 
-                  <!-- Carte principale — core business, mise en avant -->
-                  <a href="projets.html" class="mega-featured">
+                  <a href="${p}projets.html" class="mega-featured">
                     <div class="mega-featured-badge">Core business</div>
                     <h3 class="mega-featured-title">Interventions produit</h3>
                     <p class="mega-featured-desc">Structuration, design et accélération de produits digitaux — pour des équipes qui veulent vraiment avancer.</p>
                     <span class="mega-featured-cta">Voir les projets →</span>
                   </a>
 
-                  <!-- Colonne droite — 2 cartes secondaires -->
                   <div class="mega-col mega-col-cards">
-                    <a href="transmission.html#enseignement" class="mega-card${current === 'transmission' ? ' active' : ''}">
+                    <a href="${p}transmission.html#enseignement" class="mega-card${current === 'transmission' ? ' active' : ''}">
                       <span class="mega-card-icon" aria-hidden="true">🎓</span>
                       <div class="mega-card-body">
                         <p class="mega-card-title">Enseignement</p>
@@ -78,7 +98,7 @@ function renderHeader() {
                         <span class="mega-card-cta">En savoir plus →</span>
                       </div>
                     </a>
-                    <a href="transmission.html#conferences" class="mega-card${current === 'transmission' ? ' active' : ''}">
+                    <a href="${p}transmission.html#conferences" class="mega-card${current === 'transmission' ? ' active' : ''}">
                       <span class="mega-card-icon" aria-hidden="true">🎤</span>
                       <div class="mega-card-body">
                         <p class="mega-card-title">Conférences</p>
@@ -93,7 +113,7 @@ function renderHeader() {
             </li>
 
             <li>
-              <a href="a-propos.html"
+              <a href="${p}a-propos.html"
                  class="nav-link${current === 'a-propos' ? ' active' : ''}"
                  ${current === 'a-propos' ? 'aria-current="page"' : ''}>À propos</a>
             </li>
@@ -113,7 +133,9 @@ function renderHeader() {
 
         <a href="https://calendar.app.google/DLCuiwxWRqKBqRqp9"
            class="btn btn-primary header-cta"
-           aria-label="Prendre rendez-vous avec Karine">
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Prendre rendez-vous avec Karine (nouvelle fenêtre)">
           Discutons ✨
         </a>
 
@@ -122,11 +144,12 @@ function renderHeader() {
 }
 
 function renderFooter() {
+  const p = getPathPrefix();
   const navItems = [
-    { href: 'index.html',      label: 'Accueil'   },
-    { href: 'expertise.html',  label: 'Expertise' },
-    { href: 'projets.html',    label: 'Projets'   },
-    { href: 'a-propos.html',   label: 'À propos'  },
+    { href: `${p}index.html`,      label: 'Accueil'   },
+    { href: `${p}expertise.html`,  label: 'Expertise' },
+    { href: `${p}projets.html`,    label: 'Interventions' },
+    { href: `${p}a-propos.html`,   label: 'À propos'  },
   ];
 
   const navHTML = navItems
@@ -146,7 +169,9 @@ function renderFooter() {
             ${navHTML}
             <li>
               <a href="https://calendar.app.google/DLCuiwxWRqKBqRqp9"
-                 class="footer-nav-link footer-cta">
+                 class="footer-nav-link footer-cta"
+                 target="_blank"
+                 rel="noopener noreferrer">
                 Discutons ✨
               </a>
             </li>
@@ -154,7 +179,7 @@ function renderFooter() {
         </nav>
 
         <div class="footer-right">
-          <a href="https://linkedin.com/in/karinetimoneda"
+          <a href="https://www.linkedin.com/in/karine-timoneda/"
              target="_blank"
              rel="noopener noreferrer"
              class="linkedin-link"
@@ -278,19 +303,20 @@ function initMobileNav() {
 function renderBottomNav() {
   const current = getCurrentPage();
   const isProjets = current === 'projets' || current === 'transmission';
+  const p = getPathPrefix();
 
   const mainItems = [
-    { href: 'index.html',     icon: '🏠', label: 'Accueil',   key: 'accueil'   },
-    { href: 'expertise.html', icon: '✦',  label: 'Expertise', key: 'expertise' },
-    { href: 'projets.html',   icon: '💼', label: 'Projets',   key: 'projets'   },
-    { href: 'a-propos.html',  icon: '👤', label: 'À propos',  key: 'a-propos'  },
+    { href: `${p}index.html`,     icon: IC_HOME,  label: 'Accueil',       key: 'accueil',  cls: ''                       },
+    { href: `${p}expertise.html`, icon: IC_STAR,  label: 'Expertise',     key: 'expertise', cls: ''                      },
+    { href: `${p}projets.html`,   icon: IC_BRIEF, label: 'Interventions', key: 'projets',  cls: ''                       },
+    { href: `${p}a-propos.html`,  icon: IC_USER,  label: 'À propos',      key: 'a-propos', cls: ' bottom-nav-item--about' },
   ];
 
   const itemsHTML = mainItems.map(item => {
     const isActive = item.key === current;
     return `
       <a href="${item.href}"
-         class="bottom-nav-item${isActive ? ' active' : ''}"
+         class="bottom-nav-item${item.cls}${isActive ? ' active' : ''}"
          ${isActive ? 'aria-current="page"' : ''}
          aria-label="${item.label}">
         <span class="bottom-nav-icon" aria-hidden="true">${item.icon}</span>
@@ -298,30 +324,50 @@ function renderBottomNav() {
       </a>`;
   }).join('');
 
+  // Items directs pour tablette (masqués sur mobile)
+  const tabletItemsHTML = `
+    <a href="${p}transmission.html#enseignement"
+       class="bottom-nav-item bottom-nav-item--tablet${current === 'transmission' ? ' active' : ''}"
+       aria-label="Enseignement">
+      <span class="bottom-nav-icon" aria-hidden="true">${IC_GRAD}</span>
+      <span class="bottom-nav-label">Enseign.</span>
+    </a>
+    <a href="${p}transmission.html#conferences"
+       class="bottom-nav-item bottom-nav-item--tablet${current === 'transmission' ? ' active' : ''}"
+       aria-label="Conférences">
+      <span class="bottom-nav-icon" aria-hidden="true">${IC_MIC}</span>
+      <span class="bottom-nav-label">Confér.</span>
+    </a>`;
+
   const theme = document.documentElement.getAttribute('data-theme') || 'light';
-  const themeIcon  = theme === 'dark' ? '☀️' : '🌙';
+  const themeIcon  = theme === 'dark' ? IC_SUN  : IC_MOON;
   const themeLabel = theme === 'dark' ? 'Mode clair' : 'Mode sombre';
 
   return `
     <nav class="bottom-nav" id="bottom-nav" aria-label="Navigation principale">
       ${itemsHTML}
-      <button class="bottom-nav-item${isProjets ? ' active' : ''}"
+      ${tabletItemsHTML}
+      <button class="bottom-nav-item bottom-nav-item--mobile${isProjets ? ' active' : ''}"
               id="bottom-plus-btn"
               aria-expanded="false"
               aria-controls="bottom-sheet"
               aria-label="Plus d'options">
-        <span class="bottom-nav-icon" aria-hidden="true">⋯</span>
+        <span class="bottom-nav-icon" aria-hidden="true">${IC_MORE}</span>
         <span class="bottom-nav-label">Plus</span>
       </button>
 
       <div class="bottom-sheet" id="bottom-sheet" aria-hidden="true" role="menu">
-        <a href="transmission.html#enseignement" class="bottom-sheet-item${current === 'transmission' ? ' active' : ''}" role="menuitem">
-          <span class="bottom-sheet-icon" aria-hidden="true">🎓</span>
+        <a href="${p}transmission.html#enseignement" class="bottom-sheet-item${current === 'transmission' ? ' active' : ''}" role="menuitem">
+          <span class="bottom-sheet-icon" aria-hidden="true">${IC_GRAD}</span>
           <span>Enseignement</span>
         </a>
-        <a href="transmission.html#conferences" class="bottom-sheet-item" role="menuitem">
-          <span class="bottom-sheet-icon" aria-hidden="true">🎤</span>
+        <a href="${p}transmission.html#conferences" class="bottom-sheet-item" role="menuitem">
+          <span class="bottom-sheet-icon" aria-hidden="true">${IC_MIC}</span>
           <span>Conférences</span>
+        </a>
+        <a href="${p}a-propos.html" class="bottom-sheet-item bottom-sheet-item--about${current === 'a-propos' ? ' active' : ''}" role="menuitem">
+          <span class="bottom-sheet-icon" aria-hidden="true">${IC_USER}</span>
+          <span>À propos</span>
         </a>
         <div class="bottom-sheet-divider" role="separator"></div>
         <button class="bottom-sheet-item" id="sheet-theme-btn" role="menuitem">
@@ -364,7 +410,7 @@ function initBottomSheet() {
       const t = document.documentElement.getAttribute('data-theme') || 'light';
       const icon  = document.getElementById('sheet-theme-icon');
       const label = document.getElementById('sheet-theme-label');
-      if (icon)  icon.textContent  = t === 'dark' ? '☀️' : '🌙';
+      if (icon)  icon.innerHTML  = t === 'dark' ? IC_SUN : IC_MOON;
       if (label) label.textContent = t === 'dark' ? 'Mode clair' : 'Mode sombre';
       closeSheet();
     });
