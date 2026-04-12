@@ -3095,6 +3095,283 @@ p { color: var(--text-secondary); line-height: 1.75; }
 /* Mega menu mobile rules merged into the 768px block below */
 
 /* ===================================================
+   28b. DIAGNOSTIC INTERACTIF
+   =================================================== */
+
+/* Layout principal : 2 colonnes desktop */
+.diag-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1.55fr;
+  gap: var(--space-lg);
+  align-items: start;
+}
+
+/* ── Colonne gauche : triggers ── */
+.diag-triggers {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.diag-trigger {
+  display: grid;
+  grid-template-columns: 2.6rem 1fr 1.25rem;
+  align-items: center;
+  gap: 0.875rem;
+  width: 100%;
+  padding: 1rem 1.125rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-align: left;
+  transition: background var(--tr-base), border-color var(--tr-base), box-shadow var(--tr-base), transform var(--tr-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.diag-trigger::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--gradient-vivid);
+  opacity: 0;
+  transition: opacity var(--tr-base);
+}
+
+.diag-trigger:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-strong);
+  transform: translateX(2px);
+}
+
+.diag-trigger.is-active {
+  background: var(--bg-card);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+}
+
+.diag-trigger.is-active::before { opacity: 1; }
+
+.diag-trigger-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: var(--radius-sm);
+  background: var(--bg-alt);
+  flex-shrink: 0;
+  transition: background var(--tr-base);
+}
+
+.diag-trigger.is-active .diag-trigger-icon {
+  background: linear-gradient(135deg, rgba(109,40,217,0.12) 0%, rgba(253,56,159,0.08) 100%);
+}
+
+.diag-trigger-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.diag-trigger-title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+.diag-trigger-hint {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.diag-trigger.is-active .diag-trigger-hint { color: var(--accent-light); }
+
+/* Chevron (desktop: indicateur actif, mobile: flèche accordéon) */
+.diag-trigger-chevron {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background var(--tr-base), border-color var(--tr-base), transform var(--tr-base);
+}
+
+.diag-trigger-chevron::after {
+  content: '';
+  width: 0.4rem;
+  height: 0.4rem;
+  border-right: 2px solid var(--text-muted);
+  border-bottom: 2px solid var(--text-muted);
+  transform: rotate(-45deg) translate(-1px, 1px);
+  transition: border-color var(--tr-base);
+}
+
+.diag-trigger.is-active .diag-trigger-chevron {
+  background: var(--gradient-vivid);
+  border-color: transparent;
+}
+
+.diag-trigger.is-active .diag-trigger-chevron::after {
+  border-color: white;
+  transform: rotate(-45deg) translate(-1px, 1px);
+}
+
+/* ── Colonne droite : card solution ── */
+.diag-panels {
+  position: sticky;
+  top: calc(var(--header-height) + 1.5rem);
+}
+
+.diag-panel {
+  animation: diagFadeIn 0.28s ease;
+}
+
+@keyframes diagFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Card visuelle */
+.diag-card {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Zone visuelle — gradient + icône */
+.diag-card-visual {
+  height: 200px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Blobs décoratifs */
+.diag-card-visual::before {
+  content: '';
+  position: absolute;
+  width: 260px; height: 260px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.07);
+  top: -80px; right: -60px;
+}
+.diag-card-visual::after {
+  content: '';
+  position: absolute;
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+  bottom: -40px; left: 10px;
+}
+
+.diag-card-visual-icon {
+  font-size: 4.5rem;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 4px 20px rgba(0,0,0,0.35));
+  line-height: 1;
+}
+
+/* Gradients par item — palette projets (indigo, amber, emerald, rose, teal) */
+.diag-card-visual--0 { background: linear-gradient(140deg, #312E81 0%, #4F46E5 100%); }
+.diag-card-visual--1 { background: linear-gradient(140deg, #92400E 0%, #F59E0B 100%); }
+.diag-card-visual--2 { background: linear-gradient(140deg, #064E3B 0%, #10B981 100%); }
+.diag-card-visual--3 { background: linear-gradient(140deg, #9D174D 0%, #F472B6 100%); }
+.diag-card-visual--4 { background: linear-gradient(140deg, #0C4A6E 0%, #38BDF8 100%); }
+
+/* Zone contenu */
+.diag-card-content {
+  padding: var(--space-md);
+  background: var(--bg-card);
+}
+
+.diag-card-title {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  margin-bottom: var(--space-sm);
+}
+
+.diag-card-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.diag-card-bullets li {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: 1.5;
+  padding-left: 1.375rem;
+  position: relative;
+}
+
+.diag-card-bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.45em;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--gradient-vivid);
+}
+
+/* ── Accordéon mobile (bodies injectés par JS) ── */
+
+/* Caché sur desktop — visible uniquement en mobile */
+@media (min-width: 769px) {
+  .diag-accordion-body { display: none !important; }
+}
+
+.diag-accordion-body {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.38s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.28s ease;
+  opacity: 0;
+}
+
+.diag-accordion-body.is-open {
+  max-height: 800px;
+  opacity: 1;
+}
+
+.diag-accordion-body .diag-card {
+  margin-top: 0.5rem;
+  border-radius: var(--radius-lg);
+}
+
+.diag-accordion-body .diag-card-visual {
+  height: 140px;
+}
+
+.diag-accordion-body .diag-card-visual-icon {
+  font-size: 3rem;
+}
+
+/* ===================================================
    29. RESPONSIVE — 1024px
    =================================================== */
 @media (max-width: 1024px) {
@@ -3174,6 +3451,28 @@ p { color: var(--text-secondary); line-height: 1.75; }
 
   .expertise-preview-grid,
   .projects-preview-grid { grid-template-columns: 1fr; }
+
+  /* Diagnostic interactif → accordéon mobile */
+  .diag-wrapper {
+    display: block;
+  }
+
+  .diag-panels {
+    display: none; /* Remplacé par accordéons inline */
+  }
+
+  .diag-triggers {
+    gap: 0.375rem;
+  }
+
+  .diag-trigger {
+    flex-wrap: wrap;
+    border-radius: var(--radius-md);
+  }
+
+  .diag-trigger.is-active .diag-trigger-chevron::after {
+    transform: rotate(45deg) translate(-1px, -1px);
+  }
 
   .method-steps { grid-template-columns: 1fr; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }

@@ -100,73 +100,166 @@
           <span class="stat-label">start-ups &amp; scale-ups<br>accompagnées</span>
         </div>
         <div class="stat-card reveal">
-          <span class="stat-value count-up" aria-label="10 secteurs">10</span>
+          <span class="stat-value count-up" aria-label="10 secteurs et plus">+10</span>
           <span class="stat-label">secteurs<br>d'intervention</span>
         </div>
         <div class="stat-card reveal">
           <span class="stat-value count-up" aria-label="150 plus interfaces">+150</span>
-          <span class="stat-label">interfaces conçues</span>
+          <span class="stat-label">parcours et interfaces<br>conçus</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════ VOUS VOUS RECONNAISSEZ ? ═══════════════ -->
-  <section class="section bg-alt" aria-labelledby="pain-title">
+  <!-- ═══════════════ DIAGNOSTIC INTERACTIF ═══════════════ -->
+  <section class="section bg-alt" aria-labelledby="diag-title">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-label">Situations familières</span>
-        <h2 class="section-title" id="pain-title">Vous vous reconnaissez ?</h2>
-        <p class="section-intro">
-          Ces blocages ne sont pas des fatalités, ce sont des signaux.
-          Chacun a une solution identifiable.
-        </p>
+        <span class="section-label">Situations &amp; réponses</span>
+        <h2 class="section-title" id="diag-title">Vous vous reconnaissez&nbsp;?</h2>
+        <p class="section-intro">Ces blocages ont une logique — et une réponse concrète.</p>
       </div>
 
-      <div class="bento-grid" data-stagger="90">
+      <div class="diag-wrapper reveal" role="region" aria-label="Diagnostic interactif" data-diag>
 
-        <div class="bento-card large reveal">
-          <div class="card-accent" aria-hidden="true"></div>
-          <span class="bento-card-icon" aria-hidden="true">🗺️</span>
-          <h3>Votre roadmap grossit. Votre produit n'avance pas vraiment.</h3>
-          <p>Les priorités changent chaque semaine. Tech, sales et produit ont des listes différentes, sans arbitre. Le résultat : tout le monde bosse, mais rien n'avance vraiment.</p>
-        </div>
+        <!-- ── Gauche : symptômes ── -->
+        <div class="diag-triggers" role="tablist" aria-label="Situations rencontrées">
 
-        <div class="bento-card reveal">
-          <div class="card-accent" aria-hidden="true"></div>
-          <span class="bento-card-icon" aria-hidden="true">🔄</span>
-          <h3>Vos équipes sont bonnes. Ensemble, c'est une autre histoire.</h3>
-          <p>Tech, produit, business : chacun performe dans son couloir. À la jonction, ça coince systématiquement.</p>
-        </div>
+          <button class="diag-trigger is-active" role="tab" id="diag-tab-0" aria-controls="diag-panel-0" aria-selected="true" data-idx="0">
+            <span class="diag-trigger-icon" aria-hidden="true">🧭</span>
+            <div class="diag-trigger-body">
+              <span class="diag-trigger-title">Vision floue, décisions qui divergent</span>
+              <span class="diag-trigger-hint">Stratégie &amp; direction</span>
+            </div>
+            <span class="diag-trigger-chevron" aria-hidden="true"></span>
+          </button>
 
-        <div class="bento-card reveal">
-          <div class="card-accent" aria-hidden="true"></div>
-          <span class="bento-card-icon" aria-hidden="true">📊</span>
-          <h3>Vous lancez. Les métriques ne suivent pas.</h3>
-          <p>Releases régulières, équipe qui bosse dur, et pourtant l'adoption est décevante. L'impact business reste flou.</p>
-        </div>
+          <button class="diag-trigger" role="tab" id="diag-tab-1" aria-controls="diag-panel-1" aria-selected="false" data-idx="1">
+            <span class="diag-trigger-icon" aria-hidden="true">🔄</span>
+            <div class="diag-trigger-body">
+              <span class="diag-trigger-title">Vos équipes avancent chacune dans leur couloir</span>
+              <span class="diag-trigger-hint">Alignement &amp; collaboration</span>
+            </div>
+            <span class="diag-trigger-chevron" aria-hidden="true"></span>
+          </button>
 
-        <div class="bento-card reveal">
-          <div class="card-accent" aria-hidden="true"></div>
-          <span class="bento-card-icon" aria-hidden="true">🧭</span>
-          <h3>Vous avez une vision. Personne ne la porte vraiment.</h3>
-          <p>La stratégie existe sur papier. Dans les faits, les décisions du quotidien ne l'incarnent pas, et l'écart se creuse.</p>
-        </div>
+          <button class="diag-trigger" role="tab" id="diag-tab-2" aria-controls="diag-panel-2" aria-selected="false" data-idx="2">
+            <span class="diag-trigger-icon" aria-hidden="true">🗺️</span>
+            <div class="diag-trigger-body">
+              <span class="diag-trigger-title">Backlog plein, priorités introuvables</span>
+              <span class="diag-trigger-hint">Priorisation &amp; roadmap</span>
+            </div>
+            <span class="diag-trigger-chevron" aria-hidden="true"></span>
+          </button>
 
-        <div class="bento-card reveal">
-          <div class="card-accent" aria-hidden="true"></div>
-          <span class="bento-card-icon" aria-hidden="true">💡</span>
-          <h3>Vous construisez vite. Mais pour les bonnes raisons ?</h3>
-          <p>Les features s'accumulent, les retours utilisateurs restent flous, et personne n'est vraiment sûr que ce qui sort correspond à ce dont ils ont besoin.</p>
-        </div>
+          <button class="diag-trigger" role="tab" id="diag-tab-3" aria-controls="diag-panel-3" aria-selected="false" data-idx="3">
+            <span class="diag-trigger-icon" aria-hidden="true">📊</span>
+            <div class="diag-trigger-body">
+              <span class="diag-trigger-title">Vous livrez — l'impact reste invisible</span>
+              <span class="diag-trigger-hint">Impact &amp; mesure</span>
+            </div>
+            <span class="diag-trigger-chevron" aria-hidden="true"></span>
+          </button>
 
-        <div class="bento-card large reveal" style="grid-column: 1 / -1">
-          <div class="card-accent" aria-hidden="true"></div>
-          <span class="bento-card-icon" aria-hidden="true">⏱️</span>
-          <h3>Vous perdez du temps à décider. Vous n'avancez pas assez vite.</h3>
-          <p>Réunions infinies, consensus introuvables, décisions repoussées. Pendant ce temps, vos concurrents bougent. La vélocité décisionnelle est une compétence produit à part entière. Je peux vous aider à la développer.</p>
-        </div>
+          <button class="diag-trigger" role="tab" id="diag-tab-4" aria-controls="diag-panel-4" aria-selected="false" data-idx="4">
+            <span class="diag-trigger-icon" aria-hidden="true">🎨</span>
+            <div class="diag-trigger-body">
+              <span class="diag-trigger-title">L'interface grossit, l'usage ne suit pas</span>
+              <span class="diag-trigger-hint">Expérience &amp; interfaces</span>
+            </div>
+            <span class="diag-trigger-chevron" aria-hidden="true"></span>
+          </button>
 
+        </div><!-- /diag-triggers -->
+
+        <!-- ── Droite : card solution ── -->
+        <div class="diag-panels" aria-live="polite">
+
+          <div class="diag-panel is-active" role="tabpanel" id="diag-panel-0" aria-labelledby="diag-tab-0">
+            <div class="diag-card">
+              <div class="diag-card-visual diag-card-visual--0" aria-hidden="true">
+                <span class="diag-card-visual-icon">🧭</span>
+              </div>
+              <div class="diag-card-content">
+                <h3 class="diag-card-title">Des décisions alignées, prises plus vite</h3>
+                <ul class="diag-card-bullets">
+                  <li>Vision formulée, comprise, actionnée</li>
+                  <li>Chaque équipe sait pourquoi elle décide ce qu'elle décide</li>
+                  <li>Moins d'allers-retours, plus de vélocité</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="diag-panel" role="tabpanel" id="diag-panel-1" aria-labelledby="diag-tab-1" hidden>
+            <div class="diag-card">
+              <div class="diag-card-visual diag-card-visual--1" aria-hidden="true">
+                <span class="diag-card-visual-icon">🔄</span>
+              </div>
+              <div class="diag-card-content">
+                <h3 class="diag-card-title">Vos équipes avancent ensemble, sans friction</h3>
+                <ul class="diag-card-bullets">
+                  <li>Frictions identifiées, causes traitées</li>
+                  <li>Rituels de décision qui produisent des actions</li>
+                  <li>Moins de réunions — plus de résultats</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="diag-panel" role="tabpanel" id="diag-panel-2" aria-labelledby="diag-tab-2" hidden>
+            <div class="diag-card">
+              <div class="diag-card-visual diag-card-visual--2" aria-hidden="true">
+                <span class="diag-card-visual-icon">🗺️</span>
+              </div>
+              <div class="diag-card-content">
+                <h3 class="diag-card-title">Des priorités claires, des arbitrages assumés</h3>
+                <ul class="diag-card-bullets">
+                  <li>Critères partagés par toutes les équipes</li>
+                  <li>Roadmap = outil de pilotage, pas de promesses</li>
+                  <li>Le "non" est aussi simple à dire que le "oui"</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="diag-panel" role="tabpanel" id="diag-panel-3" aria-labelledby="diag-tab-3" hidden>
+            <div class="diag-card">
+              <div class="diag-card-visual diag-card-visual--3" aria-hidden="true">
+                <span class="diag-card-visual-icon">📊</span>
+              </div>
+              <div class="diag-card-content">
+                <h3 class="diag-card-title">Ce que vous livrez crée un impact mesurable</h3>
+                <ul class="diag-card-bullets">
+                  <li>Indicateurs définis avant le développement</li>
+                  <li>Adoption et valeur trackées en continu</li>
+                  <li>De "on a livré" à "on a créé de la valeur"</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="diag-panel" role="tabpanel" id="diag-panel-4" aria-labelledby="diag-tab-4" hidden>
+            <div class="diag-card">
+              <div class="diag-card-visual diag-card-visual--4" aria-hidden="true">
+                <span class="diag-card-visual-icon">🎨</span>
+              </div>
+              <div class="diag-card-content">
+                <h3 class="diag-card-title">Vos utilisateurs comprennent du premier coup</h3>
+                <ul class="diag-card-bullets">
+                  <li>Parcours fondés sur des comportements réels</li>
+                  <li>Interfaces simplifiées, pas appauvrées</li>
+                  <li>L'UX devient un argument commercial</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /diag-panels -->
+      </div><!-- /diag-wrapper -->
+
+      <div style="margin-top: var(--space-lg); text-align: center;" class="reveal">
+        <a href="expertise" class="btn-ghost">Voir toute mon expertise</a>
       </div>
     </div>
   </section>
@@ -216,46 +309,9 @@
     </div>
   </div>
 
-  <!-- ═══════════════ EXPERTISE PREVIEW ═══════════════ -->
-  <section class="section" aria-labelledby="ep-title">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-label">Domaines d'intervention</span>
-        <h2 class="section-title" id="ep-title">Ce sur quoi j'interviens</h2>
-        <p class="section-intro">
-          Construite sur +6 ans de terrain, toujours orientée impact, jamais sur le papier.
-        </p>
-      </div>
-
-      <div class="expertise-preview-grid" data-stagger="80">
-        <div class="expertise-preview-card reveal">
-          <span class="ep-number" aria-hidden="true">01</span>
-          <span class="ep-icon" aria-hidden="true">🎯</span>
-          <h3 class="ep-title">Stratégie &amp; vision</h3>
-          <p class="ep-desc">Définir où aller, pourquoi maintenant, et comment embarquer toute l'organisation dans la même direction.</p>
-        </div>
-        <div class="expertise-preview-card reveal">
-          <span class="ep-number" aria-hidden="true">02</span>
-          <span class="ep-icon" aria-hidden="true">🗺️</span>
-          <h3 class="ep-title">Priorisation &amp; roadmap</h3>
-          <p class="ep-desc">Décider sereinement dans un environnement qui va vite, avec des critères clairs et des arbitrages assumés.</p>
-        </div>
-        <div class="expertise-preview-card reveal">
-          <span class="ep-number" aria-hidden="true">03</span>
-          <span class="ep-icon" aria-hidden="true">🎨</span>
-          <h3 class="ep-title">Design UX/UI</h3>
-          <p class="ep-desc">Concevoir des parcours et des interfaces qui font vraiment sens : lisibles, efficaces, alignés avec vos objectifs business.</p>
-        </div>
-      </div>
-
-      <div style="margin-top: var(--space-lg); text-align: center;" class="reveal">
-        <a href="expertise" class="btn-ghost">Voir toute mon expertise</a>
-      </div>
-    </div>
-  </section>
 
   <!-- ═══════════════ MÉTHODE ═══════════════ -->
-  <section class="section bg-alt" aria-labelledby="method-title">
+  <section class="section" aria-labelledby="method-title">
     <div class="container">
       <div class="section-header centered reveal">
         <span class="section-label">La méthode</span>
@@ -289,7 +345,7 @@
   </section>
 
   <!-- ═══════════════ TÉMOIGNAGES ═══════════════ -->
-  <section class="section" aria-labelledby="testimonials-title">
+  <section class="section bg-alt" aria-labelledby="testimonials-title">
     <div class="container">
       <div class="section-header centered reveal">
         <span class="section-label">Ce qu'on dit</span>
@@ -527,7 +583,7 @@
   </div>
 
   <!-- ═══════════════ PROJETS PREVIEW ═══════════════ -->
-  <section class="section bg-alt" aria-labelledby="projects-preview-title">
+  <section class="section" aria-labelledby="projects-preview-title">
     <div class="container">
       <div class="section-header reveal">
         <span class="section-label">Cas concrets</span>

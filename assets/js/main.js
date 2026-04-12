@@ -60,7 +60,10 @@ function initStickyHeader() {
 function animateCount(el) {
   const raw    = el.dataset.target || el.textContent.trim();
   const target = parseInt(raw.replace(/\D/g, ''), 10);
-  const suffix = raw.replace(/[\d]/g, '');
+  const prefixMatch = raw.match(/^[^\d]+/);
+  const suffixMatch = raw.match(/[^\d]+$/);
+  const prefix = prefixMatch ? prefixMatch[0] : '';
+  const suffix = suffixMatch && suffixMatch[0] !== prefix ? suffixMatch[0] : '';
   const duration = 1800;
   let startTs = null;
 
@@ -69,7 +72,7 @@ function animateCount(el) {
   function step(ts) {
     if (!startTs) startTs = ts;
     const progress = Math.min((ts - startTs) / duration, 1);
-    el.textContent = Math.floor(easeOutCubic(progress) * target) + suffix;
+    el.textContent = prefix + Math.floor(easeOutCubic(progress) * target) + suffix;
     if (progress < 1) requestAnimationFrame(step);
   }
   requestAnimationFrame(step);
@@ -127,6 +130,85 @@ function initMarquee() {
   });
 }
 
+/* ─── Diagnostic interactif ──────────────────────── */
+function initDiag() {
+  const wrapper = document.querySelector('[data-diag]');
+  if (!wrapper) return;
+
+  const triggers = Array.from(wrapper.querySelectorAll('.diag-trigger'));
+  const panels   = Array.from(wrapper.querySelectorAll('.diag-panel'));
+
+  /* Injecter les accordéons mobile (clones du panel) */
+  triggers.forEach((trigger, idx) => {
+    const panel = panels[idx];
+    if (!panel) return;
+
+    const body = document.createElement('div');
+    body.className = 'diag-accordion-body';
+    body.setAttribute('aria-hidden', 'true');
+    body.setAttribute('role', 'region');
+    body.id = 'diag-accordion-' + idx;
+    body.innerHTML = panel.innerHTML;
+    trigger.insertAdjacentElement('afterend', body);
+
+    if (idx === 0) {
+      body.classList.add('is-open');
+      body.setAttribute('aria-hidden', 'false');
+    }
+  });
+
+  /* Activer un item */
+  function activate(idx) {
+    const isMobile = window.innerWidth < 769;
+
+    triggers.forEach((t, i) => {
+      const isActive = i === idx;
+      t.classList.toggle('is-active', isActive);
+      t.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+
+    panels.forEach((p, i) => {
+      if (i === idx) p.removeAttribute('hidden');
+      else p.setAttribute('hidden', '');
+    });
+
+    /* Accordéon mobile */
+    wrapper.querySelectorAll('.diag-accordion-body').forEach((b, i) => {
+      const open = isMobile && i === idx;
+      b.classList.toggle('is-open', open);
+      b.setAttribute('aria-hidden', open ? 'false' : 'true');
+    });
+  }
+
+  /* Clicks */
+  triggers.forEach((trigger, idx) => {
+    trigger.addEventListener('click', () => {
+      const isMobile = window.innerWidth < 769;
+      const alreadyActive = trigger.classList.contains('is-active');
+      /* Mobile : toggle (refermer si déjà ouvert) */
+      if (isMobile && alreadyActive) {
+        const body = wrapper.querySelectorAll('.diag-accordion-body')[idx];
+        trigger.classList.remove('is-active');
+        trigger.setAttribute('aria-selected', 'false');
+        body.classList.remove('is-open');
+        body.setAttribute('aria-hidden', 'true');
+        return;
+      }
+      activate(idx);
+    });
+  });
+
+  /* Navigation clavier (flèches) */
+  triggers.forEach((trigger, idx) => {
+    trigger.addEventListener('keydown', (e) => {
+      let next = idx;
+      if (e.key === 'ArrowDown') { next = Math.min(idx + 1, triggers.length - 1); e.preventDefault(); }
+      if (e.key === 'ArrowUp')   { next = Math.max(idx - 1, 0); e.preventDefault(); }
+      if (next !== idx) { triggers[next].focus(); activate(next); }
+    });
+  });
+}
+
 /* ─── Init global ────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   const theme = getPreferredTheme();
@@ -140,6 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollAnimations();
     initCountUp();
     initMarquee();
+    initDiag();
   });
 });
 
