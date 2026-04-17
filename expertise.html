@@ -471,87 +471,316 @@
 
       <div class="tools-tabs reveal" role="tablist" aria-label="Catégories d'outils">
         <button class="tool-tab active" role="tab" aria-selected="true"  data-category="all">Tous</button>
-        <button class="tool-tab" role="tab" aria-selected="false" data-category="recherche">Recherche</button>
-        <button class="tool-tab" role="tab" aria-selected="false" data-category="analytics">Analytics</button>
-        <button class="tool-tab" role="tab" aria-selected="false" data-category="produit">Produit</button>
-        <button class="tool-tab" role="tab" aria-selected="false" data-category="design">Design &amp; facilitation</button>
-        <button class="tool-tab" role="tab" aria-selected="false" data-category="feedback">Feedback client</button>
+        <button class="tool-tab" role="tab" aria-selected="false" data-category="discovery">Discovery</button>
+        <button class="tool-tab" role="tab" aria-selected="false" data-category="analyse-data">Analyse &amp; Data</button>
+        <button class="tool-tab" role="tab" aria-selected="false" data-category="strategie-produit">Stratégie produit</button>
+        <button class="tool-tab" role="tab" aria-selected="false" data-category="delivery">Delivery</button>
+        <button class="tool-tab" role="tab" aria-selected="false" data-category="collaboration">Collaboration &amp; feedback</button>
       </div>
 
       <div class="tools-grid-interactive reveal" id="tools-grid">
 
-        <!-- Recherche -->
-        <div class="tool-card" data-category="recherche">
-          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos/tools/dovetail.png" alt="" class="tool-logo-img"></div>
-          <div><p class="tool-card-name">Dovetail</p><p class="tool-card-use">Synthèse &amp; partage des insights</p></div>
+        <!-- ═══ DISCOVERY ═══ -->
+
+        <!-- Avancé -->
+        <div class="tool-card" data-category="discovery" data-tier="avance">
+          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos-stack/google-form.jpg" alt="" class="tool-logo-img"></div>
+          <div class="tool-card-body">
+            <div class="tool-card-header">
+              <p class="tool-card-name">Google Forms</p>
+              <span class="tool-tier tool-tier--avance">Avancé</span>
+            </div>
+            <p class="tool-card-use">Questionnaires &amp; collecte de données</p>
+          </div>
         </div>
-        <div class="tool-card" data-category="recherche">
-          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos/tools/grain.png" alt="" class="tool-logo-img"></div>
-          <div><p class="tool-card-name">Grain</p><p class="tool-card-use">Enregistrement &amp; analyse d'interviews</p></div>
+        <div class="tool-card" data-category="discovery" data-tier="avance">
+          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos-stack/calendly.jpg" alt="" class="tool-logo-img"></div>
+          <div class="tool-card-body">
+            <div class="tool-card-header">
+              <p class="tool-card-name">Calendly</p>
+              <span class="tool-tier tool-tier--avance">Avancé</span>
+            </div>
+            <p class="tool-card-use">Planification des entretiens utilisateurs</p>
+          </div>
         </div>
-        <div class="tool-card" data-category="recherche">
-          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos/tools/typeform.png" alt="" class="tool-logo-img"></div>
-          <div><p class="tool-card-name">Typeform</p><p class="tool-card-use">Questionnaires utilisateurs</p></div>
+        <div class="tool-card" data-category="discovery collaboration" data-tier="avance">
+          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos-stack/google-meet.avif" alt="" class="tool-logo-img"></div>
+          <div class="tool-card-body">
+            <div class="tool-card-header">
+              <p class="tool-card-name">Google Meet</p>
+              <span class="tool-tier tool-tier--avance">Avancé</span>
+            </div>
+            <p class="tool-card-use">Conduite d'interviews à distance</p>
+          </div>
         </div>
-        <div class="tool-card" data-category="recherche">
-          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos/tools/maze.png" alt="" class="tool-logo-img"></div>
-          <div><p class="tool-card-name">Maze</p><p class="tool-card-use">Tests utilisateurs à distance</p></div>
+        <div class="tool-card" data-category="discovery strategie-produit collaboration" data-tier="avance">
+          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos-stack/notion.png" alt="" class="tool-logo-img"></div>
+          <div class="tool-card-body">
+            <div class="tool-card-header">
+              <p class="tool-card-name">Notion</p>
+              <span class="tool-tier tool-tier--avance">Avancé</span>
+            </div>
+            <p class="tool-card-use">Documentation produit &amp; roadmap</p>
+          </div>
+        </div>
+        <div class="tool-card" data-category="discovery strategie-produit" data-tier="avance">
+          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos-stack/figjam.webp" alt="" class="tool-logo-img"></div>
+          <div class="tool-card-body">
+            <div class="tool-card-header">
+              <p class="tool-card-name">FigJam</p>
+              <span class="tool-tier tool-tier--avance">Avancé</span>
+            </div>
+            <p class="tool-card-use">Mapping &amp; ateliers discovery</p>
+          </div>
+        </div>
+        <div class="tool-card" data-category="discovery strategie-produit" data-tier="avance">
+          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos-stack/miro.png" alt="" class="tool-logo-img"></div>
+          <div class="tool-card-body">
+            <div class="tool-card-header">
+              <p class="tool-card-name">Miro</p>
+              <span class="tool-tier tool-tier--avance">Avancé</span>
+            </div>
+            <p class="tool-card-use">Ateliers &amp; facilitation visuelle</p>
+          </div>
         </div>
 
-        <!-- Analytics -->
-        <div class="tool-card" data-category="analytics">
-          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos/tools/amplitude.png" alt="" class="tool-logo-img"></div>
-          <div><p class="tool-card-name">Amplitude</p><p class="tool-card-use">Analyse comportementale &amp; funnel</p></div>
+        <!-- Intermédiaire -->
+        <div class="tool-card" data-category="discovery" data-tier="intermediaire">
+          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos-stack/maze.png" alt="" class="tool-logo-img"></div>
+          <div class="tool-card-body">
+            <div class="tool-card-header">
+              <p class="tool-card-name">Maze</p>
+              <span class="tool-tier tool-tier--intermediaire">Intermédiaire</span>
+            </div>
+            <p class="tool-card-use">Tests utilisateurs à distance</p>
+          </div>
         </div>
-        <div class="tool-card" data-category="analytics">
-          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos/tools/mixpanel.png" alt="" class="tool-logo-img"></div>
-          <div><p class="tool-card-name">Mixpanel</p><p class="tool-card-use">Tracking événements &amp; rétention</p></div>
-        </div>
-        <div class="tool-card" data-category="analytics">
-          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos/tools/hotjar.png" alt="" class="tool-logo-img"></div>
-          <div><p class="tool-card-name">Hotjar</p><p class="tool-card-use">Heatmaps &amp; enregistrements sessions</p></div>
-        </div>
-
-        <!-- Produit -->
-        <div class="tool-card" data-category="produit">
-          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos/tools/notion.png" alt="" class="tool-logo-img"></div>
-          <div><p class="tool-card-name">Notion</p><p class="tool-card-use">Documentation produit &amp; roadmap</p></div>
-        </div>
-        <div class="tool-card" data-category="produit">
-          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos/tools/linear.png" alt="" class="tool-logo-img"></div>
-          <div><p class="tool-card-name">Linear</p><p class="tool-card-use">Gestion de backlog &amp; sprints</p></div>
-        </div>
-        <div class="tool-card" data-category="produit">
-          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos/tools/jira.png" alt="" class="tool-logo-img"></div>
-          <div><p class="tool-card-name">Jira</p><p class="tool-card-use">Suivi de tickets &amp; delivery</p></div>
-        </div>
-        <div class="tool-card" data-category="produit">
-          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos/tools/productboard.png" alt="" class="tool-logo-img"></div>
-          <div><p class="tool-card-name">ProductBoard</p><p class="tool-card-use">Centralisation feedback &amp; roadmap</p></div>
+        <div class="tool-card" data-category="discovery analyse-data" data-tier="intermediaire">
+          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos-stack/hotjar.png" alt="" class="tool-logo-img"></div>
+          <div class="tool-card-body">
+            <div class="tool-card-header">
+              <p class="tool-card-name">Hotjar</p>
+              <span class="tool-tier tool-tier--intermediaire">Intermédiaire</span>
+            </div>
+            <p class="tool-card-use">Heatmaps &amp; enregistrements sessions</p>
+          </div>
         </div>
 
-        <!-- Design & facilitation -->
-        <div class="tool-card" data-category="design">
-          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos/tools/figma.png" alt="" class="tool-logo-img"></div>
-          <div><p class="tool-card-name">Figma</p><p class="tool-card-use">Prototypes &amp; wireframes</p></div>
+        <!-- Basique -->
+        <div class="tool-card" data-category="discovery" data-tier="basique">
+          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos-stack/dovetail.png" alt="" class="tool-logo-img"></div>
+          <div class="tool-card-body">
+            <div class="tool-card-header">
+              <p class="tool-card-name">Dovetail</p>
+              <span class="tool-tier tool-tier--basique">Basique</span>
+            </div>
+            <p class="tool-card-use">Synthèse &amp; partage des insights</p>
+          </div>
         </div>
-        <div class="tool-card" data-category="design">
-          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos/tools/miro.png" alt="" class="tool-logo-img"></div>
-          <div><p class="tool-card-name">Miro</p><p class="tool-card-use">Ateliers &amp; facilitation visuelle</p></div>
-        </div>
-        <div class="tool-card" data-category="design">
-          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos/tools/whimsical.png" alt="" class="tool-logo-img"></div>
-          <div><p class="tool-card-name">Whimsical</p><p class="tool-card-use">Flowcharts &amp; user journeys</p></div>
-        </div>
-        <div class="tool-card" data-category="design">
-          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos/tools/loom.png" alt="" class="tool-logo-img"></div>
-          <div><p class="tool-card-name">Loom</p><p class="tool-card-use">Partage asynchrone &amp; documentation vidéo</p></div>
+        <div class="tool-card" data-category="discovery" data-tier="basique">
+          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos-stack/typeform.webp" alt="" class="tool-logo-img"></div>
+          <div class="tool-card-body">
+            <div class="tool-card-header">
+              <p class="tool-card-name">Typeform</p>
+              <span class="tool-tier tool-tier--basique">Basique</span>
+            </div>
+            <p class="tool-card-use">Questionnaires utilisateurs</p>
+          </div>
         </div>
 
-        <!-- Feedback client -->
-        <div class="tool-card" data-category="feedback">
-          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos/tools/intercom.png" alt="" class="tool-logo-img"></div>
-          <div><p class="tool-card-name">Intercom</p><p class="tool-card-use">Messaging &amp; feedback in-app</p></div>
+        <!-- ═══ ANALYSE & DATA ═══ -->
+
+        <!-- Avancé -->
+        <div class="tool-card" data-category="analyse-data" data-tier="avance">
+          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos-stack/posthog.png" alt="" class="tool-logo-img"></div>
+          <div class="tool-card-body">
+            <div class="tool-card-header">
+              <p class="tool-card-name">PostHog</p>
+              <span class="tool-tier tool-tier--avance">Avancé</span>
+            </div>
+            <p class="tool-card-use">Analytics produit &amp; feature flags</p>
+          </div>
+        </div>
+
+        <!-- Intermédiaire -->
+        <div class="tool-card" data-category="analyse-data" data-tier="intermediaire">
+          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos-stack/logo-google-sheets.png" alt="" class="tool-logo-img"></div>
+          <div class="tool-card-body">
+            <div class="tool-card-header">
+              <p class="tool-card-name">Google Sheets</p>
+              <span class="tool-tier tool-tier--intermediaire">Intermédiaire</span>
+            </div>
+            <p class="tool-card-use">Analyse de données &amp; reporting</p>
+          </div>
+        </div>
+        <div class="tool-card" data-category="analyse-data" data-tier="intermediaire">
+          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos-stack/heap.jpeg" alt="" class="tool-logo-img"></div>
+          <div class="tool-card-body">
+            <div class="tool-card-header">
+              <p class="tool-card-name">Heap</p>
+              <span class="tool-tier tool-tier--intermediaire">Intermédiaire</span>
+            </div>
+            <p class="tool-card-use">Analyse comportementale automatique</p>
+          </div>
+        </div>
+        <div class="tool-card" data-category="analyse-data" data-tier="intermediaire">
+          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos-stack/logo-metabase.webp" alt="" class="tool-logo-img"></div>
+          <div class="tool-card-body">
+            <div class="tool-card-header">
+              <p class="tool-card-name">Metabase</p>
+              <span class="tool-tier tool-tier--intermediaire">Intermédiaire</span>
+            </div>
+            <p class="tool-card-use">Dashboards &amp; exploration de données</p>
+          </div>
+        </div>
+
+        <!-- Basique -->
+        <div class="tool-card" data-category="analyse-data" data-tier="basique">
+          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos-stack/google-analytics.png" alt="" class="tool-logo-img"></div>
+          <div class="tool-card-body">
+            <div class="tool-card-header">
+              <p class="tool-card-name">Google Analytics</p>
+              <span class="tool-tier tool-tier--basique">Basique</span>
+            </div>
+            <p class="tool-card-use">Trafic web &amp; acquisition</p>
+          </div>
+        </div>
+        <div class="tool-card" data-category="analyse-data" data-tier="basique">
+          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos-stack/airtable.png" alt="" class="tool-logo-img"></div>
+          <div class="tool-card-body">
+            <div class="tool-card-header">
+              <p class="tool-card-name">Airtable</p>
+              <span class="tool-tier tool-tier--basique">Basique</span>
+            </div>
+            <p class="tool-card-use">Base de données &amp; suivi structuré</p>
+          </div>
+        </div>
+
+        <!-- ═══ STRATÉGIE PRODUIT ═══ -->
+        <div class="tool-card" data-category="strategie-produit" data-tier="avance">
+          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos-stack/logo-chat-gpt.jpg" alt="" class="tool-logo-img"></div>
+          <div class="tool-card-body">
+            <div class="tool-card-header">
+              <p class="tool-card-name">ChatGPT</p>
+              <span class="tool-tier tool-tier--avance">Avancé</span>
+            </div>
+            <p class="tool-card-use">Structuration &amp; génération de contenu stratégique</p>
+          </div>
+        </div>
+        <div class="tool-card" data-category="strategie-produit" data-tier="avance">
+          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos-stack/logo-claude.png" alt="" class="tool-logo-img"></div>
+          <div class="tool-card-body">
+            <div class="tool-card-header">
+              <p class="tool-card-name">Claude</p>
+              <span class="tool-tier tool-tier--avance">Avancé</span>
+            </div>
+            <p class="tool-card-use">Analyse, synthèse &amp; aide à la décision produit</p>
+          </div>
+        </div>
+
+        <!-- ═══ DELIVERY ═══ -->
+
+        <!-- Avancé -->
+        <div class="tool-card" data-category="delivery" data-tier="avance">
+          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos-stack/logo-google-slides.jpg" alt="" class="tool-logo-img"></div>
+          <div class="tool-card-body">
+            <div class="tool-card-header">
+              <p class="tool-card-name">Google Slides</p>
+              <span class="tool-tier tool-tier--avance">Avancé</span>
+            </div>
+            <p class="tool-card-use">Présentations &amp; livrables visuels</p>
+          </div>
+        </div>
+
+        <!-- Intermédiaire -->
+        <div class="tool-card" data-category="delivery" data-tier="intermediaire">
+          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos-stack/lgoo-adobe-creative-suite.png" alt="" class="tool-logo-img"></div>
+          <div class="tool-card-body">
+            <div class="tool-card-header">
+              <p class="tool-card-name">Adobe Creative Suite</p>
+              <span class="tool-tier tool-tier--intermediaire">Intermédiaire</span>
+            </div>
+            <p class="tool-card-use">Production de supports visuels</p>
+          </div>
+        </div>
+        <div class="tool-card" data-category="delivery" data-tier="intermediaire">
+          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos-stack/logo-figma-slides.webp" alt="" class="tool-logo-img"></div>
+          <div class="tool-card-body">
+            <div class="tool-card-header">
+              <p class="tool-card-name">Figma Slides</p>
+              <span class="tool-tier tool-tier--intermediaire">Intermédiaire</span>
+            </div>
+            <p class="tool-card-use">Présentations collaboratives &amp; interactives</p>
+          </div>
+        </div>
+        <div class="tool-card" data-category="delivery" data-tier="intermediaire">
+          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos-stack/logo-webflow.jpeg" alt="" class="tool-logo-img"></div>
+          <div class="tool-card-body">
+            <div class="tool-card-header">
+              <p class="tool-card-name">Webflow</p>
+              <span class="tool-tier tool-tier--intermediaire">Intermédiaire</span>
+            </div>
+            <p class="tool-card-use">Création &amp; publication de sites no-code</p>
+          </div>
+        </div>
+
+        <!-- Basique -->
+        <div class="tool-card" data-category="delivery" data-tier="basique">
+          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos-stack/logo-github.svg" alt="" class="tool-logo-img"></div>
+          <div class="tool-card-body">
+            <div class="tool-card-header">
+              <p class="tool-card-name">GitHub</p>
+              <span class="tool-tier tool-tier--basique">Basique</span>
+            </div>
+            <p class="tool-card-use">Suivi de code &amp; versioning</p>
+          </div>
+        </div>
+        <div class="tool-card" data-category="delivery" data-tier="basique">
+          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos-stack/logo-canva.webp" alt="" class="tool-logo-img"></div>
+          <div class="tool-card-body">
+            <div class="tool-card-header">
+              <p class="tool-card-name">Canva</p>
+              <span class="tool-tier tool-tier--basique">Basique</span>
+            </div>
+            <p class="tool-card-use">Visuels rapides &amp; supports de communication</p>
+          </div>
+        </div>
+
+        <!-- ═══ COLLABORATION & FEEDBACK (à compléter) ═══ -->
+        <div class="tool-card" data-category="delivery" data-tier="avance">
+          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos-stack/logo-figma.avif" alt="" class="tool-logo-img"></div>
+          <div class="tool-card-body">
+            <div class="tool-card-header">
+              <p class="tool-card-name">Figma</p>
+              <span class="tool-tier tool-tier--avance">Avancé</span>
+            </div>
+            <p class="tool-card-use">Prototypes &amp; wireframes</p>
+          </div>
+        </div>
+        <!-- ═══ COLLABORATION & FEEDBACK ═══ -->
+
+        <!-- Avancé -->
+        <div class="tool-card" data-category="collaboration" data-tier="avance">
+          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos-stack/logo-slack.jpg" alt="" class="tool-logo-img"></div>
+          <div class="tool-card-body">
+            <div class="tool-card-header">
+              <p class="tool-card-name">Slack</p>
+              <span class="tool-tier tool-tier--avance">Avancé</span>
+            </div>
+            <p class="tool-card-use">Communication asynchrone &amp; coordination d'équipe</p>
+          </div>
+        </div>
+
+        <!-- Intermédiaire -->
+        <div class="tool-card" data-category="collaboration" data-tier="intermediaire">
+          <div class="tool-card-icon" aria-hidden="true"><img src="assets/img/logos-stack/logo-jira.png" alt="" class="tool-logo-img"></div>
+          <div class="tool-card-body">
+            <div class="tool-card-header">
+              <p class="tool-card-name">Jira</p>
+              <span class="tool-tier tool-tier--intermediaire">Intermédiaire</span>
+            </div>
+            <p class="tool-card-use">Suivi de tickets &amp; coordination delivery</p>
+          </div>
         </div>
 
       </div>
@@ -623,6 +852,28 @@
 
   /* ─── Tabs outils ─────────────────────────────── */
   (function () {
+    const grid = document.getElementById('tools-grid');
+    const TIER_ORDER = { avance: 0, intermediaire: 1, basique: 2 };
+
+    function sortAndFilter(cat) {
+      const cards = [...grid.querySelectorAll('.tool-card')];
+      // Tri selon les 3 niveaux
+      cards.sort((a, b) => {
+        const ta = TIER_ORDER[a.dataset.tier] ?? 99;
+        const tb = TIER_ORDER[b.dataset.tier] ?? 99;
+        return ta - tb;
+      });
+      cards.forEach(c => grid.appendChild(c));
+      // Filtrage multi-catégorie (séparées par espace)
+      cards.forEach(card => {
+        const cats = (card.dataset.category || '').split(' ');
+        card.classList.toggle('tool-hidden', cat !== 'all' && !cats.includes(cat));
+      });
+    }
+
+    // Tri initial au chargement
+    sortAndFilter('all');
+
     document.querySelectorAll('.tool-tab').forEach(tab => {
       tab.addEventListener('click', () => {
         const cat = tab.dataset.category;
@@ -630,9 +881,7 @@
           t.classList.toggle('active', t === tab);
           t.setAttribute('aria-selected', t === tab ? 'true' : 'false');
         });
-        document.querySelectorAll('#tools-grid .tool-card').forEach(card => {
-          card.classList.toggle('tool-hidden', cat !== 'all' && card.dataset.category !== cat);
-        });
+        sortAndFilter(cat);
       });
     });
   })();
