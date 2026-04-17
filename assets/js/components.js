@@ -51,7 +51,7 @@ function renderHeader() {
     <header class="site-header" id="site-header" role="banner">
       <div class="container header-inner">
 
-        <a href="${getHomeHref()}" class="logo" aria-label="Karine Timoneda — Accueil">
+        <a href="${getHomeHref()}" class="logo" aria-label="Karine Timoneda - Accueil">
           Karine Timoneda
         </a>
 
@@ -90,9 +90,9 @@ function renderHeader() {
                 <div class="mega-inner">
 
                   <a href="${p}projets" class="mega-featured">
-                    <div class="mega-featured-badge">Core business</div>
-                    <h3 class="mega-featured-title">Interventions produit</h3>
-                    <p class="mega-featured-desc">Structuration, design et accélération de produits digitaux, pour des équipes qui veulent vraiment avancer.</p>
+                    <div class="mega-featured-badge">Cœur de métier</div>
+                    <h3 class="mega-featured-title">Missions produit & design</h3>
+                    <p class="mega-featured-desc">Stratégie produit, design 0→1, refonte SaaS : des missions dans des contextes variés, avec un impact mesurable à chaque fois.</p>
                     <span class="mega-featured-cta">Voir les projets →</span>
                   </a>
 
@@ -101,15 +101,15 @@ function renderHeader() {
                       <span class="mega-card-icon" aria-hidden="true">🎓</span>
                       <div class="mega-card-body">
                         <p class="mega-card-title">Enseignement</p>
-                        <p class="mega-card-desc">Cours en école de design et management : UX, stratégie produit, cognition.</p>
-                        <span class="mega-card-cta">En savoir plus →</span>
+                        <p class="mega-card-desc">Modules produit, UX et stratégie digitale en école, construits à partir de cas réels terrain.</p>
+                        <span class="mega-card-cta">Voir les modules →</span>
                       </div>
                     </a>
                     <a href="${p}conferences" class="mega-card${current === 'conferences' ? ' active' : ''}">
                       <span class="mega-card-icon" aria-hidden="true">🎤</span>
                       <div class="mega-card-body">
                         <p class="mega-card-title">Conférences</p>
-                        <p class="mega-card-desc">Webinaires, keynotes, tables rondes et masterclasses sur le produit et l'UX.</p>
+                        <p class="mega-card-desc">Keynotes, webinaires, tables rondes et masterclasses : un point de vue direct, des exemples concrets.</p>
                         <span class="mega-card-cta">Voir les formats →</span>
                       </div>
                     </a>
@@ -236,7 +236,7 @@ function initMegaMenu() {
     toggleMega();
   });
 
-  // Hover desktop — ouverture sur le trigger, fermeture quand on quitte
+  // Hover desktop - ouverture sur le trigger, fermeture quand on quitte
   // à la fois le trigger ET le panel
   let hoverTimer = null;
   function scheduleClose() {

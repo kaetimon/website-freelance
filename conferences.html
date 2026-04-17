@@ -25,7 +25,7 @@
 <main id="main-content">
 
   <!-- HERO -->
-  <section class="page-hero" aria-labelledby="conf-page-title">
+  <section class="page-hero" aria-labelledby="conf-page-title" style="padding-bottom:0;border-bottom:none">
     <div class="hero-orb hero-orb-1" aria-hidden="true"
          style="width:300px;height:300px;top:-50px;right:-60px;animation-delay:-3s"></div>
     <div class="container">
@@ -38,24 +38,52 @@
         j'interviens sur les sujets produit et UX pour des équipes, des communautés
         et des événements sectoriels.
       </p>
+      <div class="hero-ctas">
+        <a href="https://calendar.app.google/DLCuiwxWRqKBqRqp9"
+           class="btn btn-primary"
+           target="_blank"
+           rel="noopener noreferrer">
+          Discutons de vos besoins →
+        </a>
+        <a href="#formats-intervention" class="btn btn-secondary">Voir les formats d'intervention</a>
+      </div>
     </div>
   </section>
 
-  <!-- CONFÉRENCES -->
-  <section class="section transmission-section" id="conferences" aria-labelledby="conf-title">
+  <!-- CHIFFRES CLÉS -->
+  <section class="stats-section" aria-label="Chiffres clés">
     <div class="container">
+      <div class="stats-grid reveal">
 
-      <!-- Stats -->
-      <div class="transmission-stats reveal">
-        <div class="transmission-stat">🎙️ <strong>+30</strong> interventions</div>
-        <div class="transmission-stat">👥 <strong>+3 000</strong> participants cumulés</div>
-        <div class="transmission-stat">🌍 <strong>FR &amp; EN</strong></div>
-        <div class="transmission-stat">🗓️ <strong>Depuis 2019</strong></div>
+        <div class="stat-card">
+          <span class="stat-value text-gradient">+50</span>
+          <span class="stat-label">interventions</span>
+        </div>
+
+        <div class="stat-card">
+          <span class="stat-value text-gradient">+2000</span>
+          <span class="stat-label">participants cumulés</span>
+        </div>
+
+        <div class="stat-card">
+          <span class="stat-value text-gradient" style="font-size:clamp(1.1rem,2.5vw,1.5rem);line-height:1.2">Depuis<br>2021</span>
+          <span class="stat-label">premières interventions</span>
+        </div>
+
+        <div class="stat-card">
+          <span class="stat-value text-gradient" style="font-size:clamp(1rem,2vw,1.3rem);line-height:1.2">Présentiel<br>&amp; distanciel</span>
+          <span class="stat-label">formats disponibles</span>
+        </div>
+
       </div>
+    </div>
+  </section>
 
-      <!-- Thématiques -->
+  <!-- THÉMATIQUES -->
+  <section class="section" aria-labelledby="themes-title">
+    <div class="container">
       <div class="reveal">
-        <h3 class="sub-section-title">Thématiques abordées</h3>
+        <h2 id="themes-title" class="section-title">Thématiques abordées</h2>
         <div class="topics-grid">
 
           <div class="topic-card">
@@ -114,10 +142,14 @@
 
         </div>
       </div>
+    </div>
+  </section>
 
-      <!-- Formats -->
+  <!-- FORMATS D'INTERVENTION -->
+  <section class="section bg-alt" id="formats-intervention" aria-labelledby="formats-title">
+    <div class="container">
       <div class="reveal">
-        <h3 class="sub-section-title">Formats d'intervention</h3>
+        <h2 id="formats-title" class="section-title">Formats d'intervention</h2>
         <div class="formats-grid">
 
           <div class="format-card">
@@ -166,10 +198,14 @@
 
         </div>
       </div>
+    </div>
+  </section>
 
-      <!-- Interventions passées -->
+  <!-- INTERVENTIONS PASSÉES -->
+  <section class="section" aria-labelledby="past-title">
+    <div class="container">
       <div class="reveal">
-        <h3 class="sub-section-title">Quelques interventions passées</h3>
+        <h2 id="past-title" class="section-title">Quelques interventions passées</h2>
         <div class="intervention-list">
 
           <div class="intervention-item">
@@ -228,25 +264,12 @@
 
         </div>
       </div>
-
-      <!-- Notice invitation -->
-      <div class="invite-notice reveal" style="margin-top:var(--space-lg)">
-        <span class="invite-notice-icon">📩</span>
-        <p class="invite-notice-text">
-          <strong>Vous organisez un événement ou cherchez un intervenant ?</strong>
-          Je suis disponible pour des interventions en français et en anglais,
-          en présentiel comme à distance.
-          <a href="https://calendar.app.google/DLCuiwxWRqKBqRqp9" target="_blank" rel="noopener noreferrer">Échangeons →</a>
-        </p>
-      </div>
-
     </div>
   </section>
 
   <!-- CTA -->
   <section class="cta-section" aria-labelledby="cta-conf-title">
     <div class="container reveal">
-      <span class="section-label" style="margin-bottom:var(--space-sm);display:block">Une intervention ?</span>
       <h2 id="cta-conf-title" style="margin-bottom:var(--space-sm)">
         Vous avez un projet<br>de prise de parole en tête.
       </h2>

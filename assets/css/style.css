@@ -3,7 +3,7 @@
    style.css — Version 2.0 · Enhanced
    =================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fustat:wght@200;300;400;500;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
 
 /* ===================================================
    1. CUSTOM PROPERTIES — LIGHT MODE
@@ -72,7 +72,8 @@
   --space-2xl: 6rem;
 
   /* Typographie */
-  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font: 'Instrument Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Fustat', sans-serif;
   --text-xs:   0.75rem;
   --text-sm:   0.875rem;
   --text-base: 1rem;
@@ -191,6 +192,7 @@
    =================================================== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); }
 
 body {
   font-family: var(--font);
@@ -1008,6 +1010,7 @@ p { color: var(--text-secondary); line-height: 1.75; }
   align-items: center;
   gap: var(--space-sm);
   flex-wrap: wrap;
+  margin-bottom: var(--space-lg);
   animation: fadeInUp 0.7s 0.35s ease both;
 }
 
