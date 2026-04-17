@@ -325,7 +325,7 @@ p { color: var(--text-secondary); line-height: 1.75; }
 .section-header { margin-bottom: var(--space-lg); }
 .section-header.centered { text-align: center; }
 .section-header.centered .section-intro { margin-left: auto; margin-right: auto; }
-.section-title { margin-bottom: var(--space-sm); }
+.section-title { margin-bottom: var(--space-md); }
 
 /* ===================================================
    9. BOUTONS
@@ -1645,6 +1645,7 @@ p { color: var(--text-secondary); line-height: 1.75; }
   max-width: 640px;
   line-height: 1.75;
   position: relative; z-index: 1;
+  margin-bottom: var(--space-md);
 }
 
 /* Posture */
