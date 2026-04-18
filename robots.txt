@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Disallow: /projets/marketplace-btob.html
+Disallow: /projets/app-evenementiel.html
+Disallow: /projets/saas-immobilier.html
+
+Sitemap: https://www.karine-timoneda.com/sitemap.xml
