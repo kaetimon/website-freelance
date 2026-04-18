@@ -18,221 +18,2174 @@
       } catch (e) {}
     })();
   </script>
+
+  <style>
+    /* ================================================
+       À PROPOS - KARINEOS DESKTOP
+       One-screen desktop · responsive mobile
+       ================================================ */
+
+    html, body { overflow-x: hidden; }
+
+    /* ── CUSTOM CURSOR (desktop only) ── */
+    @media (pointer: fine) {
+      .about-page * { cursor: none !important; }
+    }
+
+    .ab-cursor-wrap {
+      position: fixed;
+      top: 0; left: 0;
+      pointer-events: none;
+      z-index: 99999;
+      transform: translate(-4px, -4px);
+      will-change: transform;
+      display: none;
+    }
+
+    @media (pointer: fine) { .ab-cursor-wrap { display: block; } }
+
+    .ab-cursor-arrow {
+      width: 22px; height: 26px;
+      display: block;
+      filter: drop-shadow(0 0 5px rgba(144,97,249,0.6));
+    }
+
+    .ab-cursor-label {
+      position: absolute;
+      top: 20px; left: 16px;
+      background: var(--gradient-vivid);
+      color: #fff;
+      font-family: var(--font);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 0.18rem 0.55rem;
+      border-radius: 5px;
+      white-space: nowrap;
+      text-transform: uppercase;
+      box-shadow: 0 2px 10px rgba(109,40,217,0.35);
+    }
+
+    /* ── MAIN CONTAINER = THE DESKTOP ── */
+    .about-interface {
+      height: calc(100vh - var(--header-height));
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+      /* Desktop wallpaper: dark bg + subtle dot grid */
+      background: var(--bg);
+    }
+
+    /* ── BACKGROUND GLOW ORBS ── */
+    .ab-bg-glows {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .ab-bg-orb {
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    /* Violet orb - visible top-left, drifts */
+    .ab-bg-orb--violet {
+      width: 480px; height: 480px;
+      background: radial-gradient(circle, rgba(124,58,237,0.55) 0%, rgba(109,40,217,0.18) 45%, transparent 70%);
+      top: -60px; left: -80px;
+      filter: blur(55px);
+      animation: orbDrift1 12s ease-in-out infinite;
+    }
+
+    /* Rose orb - bottom-right, drifts */
+    .ab-bg-orb--rose {
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, rgba(253,56,159,0.52) 0%, rgba(236,72,153,0.15) 45%, transparent 70%);
+      bottom: -60px; right: -60px;
+      filter: blur(50px);
+      animation: orbDrift2 10s ease-in-out infinite;
+      animation-delay: -5s;
+    }
+
+    /* Small vivid violet - floats center-ish */
+    .ab-bg-orb--center {
+      width: 260px; height: 260px;
+      background: radial-gradient(circle, rgba(139,92,246,0.45) 0%, transparent 65%);
+      top: 35%; left: 38%;
+      filter: blur(38px);
+      animation: orbCenter 14s ease-in-out infinite;
+      animation-delay: -3s;
+    }
+
+    @keyframes orbDrift1 {
+      0%   { transform: translate(0px,   0px) scale(1);    opacity: 0.9; }
+      25%  { transform: translate(80px,  60px) scale(1.1); opacity: 0.75; }
+      50%  { transform: translate(140px, 20px) scale(0.95); opacity: 0.85; }
+      75%  { transform: translate(50px,  90px) scale(1.05); opacity: 0.7; }
+      100% { transform: translate(0px,   0px) scale(1);    opacity: 0.9; }
+    }
+
+    @keyframes orbDrift2 {
+      0%   { transform: translate(0px,   0px) scale(1);    opacity: 0.85; }
+      25%  { transform: translate(-90px, -50px) scale(1.08); opacity: 0.7; }
+      50%  { transform: translate(-150px,-20px) scale(0.93); opacity: 0.8; }
+      75%  { transform: translate(-60px, -80px) scale(1.04); opacity: 0.65; }
+      100% { transform: translate(0px,   0px) scale(1);    opacity: 0.85; }
+    }
+
+    @keyframes orbCenter {
+      0%   { transform: translate(0px,  0px) scale(1);    opacity: 0.6; }
+      33%  { transform: translate(60px,-40px) scale(1.15); opacity: 0.9; }
+      66%  { transform: translate(-50px, 50px) scale(0.88); opacity: 0.55; }
+      100% { transform: translate(0px,  0px) scale(1);    opacity: 0.6; }
+    }
+
+    /* Light mode: glows very subtle */
+    [data-theme="light"] .ab-bg-orb--violet { opacity: 0.18; }
+    [data-theme="light"] .ab-bg-orb--rose   { opacity: 0.14; }
+    [data-theme="light"] .ab-bg-orb--center { opacity: 0.1; }
+
+    /* Grid lines only - no dots */
+    .about-interface::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(109,40,217,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(109,40,217,0.08) 1px, transparent 1px);
+      background-size: 44px 44px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    [data-theme="light"] .about-interface::before {
+      background-image:
+        linear-gradient(rgba(109,40,217,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(109,40,217,0.05) 1px, transparent 1px);
+      background-size: 44px 44px;
+    }
+
+    /* ── MAIN GRID - fills the full desktop area ── */
+    .ab-grid {
+      display: grid;
+      grid-template-columns: 220px 1fr 220px;
+      flex: 1;
+      overflow: hidden;
+      min-height: 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ── SIDE PANELS = transparent desktop zones ── */
+    .ab-panel {
+      display: grid;
+      grid-template-columns: 1fr;
+      align-content: start;
+      gap: 0;
+      padding: 1.5rem 0.5rem 1rem;
+      overflow-y: auto;
+      overflow-x: hidden;
+      background: transparent;
+      scrollbar-width: none;
+    }
+
+    .ab-panel::-webkit-scrollbar { display: none; }
+
+    /* ── macOS DESKTOP ICON ── */
+    .ab-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 4px 10px;
+      border: none;
+      border-radius: 10px;
+      background: transparent;
+      cursor: pointer;
+      transition: background 0.13s ease;
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+    }
+
+    .ab-icon:hover {
+      background: rgba(109,40,217,0.14);
+    }
+
+    [data-theme="dark"] .ab-icon:hover {
+      background: rgba(144,97,249,0.18);
+    }
+
+    .ab-icon:focus-visible {
+      outline: 2px solid var(--violet);
+      outline-offset: 2px;
+    }
+
+    .ab-icon:active {
+      background: rgba(109,40,217,0.22);
+    }
+
+    /* The folder SVG image */
+    .ab-icon-img {
+      width: 56px;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 3px 6px rgba(0,0,0,0.22));
+      transition: transform 0.13s ease, filter 0.13s ease;
+      flex-shrink: 0;
+    }
+
+    .ab-icon:hover .ab-icon-img {
+      transform: scale(1.08) translateY(-2px);
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,0.3));
+    }
+
+    /* macOS icon label */
+    .ab-icon-label {
+      font-family: var(--font);
+      font-size: 0.67rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      text-align: center;
+      line-height: 1.25;
+      max-width: 84px;
+      padding: 1px 5px;
+      border-radius: 3px;
+      transition: background 0.13s ease, color 0.13s ease;
+      word-break: break-word;
+      hyphens: auto;
+    }
+
+    [data-theme="dark"] .ab-icon-label {
+      color: #EDE9FF;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+    }
+
+    /* macOS: selected = coloured label bg */
+    .ab-icon:hover .ab-icon-label {
+      background: var(--violet);
+      color: white;
+      text-shadow: none;
+    }
+
+    [data-theme="dark"] .ab-icon:hover .ab-icon-label {
+      background: var(--violet);
+      color: white;
+    }
+
+    /* ── CENTER HERO ── */
+    .ab-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
+      min-height: 0;
+      background: transparent;
+    }
+
+    /* Hero card - vertical portrait layout */
+    /* ══════════════════════════════════
+       COLLECTIBLE CARD - glassmorphism flip
+       ══════════════════════════════════ */
+
+    .ab-card-wrap {
+      perspective: 1100px;
+      width: 300px;
+      height: 440px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      animation: abHeroIn 0.6s cubic-bezier(0.25, 0.8, 0.25, 1) both;
+      cursor: pointer;
+    }
+
+    @keyframes abHeroIn {
+      from { opacity: 0; transform: translateY(24px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .ab-card-inner {
+      width: 100%; height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.75s cubic-bezier(0.4, 0.2, 0.2, 1);
+    }
+
+    /* Hover flips → mouseout unflips automatically */
+    .ab-card-wrap:hover .ab-card-inner { transform: rotateY(180deg); }
+    /* Mobile: class-based toggle */
+    .ab-card-wrap.ab-flipped .ab-card-inner { transform: rotateY(180deg); }
+
+    /* ── Shared face ── */
+    .ab-card-face {
+      position: absolute;
+      inset: 0;
+      border-radius: 24px;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      overflow: hidden;
+      /* Glassmorphism */
+      background: rgba(16, 8, 36, 0.82);
+      backdrop-filter: blur(28px) saturate(1.5);
+      -webkit-backdrop-filter: blur(28px) saturate(1.5);
+      border: 1px solid rgba(255,255,255,0.11);
+      box-shadow:
+        0 32px 64px rgba(0,0,0,0.55),
+        0 0 0 1px rgba(255,255,255,0.04),
+        inset 0 1px 0 rgba(255,255,255,0.09);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ab-card-back-face { transform: rotateY(180deg); }
+
+    /* ── FRONT ── */
+
+    /* Animated gradient banner */
+    .ab-card-banner {
+      height: 138px;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px 24px 0 0;
+      background: linear-gradient(135deg,
+        #6D28D9 0%, #9333EA 25%, #fd389f 60%, #F59E0B 100%);
+      background-size: 220% 220%;
+      animation: bannerShift 9s ease infinite;
+    }
+
+    @keyframes bannerShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Soft light orb inside banner */
+    .ab-card-banner::before {
+      content: '';
+      position: absolute;
+      top: -20px; right: -20px;
+      width: 180px; height: 180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.22) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    /* Bottom fade from banner to card body */
+    .ab-card-banner::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 40px;
+      background: linear-gradient(to top, rgba(16,8,36,0.82), transparent);
+    }
+
+    /* Card label top-right */
+    .ab-card-num {
+      position: absolute;
+      top: 0.6rem; right: 0.75rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.5rem;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.45);
+      z-index: 2;
+    }
+
+    /* Avatar overlapping banner */
+    .ab-card-avatar-wrap {
+      display: flex;
+      justify-content: center;
+      margin-top: -46px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .ab-card-avatar-ring {
+      width: 92px; height: 92px;
+      border-radius: 50%;
+      padding: 3px;
+      background: linear-gradient(135deg, #7C3AED, #fd389f);
+      box-shadow:
+        0 0 0 3px rgba(16,8,36,0.85),
+        0 8px 24px rgba(0,0,0,0.5);
+    }
+
+    .ab-card-img {
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    /* Identity: name + role */
+    .ab-card-identity {
+      text-align: center;
+      padding: 0.75rem 1.25rem 0.25rem;
+      flex-shrink: 0;
+    }
+
+    .ab-card-name {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      display: block;
+    }
+
+    .ab-card-role {
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.48);
+      display: block;
+      margin-top: 0.25rem;
+      line-height: 1.4;
+    }
+
+    /* Disponible status */
+    .ab-card-status {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      margin-top: 0.35rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.08em;
+      color: #4ade80;
+    }
+
+    /* Divider */
+    .ab-card-divider {
+      height: 1px;
+      margin: 0.75rem 1.25rem 0;
+      background: rgba(255,255,255,0.07);
+      flex-shrink: 0;
+    }
+
+    /* Stats row - big numbers like reference */
+    .ab-card-stats {
+      display: flex;
+      align-items: stretch;
+      flex: 1;
+      padding: 0 0.5rem;
+    }
+
+    .ab-card-stat {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.18rem;
+      padding: 0.75rem 0.25rem;
+    }
+
+    .ab-card-stat-sep {
+      width: 1px;
+      align-self: stretch;
+      margin: 0.75rem 0;
+      background: rgba(255,255,255,0.07);
+    }
+
+    .ab-card-stat-num {
+      font-family: var(--font-heading);
+      font-size: 1.65rem;
+      font-weight: 800;
+      line-height: 1;
+      color: #fff;
+      display: block;
+    }
+
+    .ab-card-stat-lbl {
+      font-size: 0.58rem;
+      color: rgba(255,255,255,0.38);
+      letter-spacing: 0.05em;
+      text-transform: none;
+      display: block;
+    }
+
+    /* Flip hint */
+    .ab-card-hint {
+      text-align: center;
+      padding: 0.25rem 0 0.75rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.46rem;
+      letter-spacing: 0.14em;
+      color: rgba(255,255,255,0.16);
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+
+    /* ── BACK face ── */
+    .ab-card-back-accent {
+      height: 4px;
+      flex-shrink: 0;
+      background: linear-gradient(90deg, #7C3AED, #fd389f, #60A5FA);
+      border-radius: 24px 24px 0 0;
+    }
+
+    .ab-card-back-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem 1.125rem 0.875rem;
+      gap: 0.7rem;
+      overflow: hidden;
+    }
+
+    .ab-card-back-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .ab-card-back-title {
+      font-family: 'Courier New', monospace;
+      font-size: 0.5rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+
+    .ab-card-locs {
+      list-style: none;
+      padding: 0; margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      flex-shrink: 0;
+    }
+
+    .ab-card-locs li {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.6);
+      display: flex;
+      align-items: baseline;
+      gap: 0.4rem;
+      line-height: 1.4;
+    }
+
+    .ab-card-locs li::before {
+      content: '·';
+      color: #9061F9;
+      font-size: 1.1rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .ab-card-quote {
+      font-style: italic;
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.6;
+      margin: 0;
+      padding: 0.55rem 0.75rem;
+      border-left: 2px solid #fd389f;
+      background: rgba(253,56,159,0.06);
+      border-radius: 0 8px 8px 0;
+      flex-shrink: 0;
+    }
+
+    .ab-card-principles {
+      list-style: none;
+      padding: 0; margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      flex-shrink: 0;
+    }
+
+    .ab-card-principles li {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.85);
+      display: flex;
+      align-items: baseline;
+      gap: 0.4rem;
+    }
+
+    .ab-card-principles li::before {
+      content: '→';
+      color: #9061F9;
+      font-size: 0.62rem;
+      flex-shrink: 0;
+    }
+
+    .ab-card-rarity {
+      display: flex;
+      gap: 0.2rem;
+      justify-content: flex-end;
+      margin-top: auto;
+    }
+
+    .ab-card-rarity span {
+      font-size: 0.7rem;
+      background: linear-gradient(135deg, #9061F9, #fd389f);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Status dot - kept for mobile */
+    .ab-status-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 6px rgba(34,197,94,0.6);
+      animation: abStatusBlink 2.8s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes abStatusBlink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.3; }
+    }
+
+    .ab-hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 1rem;
+      background: var(--gradient-vivid);
+      border: none;
+      border-radius: 100px;
+      color: white;
+      font-family: var(--font);
+      font-size: 0.775rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      align-self: center;
+      box-shadow: 0 4px 14px rgba(109,40,217,0.3);
+    }
+
+    .ab-hero-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(109,40,217,0.4);
+    }
+
+    /* CTA below the hero card */
+    .ab-center-cta {
+      position: relative;
+      z-index: 1;
+      margin-top: 1rem;
+      align-self: center;
+    }
+
+    /* ── MODAL OVERLAY ── */
+    .ab-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 8500;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.28s ease;
+      padding: 1.5rem;
+    }
+
+    .ab-modal-overlay.ab-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .ab-modal-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-xl);
+      width: min(580px, 100%);
+      max-height: min(84vh, 720px);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: var(--shadow-xl);
+      transform: translateY(24px) scale(0.97);
+      transition: transform 0.36s cubic-bezier(0.34, 1.4, 0.64, 1);
+      overflow: hidden;
+    }
+
+    [data-theme="dark"] .ab-modal-panel {
+      background: rgba(14,8,28,0.95);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      box-shadow: var(--shadow-xl), 0 0 80px rgba(109,40,217,0.22);
+    }
+
+    .ab-modal-overlay.ab-open .ab-modal-panel { transform: translateY(0) scale(1); }
+
+    .ab-modal-panel::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 1.5rem; right: 1.5rem;
+      height: 1.5px;
+      background: var(--gradient-vivid);
+      opacity: 0.6;
+    }
+
+    .ab-modal-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.875rem;
+      padding: 1.25rem 1.375rem 1rem;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .ab-modal-icon-wrap {
+      width: 36px; height: 36px;
+      border-radius: var(--radius-md);
+      background: rgba(109,40,217,0.09);
+      border: 1px solid rgba(109,40,217,0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+      color: var(--violet);
+    }
+
+    .ab-modal-meta { flex: 1; min-width: 0; }
+
+    .ab-modal-type {
+      font-family: 'Courier New', monospace;
+      font-size: 0.56rem;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .ab-modal-title {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .ab-modal-close {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--bg-alt);
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      transition: all 0.18s ease;
+      flex-shrink: 0;
+      padding: 0;
+      line-height: 1;
+    }
+
+    .ab-modal-close:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-strong);
+      color: var(--text-primary);
+    }
+
+    .ab-modal-body {
+      padding: 1.25rem 1.375rem 1.375rem;
+      overflow-y: auto;
+      flex: 1;
+      line-height: 1.65;
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+
+    /* ── MODAL CONTENT COMPONENTS ── */
+    .ab-section-head {
+      font-family: 'Courier New', monospace;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--violet);
+      margin: 1.25rem 0 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .ab-section-head::before {
+      content: '';
+      display: block;
+      width: 12px; height: 1px;
+      background: var(--violet);
+      opacity: 0.45;
+    }
+
+    .ab-section-head:first-child { margin-top: 0; }
+
+    .ab-profil-card {
+      background: linear-gradient(135deg, rgba(109,40,217,0.06), rgba(253,56,159,0.04));
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      padding: 1rem;
+      margin-bottom: 1.125rem;
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+    }
+
+    .ab-profil-avatar {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: var(--gradient-vivid);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: white;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+      letter-spacing: -0.02em;
+    }
+
+    .ab-profil-name {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      display: block;
+      line-height: 1.2;
+    }
+
+    .ab-profil-sub {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      display: block;
+      margin-top: 0.15rem;
+    }
+
+    .ab-profil-age {
+      font-family: 'Courier New', monospace;
+      font-size: 0.65rem;
+      color: var(--violet);
+      display: block;
+      margin-top: 0.1rem;
+      letter-spacing: 0.05em;
+    }
+
+    .ab-val {
+      padding: 0.75rem 0.875rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      margin-bottom: 0.45rem;
+      background: var(--bg);
+      transition: border-color 0.2s ease;
+    }
+
+    .ab-val:hover { border-color: var(--border-strong); }
+
+    .ab-val-title {
+      font-weight: 600;
+      color: var(--text-primary);
+      font-size: 0.85rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .ab-val-desc {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin: 0;
+      line-height: 1.55;
+    }
+
+    .ab-quote {
+      padding: 0.7rem 0.875rem;
+      border-left: 2px solid var(--violet);
+      background: rgba(109,40,217,0.04);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      margin-bottom: 0.55rem;
+      font-style: italic;
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      line-height: 1.6;
+    }
+
+    .ab-timeline-item {
+      padding: 0.875rem 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 0.875rem;
+      align-items: flex-start;
+    }
+
+    .ab-timeline-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .ab-timeline-left { flex-shrink: 0; padding-top: 0.15rem; }
+
+    .ab-timeline-period {
+      font-family: 'Courier New', monospace;
+      font-size: 0.63rem;
+      color: var(--violet);
+      white-space: nowrap;
+      display: block;
+      letter-spacing: 0.04em;
+    }
+
+    .ab-timeline-role {
+      font-weight: 600;
+      color: var(--text-primary);
+      font-size: 0.825rem;
+      margin-bottom: 0.3rem;
+      line-height: 1.3;
+    }
+
+    .ab-timeline-desc {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      margin: 0;
+      line-height: 1.55;
+    }
+
+    .ab-list {
+      list-style: none;
+      padding: 0;
+      margin: 0.2rem 0 0.875rem;
+    }
+
+    .ab-list li {
+      padding: 0.3rem 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .ab-list li:last-child { border-bottom: none; }
+
+    .ab-list li::before {
+      content: '→';
+      color: var(--violet);
+      flex-shrink: 0;
+      font-size: 0.72rem;
+    }
+
+    .ab-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-bottom: 0.875rem;
+    }
+
+    .ab-tag {
+      padding: 0.18rem 0.6rem;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      background: var(--bg);
+    }
+
+    .ab-stack-group { margin-bottom: 0.875rem; }
+
+    .ab-stack-label {
+      font-family: 'Courier New', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      color: var(--violet);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 0.35rem;
+    }
+
+    .ab-intro {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .ab-check {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .ab-check li {
+      padding: 0.75rem 0.875rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      margin-bottom: 0.4rem;
+      background: var(--bg);
+    }
+
+    .ab-check li strong {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--text-primary);
+      margin-bottom: 0.18rem;
+    }
+
+    .ab-check li span { font-size: 0.78rem; color: var(--text-secondary); }
+
+    .ab-city-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .ab-city-card {
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: border-color 0.2s ease;
+    }
+
+    .ab-city-card:hover { border-color: var(--border-strong); }
+
+    .ab-city-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #fd389f;
+      box-shadow: 0 0 8px rgba(253,56,159,0.6);
+      flex-shrink: 0;
+    }
+
+    .ab-city-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .ab-city-sub {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      font-family: 'Courier New', monospace;
+    }
+
+    /* ── MOBILE SECTION ── */
+    .ab-mobile-section { display: none; }
+
+    /* ── RESPONSIVE: TABLET / MOBILE ── */
+    @media (max-width: 1100px) {
+      .about-interface {
+        height: auto;
+        overflow: visible;
+        min-height: 100svh;
+      }
+
+      .ab-grid {
+        grid-template-columns: 1fr;
+        overflow: visible;
+        flex: none;
+      }
+
+      .ab-panel { display: none; }
+      .ab-center { display: none; }
+
+      .ab-mobile-section {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        padding-bottom: 80px;
+      }
+    }
+
+    /* ══════════════════════════════════════
+       MOBILE - iPhone home screen
+       ══════════════════════════════════════ */
+
+    /* Hero: mini glassmorphism card */
+    .ab-mobile-hero {
+      padding: 1.25rem 1.25rem 0.75rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .ab-mobile-mini-card {
+      border-radius: 20px;
+      overflow: hidden;
+      background: rgba(16, 8, 36, 0.82);
+      backdrop-filter: blur(28px) saturate(1.5);
+      -webkit-backdrop-filter: blur(28px) saturate(1.5);
+      border: 1px solid rgba(255,255,255,0.11);
+      box-shadow:
+        0 20px 48px rgba(0,0,0,0.5),
+        0 0 0 1px rgba(255,255,255,0.04),
+        inset 0 1px 0 rgba(255,255,255,0.09);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Mini gradient banner */
+    .ab-mini-banner {
+      height: 72px;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px 20px 0 0;
+      background: linear-gradient(135deg,
+        #6D28D9 0%, #9333EA 25%, #fd389f 60%, #F59E0B 100%);
+      background-size: 220% 220%;
+      animation: bannerShift 9s ease infinite;
+    }
+
+    .ab-mini-banner::before {
+      content: '';
+      position: absolute;
+      top: -15px; right: -15px;
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .ab-mini-banner::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 28px;
+      background: linear-gradient(to top, rgba(16,8,36,0.82), transparent);
+    }
+
+    .ab-mini-card-num {
+      position: absolute;
+      top: 0.5rem; right: 0.65rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.46rem;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* Avatar overlapping banner */
+    .ab-mini-avatar-wrap {
+      display: flex;
+      justify-content: center;
+      margin-top: -32px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .ab-mini-avatar-ring {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      padding: 2.5px;
+      background: linear-gradient(135deg, #7C3AED, #fd389f);
+      box-shadow: 0 0 0 2.5px rgba(16,8,36,0.85), 0 6px 18px rgba(0,0,0,0.45);
+    }
+
+    .ab-mobile-photo {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      border-radius: 50%;
+    }
+
+    /* Identity block */
+    .ab-mobile-identity {
+      text-align: center;
+      padding: 0.6rem 1.25rem 0.25rem;
+      flex-shrink: 0;
+    }
+
+    .ab-mobile-name {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #fff;
+      display: block;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .ab-mobile-role {
+      font-size: 0.63rem;
+      color: rgba(255,255,255,0.45);
+      display: block;
+      margin-top: 0.2rem;
+      line-height: 1.4;
+    }
+
+    .ab-mobile-status {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.55rem;
+      color: #4ade80;
+      letter-spacing: 0.08em;
+      margin-top: 0.3rem;
+    }
+
+    .ab-mobile-phrase { display: none; }
+
+    /* Divider */
+    .ab-mini-divider {
+      height: 1px;
+      margin: 0.6rem 1.25rem 0;
+      background: rgba(255,255,255,0.07);
+      flex-shrink: 0;
+    }
+
+    /* Stats row - big numbers */
+    .ab-mobile-stats {
+      display: flex;
+      align-items: stretch;
+      padding: 0 0.5rem 0.75rem;
+    }
+
+    .ab-mobile-stat {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.12rem;
+      padding: 0.6rem 0.25rem;
+    }
+
+    .ab-mobile-stat-num {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+      display: block;
+    }
+
+    .ab-mobile-stat-lbl {
+      font-size: 0.52rem;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.04em;
+      display: block;
+    }
+
+    .ab-mobile-stat-sep {
+      width: 1px;
+      align-self: stretch;
+      margin: 0.65rem 0;
+      background: rgba(255,255,255,0.07);
+    }
+
+    /* ── Icon panels: transparent, iPhone-wallpaper shows through ── */
+    .ab-mobile-panel {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.25rem 1rem 2rem;
+      background: transparent;
+      display: none;
+      position: relative;
+      z-index: 2;
+    }
+
+    .ab-mobile-panel.ab-panel-active { display: block; }
+
+    /* ── iPhone icon grid: 4 columns ── */
+    .ab-mobile-icon-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px 8px;
+    }
+
+    /* ── iPhone app icon style ── */
+    .ab-mobile-panel .ab-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      padding: 0;
+      border: none;
+      border-radius: 0;
+      background: transparent;
+      cursor: pointer;
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+    }
+
+    .ab-mobile-panel .ab-icon:active .ab-ios-icon {
+      opacity: 0.75;
+      transform: scale(0.93);
+    }
+
+    /* The rounded square iOS icon container */
+    .ab-ios-icon {
+      width: 60px; height: 60px;
+      border-radius: 14px;
+      overflow: hidden;
+      flex-shrink: 0;
+      transition: transform 0.12s ease, opacity 0.12s ease;
+      box-shadow:
+        0 4px 14px rgba(0,0,0,0.4),
+        inset 0 1px 0 rgba(255,255,255,0.18);
+    }
+
+    .ab-ios-icon svg { display: block; }
+
+    /* Label under iOS icon */
+    .ab-mobile-panel .ab-icon-label {
+      font-size: 0.64rem;
+      font-weight: 500;
+      color: #fff;
+      text-align: center;
+      line-height: 1.2;
+      max-width: 68px;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.55);
+      background: transparent !important;
+      word-break: break-word;
+      hyphens: auto;
+    }
+
+    /* iPhone dock bar */
+    .ab-mobile-dock {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      padding: 0.75rem 1.5rem 1.25rem;
+      background: rgba(255,255,255,0.07);
+      backdrop-filter: blur(24px) saturate(1.4);
+      -webkit-backdrop-filter: blur(24px) saturate(1.4);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+    }
+
+    @media (max-width: 1100px) { .ab-mobile-dock { display: flex; } }
+
+    .ab-dock-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.75rem;
+      background: var(--gradient-vivid);
+      border: none;
+      border-radius: 100px;
+      color: white;
+      font-family: var(--font);
+      font-size: 0.825rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(109,40,217,0.45);
+    }
+
+    /* Mobile RDV button - below icon grid */
+    .ab-mobile-rdv {
+      display: flex;
+      justify-content: center;
+      padding: 1.5rem 1rem 0.5rem;
+    }
+
+    .ab-mobile-rdv .ab-hero-cta {
+      width: 100%;
+      max-width: 280px;
+      justify-content: center;
+      padding: 0.75rem 1.5rem;
+      font-size: 0.875rem;
+    }
+
+    /* ── MODAL: bottom sheet on mobile ── */
+    @media (max-width: 768px) {
+      .ab-modal-overlay {
+        align-items: flex-end;
+        padding: 0;
+      }
+
+      .ab-modal-panel {
+        width: 100%;
+        max-height: 90svh;
+        border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+        transform: translateY(100%);
+        transition: transform 0.38s cubic-bezier(0.25, 0.8, 0.25, 1);
+      }
+
+      .ab-modal-overlay.ab-open .ab-modal-panel { transform: translateY(0); }
+
+      .ab-modal-panel::before {
+        left: 40%; right: 40%;
+        top: 0.625rem;
+        border-radius: 2px;
+        background: var(--border-strong);
+        opacity: 1;
+      }
+    }
+
+    /* Hide injected footer */
+    #footer-placeholder { display: none; }
+
+    @media (max-width: 380px) {
+      .ab-mobile-photo { width: 52px; height: 66px; }
+      .ab-mobile-name  { font-size: 1rem; }
+    }
+  </style>
 </head>
-<body>
+
+<body class="about-page">
+
+<!-- Custom Figma-style cursor -->
+<div class="ab-cursor-wrap" id="abCursor" aria-hidden="true">
+  <svg class="ab-cursor-arrow" viewBox="0 0 22 26" fill="none">
+    <path d="M2 2 L2 20 L7 14.5 L10.5 22 L13 21 L9.5 13.5 L15.5 13.5 Z"
+          fill="#9061F9" stroke="white" stroke-width="1.2"
+          stroke-linejoin="round" stroke-linecap="round"/>
+  </svg>
+  <span class="ab-cursor-label">Karine</span>
+</div>
+
 <div id="header-placeholder"></div>
 
-<main id="main-content">
+<main id="main-content" class="about-interface" aria-label="À propos de Karine Timoneda">
 
-  <!-- HERO -->
-  <section class="page-hero" aria-labelledby="about-title">
-    <div class="hero-orb hero-orb-1" aria-hidden="true" style="width:320px;height:320px;top:-80px;right:-60px;animation-delay:-5s"></div>
-    <div class="container">
-      <span class="section-label page-hero-label">À propos</span>
-      <h1 class="page-hero-title text-gradient" id="about-title">
-        Je suis Karine Timoneda.<br>Stratège produit, pas consultante en PowerPoints.
-      </h1>
-      <p class="page-hero-desc">
-        Freelance · Paris &amp; remote · Disponible · +6 ans à construire, questionner et reconstruire des produits dans des start-ups et scale-ups en croissance.
-      </p>
+  <!-- ── ANIMATED BACKGROUND GLOWS ── -->
+  <div class="ab-bg-glows" aria-hidden="true">
+    <div class="ab-bg-orb ab-bg-orb--violet"></div>
+    <div class="ab-bg-orb ab-bg-orb--rose"></div>
+    <div class="ab-bg-orb ab-bg-orb--center"></div>
+  </div>
+
+  <!-- ── MAIN GRID (desktop) - the full desktop ── -->
+  <div class="ab-grid">
+
+    <!-- LEFT PANEL : personal folders as desktop icons -->
+    <aside class="ab-panel" aria-label="Dossiers personnels">
+
+      <button class="ab-icon" data-modal="profil" aria-label="Profil">
+        <span class="ab-icon-img"></span>
+        <span class="ab-icon-label">Profil</span>
+      </button>
+
+      <button class="ab-icon" data-modal="valeurs" aria-label="Valeurs">
+        <span class="ab-icon-img"></span>
+        <span class="ab-icon-label">Valeurs</span>
+      </button>
+
+      <button class="ab-icon" data-modal="passions" aria-label="Passions">
+        <span class="ab-icon-img"></span>
+        <span class="ab-icon-label">Passions</span>
+      </button>
+
+      <button class="ab-icon" data-modal="vision" aria-label="Vision">
+        <span class="ab-icon-img"></span>
+        <span class="ab-icon-label">Vision</span>
+      </button>
+
+      <button class="ab-icon" data-modal="manifesto" aria-label="Manifesto">
+        <span class="ab-icon-img"></span>
+        <span class="ab-icon-label">Manifesto</span>
+      </button>
+
+      <button class="ab-icon" data-modal="pourquoi" aria-label="Pourquoi ce métier">
+        <span class="ab-icon-img"></span>
+        <span class="ab-icon-label">Pourquoi ce métier</span>
+      </button>
+
+    </aside>
+
+    <!-- CENTER : COLLECTIBLE CARD -->
+    <div class="ab-center" aria-label="Identité principale">
+
+      <div class="ab-card-wrap" id="abCard" role="button" aria-label="Carte de Karine Timoneda">
+
+        <div class="ab-card-inner">
+
+          <!-- ── FRONT ── -->
+          <div class="ab-card-face">
+            <div class="ab-card-banner">
+              <span class="ab-card-num">KT · 01</span>
+            </div>
+
+            <div class="ab-card-avatar-wrap">
+              <div class="ab-card-avatar-ring">
+                <img src="assets/img/karine-light.jpg"
+                     alt="Portrait de Karine Timoneda"
+                     class="ab-card-img"
+                     id="abHeroPhoto">
+              </div>
+            </div>
+
+            <div class="ab-card-identity">
+              <span class="ab-card-name">Karine Timoneda</span>
+              <span class="ab-card-role">Stratégie produit, UX &amp; accompagnement de décisions</span>
+              <div class="ab-card-status">
+                <span class="ab-status-dot"></span>
+                Disponible · Paris &amp; remote
+              </div>
+            </div>
+
+            <div class="ab-card-divider"></div>
+
+            <div class="ab-card-stats">
+              <div class="ab-card-stat">
+                <span class="ab-card-stat-num">6+</span>
+                <span class="ab-card-stat-lbl">ans exp.</span>
+              </div>
+              <div class="ab-card-stat-sep"></div>
+              <div class="ab-card-stat">
+                <span class="ab-card-stat-num">30+</span>
+                <span class="ab-card-stat-lbl">produits</span>
+              </div>
+              <div class="ab-card-stat-sep"></div>
+              <div class="ab-card-stat">
+                <span class="ab-card-stat-num">150+</span>
+                <span class="ab-card-stat-lbl">interfaces</span>
+              </div>
+            </div>
+
+            <div class="ab-card-hint">↻ Survolez pour retourner</div>
+          </div>
+
+          <!-- ── BACK ── -->
+          <div class="ab-card-face ab-card-back-face">
+            <div class="ab-card-back-accent"></div>
+            <div class="ab-card-back-body">
+              <div class="ab-card-back-header">
+                <span class="ab-card-back-title">Profil · Paris &amp; France</span>
+                <span class="ab-card-num" style="position:static;font-size:0.5rem;">KT · 01</span>
+              </div>
+
+              <ul class="ab-card-locs">
+                <li>Basée à Paris</li>
+                <li>Disponible en France &amp; remote</li>
+                <li>Je me déplace là où les décisions se prennent</li>
+              </ul>
+
+              <p class="ab-card-quote">
+                "Mon travail, ce n'est pas seulement améliorer l'existant. C'est aussi savoir remettre en question ce qui ne fonctionne plus, pour reconstruire sur des bases plus justes."
+              </p>
+
+              <ul class="ab-card-principles">
+                <li>Comprendre avant produire</li>
+                <li>Prioriser avant exécuter</li>
+                <li>Construire pour durer</li>
+              </ul>
+
+              <div class="ab-card-rarity" aria-hidden="true">
+                <span>✦</span><span>✦</span><span>✦</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <a href="https://calendar.app.google/DLCuiwxWRqKBqRqp9"
+         class="ab-hero-cta ab-center-cta"
+         target="_blank" rel="noopener noreferrer"
+         aria-label="Découvrir mon univers">
+        ✨ Découvrir mon univers
+      </a>
+
     </div>
-  </section>
 
-  <!-- PARCOURS -->
-  <section class="section" aria-labelledby="parcours-title">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-label">Parcours</span>
-        <h2 class="section-title" id="parcours-title">D'où je viens</h2>
-        <p class="section-intro">+6 ans de design et stratégie produit dans des contextes différents, ce qui m'a appris que chaque organisation est un cas à part entière.</p>
-      </div>
+    <!-- RIGHT PANEL : professional folders as desktop icons -->
+    <aside class="ab-panel" aria-label="Dossiers professionnels">
 
-      <div class="timeline reveal" role="list">
+      <button class="ab-icon" data-modal="parcours" aria-label="Parcours">
+        <span class="ab-icon-img"></span>
+        <span class="ab-icon-label">Parcours</span>
+      </button>
 
-        <div class="timeline-item" role="listitem">
-          <div class="timeline-marker" aria-hidden="true">
-            <div class="timeline-dot"></div>
-            <div class="timeline-line"></div>
-          </div>
-          <div class="timeline-content">
-            <span class="timeline-period">2021 – aujourd'hui</span>
-            <p class="timeline-role">Stratège Produit &amp; UX Designer · Freelance</p>
-            <p class="timeline-desc">Missions en stratégie produit et design UX/UI pour des start-ups et scale-ups en France. Accompagnement de la phase 0→1 à la refonte complète : vision, parcours, interfaces, site vitrine. Clients notables : Hugo Publishing, City Zen, plateformes SaaS.</p>
+      <button class="ab-icon" data-modal="expertise" aria-label="Expertise">
+        <span class="ab-icon-img"></span>
+        <span class="ab-icon-label">Expertise</span>
+      </button>
+
+      <button class="ab-icon" data-modal="methode" aria-label="Méthode">
+        <span class="ab-icon-img"></span>
+        <span class="ab-icon-label">Méthode</span>
+      </button>
+
+      <button class="ab-icon" data-modal="collaboration" aria-label="Collaboration">
+        <span class="ab-icon-img"></span>
+        <span class="ab-icon-label">Collaboration</span>
+      </button>
+
+      <button class="ab-icon" data-modal="stack" aria-label="Stack">
+        <span class="ab-icon-img"></span>
+        <span class="ab-icon-label">Stack</span>
+      </button>
+
+      <button class="ab-icon" data-modal="mobilite" aria-label="Mobilité">
+        <span class="ab-icon-img"></span>
+        <span class="ab-icon-label">Mobilité</span>
+      </button>
+
+    </aside>
+
+  </div><!-- end .ab-grid -->
+
+  <!-- ── MOBILE SECTION ── -->
+  <div class="ab-mobile-section">
+
+    <!-- Hero mini-card -->
+    <div class="ab-mobile-hero">
+      <div class="ab-mobile-mini-card">
+
+        <!-- Banner -->
+        <div class="ab-mini-banner">
+          <span class="ab-mini-card-num">KT · 01</span>
+        </div>
+
+        <!-- Avatar overlapping banner -->
+        <div class="ab-mini-avatar-wrap">
+          <div class="ab-mini-avatar-ring">
+            <img src="assets/img/karine-light.jpg"
+                 alt="Karine Timoneda"
+                 class="ab-mobile-photo"
+                 id="abMobilePhoto">
           </div>
         </div>
 
-        <div class="timeline-item" role="listitem">
-          <div class="timeline-marker" aria-hidden="true">
-            <div class="timeline-dot"></div>
-            <div class="timeline-line"></div>
-          </div>
-          <div class="timeline-content">
-            <span class="timeline-period">2022 – 2026</span>
-            <p class="timeline-role">Directrice des Opérations · ipsoon, agence UX</p>
-            <p class="timeline-desc">Pilotage opérationnel et stratégique d'une agence spécialisée en design produit. Management d'équipe, structuration des processus, accompagnement de projets clients de bout en bout. Double casquette COO et Product Designer sur des missions SaaS, plateformes et outils internes.</p>
+        <!-- Identity -->
+        <div class="ab-mobile-identity">
+          <span class="ab-mobile-name">Karine Timoneda</span>
+          <span class="ab-mobile-role">Stratégie produit, UX &amp; accompagnement de décisions</span>
+          <div class="ab-mobile-status">
+            <span class="ab-status-dot" aria-hidden="true"></span>
+            Disponible · Paris &amp; remote
           </div>
         </div>
 
-        <div class="timeline-item" role="listitem">
-          <div class="timeline-marker" aria-hidden="true">
-            <div class="timeline-dot"></div>
-            <div class="timeline-line"></div>
+        <!-- Divider -->
+        <div class="ab-mini-divider"></div>
+
+        <!-- Stats -->
+        <div class="ab-mobile-stats">
+          <div class="ab-mobile-stat">
+            <span class="ab-mobile-stat-num">6+</span>
+            <span class="ab-mobile-stat-lbl">ans exp.</span>
           </div>
-          <div class="timeline-content">
-            <span class="timeline-period">2020 – 2022 · Alternance</span>
-            <p class="timeline-role">UX Designer · ObiOne</p>
-            <p class="timeline-desc">Refonte UX du logiciel PIM d'ObiOne en étroite collaboration avec l'équipe développement. Première confrontation avec la réalité d'un produit B2B complexe : arbitrages, contraintes techniques et besoins métier à réconcilier.</p>
+          <div class="ab-mobile-stat-sep" aria-hidden="true"></div>
+          <div class="ab-mobile-stat">
+            <span class="ab-mobile-stat-num">30+</span>
+            <span class="ab-mobile-stat-lbl">produits</span>
+          </div>
+          <div class="ab-mobile-stat-sep" aria-hidden="true"></div>
+          <div class="ab-mobile-stat">
+            <span class="ab-mobile-stat-num">150+</span>
+            <span class="ab-mobile-stat-lbl">interfaces</span>
           </div>
         </div>
 
-        <div class="timeline-item" role="listitem">
-          <div class="timeline-marker" aria-hidden="true">
-            <div class="timeline-dot"></div>
-            <div class="timeline-line"></div>
-          </div>
-          <div class="timeline-content">
-            <span class="timeline-period">Sept. 2020 – Avr. 2021</span>
-            <p class="timeline-role">Cheffe de projet / UX Designer Junior · FredgieAttitude</p>
-            <p class="timeline-desc">Création d'une plateforme digitale de A à Z : cadrage, conception des parcours et livraison des maquettes. Une mission courte, dense, qui m'a appris que le design, c'est surtout une affaire de posture.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item" role="listitem">
-          <div class="timeline-marker" aria-hidden="true">
-            <div class="timeline-dot"></div>
-            <div class="timeline-line"></div>
-          </div>
-          <div class="timeline-content">
-            <span class="timeline-period">2019 – 2020</span>
-            <p class="timeline-role">Développeuse front-end Junior · heaven &amp; WEB Stratégies</p>
-            <p class="timeline-desc">Début de carrière dans le développement front-end à Paris, puis Bordeaux. C'est là que j'ai découvert ma passion pour la tech et l'expérience utilisateur, avant de pivoter vers le design produit.</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- MANIÈRE DE TRAVAILLER -->
-  <section class="section bg-alt" aria-labelledby="workstyle-title">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-label">En pratique</span>
-        <h2 class="section-title" id="workstyle-title">Comment je travaille</h2>
-        <p class="section-intro">Pas de méthode universelle. Une façon d'être qui reste la même, quel que soit le contexte.</p>
-      </div>
-
-      <div class="work-style-list" data-stagger="70">
-        <div class="work-style-item reveal">
-          <span class="work-style-icon" aria-hidden="true">👂</span>
-          <div>
-            <p class="work-style-title">J'écoute avant de parler</p>
-            <p class="work-style-desc">Je ne débarque pas avec des solutions toutes faites. Je prends le temps de comprendre votre contexte, vos équipes, vos contraintes réelles ; et seulement ensuite, je propose. C'est moins spectaculaire, mais c'est ce qui fonctionne.</p>
-          </div>
-        </div>
-        <div class="work-style-item reveal">
-          <span class="work-style-icon" aria-hidden="true">🤝</span>
-          <div>
-            <p class="work-style-title">Je travaille avec, pas à la place de</p>
-            <p class="work-style-desc">Mon rôle n'est pas de remplacer vos équipes, c'est de les aider à mieux travailler ensemble et à prendre de meilleures décisions. À la fin d'une mission, votre équipe doit être plus forte, pas dépendante de moi.</p>
-          </div>
-        </div>
-        <div class="work-style-item reveal">
-          <span class="work-style-icon" aria-hidden="true">📌</span>
-          <div>
-            <p class="work-style-title">Je livre du concret à chaque étape</p>
-            <p class="work-style-desc">Pas de rapport final que personne ne lit. À chaque étape, vous avez quelque chose d'utilisable : une décision documentée, un atelier qui a avancé, un outil que l'équipe peut reprendre.</p>
-          </div>
-        </div>
-        <div class="work-style-item reveal">
-          <span class="work-style-icon" aria-hidden="true">💬</span>
-          <div>
-            <p class="work-style-title">Je dis ce que je pense, vraiment</p>
-            <p class="work-style-desc">Si je pense qu'une décision est mauvaise, je le dis (avec respect), et avec des arguments. La complaisance n'aide personne sur le long terme. Je suis là pour vous aider à avancer, pas pour vous dire ce que vous voulez entendre.</p>
-          </div>
-        </div>
       </div>
     </div>
-  </section>
 
-  <!-- VALEURS -->
-  <section class="section" aria-labelledby="values-title">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-label">Ce qui me guide</span>
-        <h2 class="section-title" id="values-title">Mes valeurs</h2>
+    <!-- All 12 icons - single grid, then CTA -->
+    <div class="ab-mobile-panel ab-panel-active" id="abPanelAll">
+      <div class="ab-mobile-icon-grid">
+        <button class="ab-icon" data-modal="profil" data-ios="true"><span class="ab-ios-icon"><span class="ab-icon-img"></span></span><span class="ab-icon-label">Profil</span></button>
+        <button class="ab-icon" data-modal="valeurs" data-ios="true"><span class="ab-ios-icon"><span class="ab-icon-img"></span></span><span class="ab-icon-label">Valeurs</span></button>
+        <button class="ab-icon" data-modal="passions" data-ios="true"><span class="ab-ios-icon"><span class="ab-icon-img"></span></span><span class="ab-icon-label">Passions</span></button>
+        <button class="ab-icon" data-modal="vision" data-ios="true"><span class="ab-ios-icon"><span class="ab-icon-img"></span></span><span class="ab-icon-label">Vision</span></button>
+        <button class="ab-icon" data-modal="manifesto" data-ios="true"><span class="ab-ios-icon"><span class="ab-icon-img"></span></span><span class="ab-icon-label">Manifesto</span></button>
+        <button class="ab-icon" data-modal="pourquoi" data-ios="true"><span class="ab-ios-icon"><span class="ab-icon-img"></span></span><span class="ab-icon-label">Pourquoi</span></button>
+        <button class="ab-icon" data-modal="parcours" data-ios="true"><span class="ab-ios-icon"><span class="ab-icon-img"></span></span><span class="ab-icon-label">Parcours</span></button>
+        <button class="ab-icon" data-modal="expertise" data-ios="true"><span class="ab-ios-icon"><span class="ab-icon-img"></span></span><span class="ab-icon-label">Expertise</span></button>
+        <button class="ab-icon" data-modal="methode" data-ios="true"><span class="ab-ios-icon"><span class="ab-icon-img"></span></span><span class="ab-icon-label">Méthode</span></button>
+        <button class="ab-icon" data-modal="collaboration" data-ios="true"><span class="ab-ios-icon"><span class="ab-icon-img"></span></span><span class="ab-icon-label">Collab.</span></button>
+        <button class="ab-icon" data-modal="stack" data-ios="true"><span class="ab-ios-icon"><span class="ab-icon-img"></span></span><span class="ab-icon-label">Stack</span></button>
+        <button class="ab-icon" data-modal="mobilite" data-ios="true"><span class="ab-ios-icon"><span class="ab-icon-img"></span></span><span class="ab-icon-label">Mobilité</span></button>
       </div>
 
-      <div class="values-grid" data-stagger="70">
-        <div class="value-item reveal">
-          <span class="value-icon" aria-hidden="true">🔍</span>
-          <div>
-            <p class="value-title">L'honnêteté avant la complaisance</p>
-            <p class="value-desc">Je préfère une conversation difficile à une relation confortable qui ne mène nulle part. L'honnêteté est un service rendu, pas un manque de tact.</p>
-          </div>
-        </div>
-        <div class="value-item reveal">
-          <span class="value-icon" aria-hidden="true">✂️</span>
-          <div>
-            <p class="value-title">La simplicité avant la sophistication</p>
-            <p class="value-desc">Un framework simple qu'on utilise vraiment vaut mieux qu'une méthodologie complexe qui impressionne en réunion et s'arrête là.</p>
-          </div>
-        </div>
-        <div class="value-item reveal">
-          <span class="value-icon" aria-hidden="true">🎯</span>
-          <div>
-            <p class="value-title">L'impact avant les processus</p>
-            <p class="value-desc">Les rituels et les outils ne sont que des moyens. Ce qui compte, c'est ce qu'ils permettent de faire, et si ça ne sert à rien, on arrête.</p>
-          </div>
-        </div>
-        <div class="value-item reveal">
-          <span class="value-icon" aria-hidden="true">👤</span>
-          <div>
-            <p class="value-title">L'utilisateur avant l'organisation</p>
-            <p class="value-desc">Quand tout le monde défend ses intérêts en réunion, je défends ceux de l'utilisateur. C'est souvent là que se trouve la bonne décision produit.</p>
-          </div>
-        </div>
+      <div class="ab-mobile-rdv">
+        <a href="https://calendar.app.google/DLCuiwxWRqKBqRqp9"
+           class="ab-hero-cta"
+           target="_blank" rel="noopener noreferrer">
+          Prendre RDV →
+        </a>
       </div>
+
     </div>
-  </section>
 
-  <!-- ATTENTES -->
-  <section class="section bg-alt" aria-labelledby="expectations-title">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-label">Pour que ça marche</span>
-        <h2 class="section-title" id="expectations-title">Ce que j'attends d'une collaboration</h2>
-        <p class="section-intro">Je travaille avec des organisations qui veulent vraiment avancer, pas juste cocher une case.</p>
-      </div>
+  </div>
 
-      <div class="expectations-block reveal">
-        <p style="font-size:var(--text-base);color:var(--text-secondary);line-height:1.75;margin-bottom:var(--space-sm)">Je mets beaucoup d'énergie dans chaque mission. En échange, j'attends :</p>
-        <ul class="expectations-list" aria-label="Ce que j'attends">
-          <li class="expectation-item">Un accès réel aux équipes et aux données ; pas une version filtrée de la réalité</li>
-          <li class="expectation-item">Un interlocuteur décisionnaire disponible, le CEO, le CTO, ou quelqu'un qui a le mandat de décider</li>
-          <li class="expectation-item">L'envie d'entendre des choses qu'on ne veut pas toujours entendre, c'est là que se cachent les vraies opportunités</li>
-          <li class="expectation-item">Une culture de la confiance, je travaille mieux quand on peut parler franchement, même en interne</li>
-          <li class="expectation-item">Un engagement dans la durée sur les missions qui le nécessitent, les changements d'organisation ne se font pas en une semaine</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta-section" aria-labelledby="cta-about-title">
-    <div class="container reveal">
-      <h2 id="cta-about-title" style="margin-bottom:var(--space-md)">
-        Votre produit mérite mieux.<br>Parlons-en.
-      </h2>
-      <div class="cta-buttons">
-        <a href="https://calendar.app.google/DLCuiwxWRqKBqRqp9" class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">Prendre un premier rendez-vous →</a>
-      </div>
-    </div>
-  </section>
 
 </main>
+
+<!-- ── MODAL SYSTEM ── -->
+<div class="ab-modal-overlay" id="abOverlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="abModalTitle">
+  <div class="ab-modal-panel" id="abPanel">
+    <div class="ab-modal-head">
+      <div class="ab-modal-icon-wrap" id="abModalIcon" aria-hidden="true"></div>
+      <div class="ab-modal-meta">
+        <span class="ab-modal-type" id="abModalType"></span>
+        <h2 class="ab-modal-title" id="abModalTitle"></h2>
+      </div>
+      <button class="ab-modal-close" id="abModalClose" aria-label="Fermer">✕</button>
+    </div>
+    <div class="ab-modal-body" id="abModalBody"></div>
+  </div>
+</div>
+
 <div id="footer-placeholder"></div>
 <script src="assets/js/components.js"></script>
 <script src="assets/js/main.js"></script>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── AGE ── */
+  function calcAge() {
+    var birth = new Date(1998, 7, 23, 13, 16, 0);
+    var now = new Date();
+    var age = now.getFullYear() - birth.getFullYear();
+    var m = now.getMonth() - birth.getMonth();
+    if (m < 0 || (m === 0 && now.getDate() < birth.getDate())) age--;
+    return age;
+  }
+
+  var age = calcAge();
+  document.querySelectorAll('.ab-age-display').forEach(function (el) {
+    el.textContent = age + ' ans';
+  });
+
+  /* ── THEME PHOTO ── */
+  function updatePhotos() {
+    var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+    var src = dark ? 'assets/img/karine-dark.jpg' : 'assets/img/karine-light.jpg';
+    ['abHeroPhoto', 'abMobilePhoto'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.src = src;
+    });
+  }
+
+  /* ── CARD TAP-TO-FLIP (mobile / touch) ── */
+  var cardWrap = document.getElementById('abCard');
+  if (cardWrap) {
+    cardWrap.addEventListener('click', function () {
+      if (!window.matchMedia('(hover: hover)').matches) {
+        cardWrap.classList.toggle('ab-flipped');
+      }
+    });
+  }
+  updatePhotos();
+  new MutationObserver(function (m) {
+    m.forEach(function (r) { if (r.attributeName === 'data-theme') updatePhotos(); });
+  }).observe(document.documentElement, { attributes: true });
+
+  /* ── FOLDER SVG BUILDER ── */
+  var FOLDER_PATH = 'M3 18 L3 13 Q3 11 5 11 L20 11 Q21.5 11 22.5 9.5 L24 7.5 Q25 6 26.5 6 L29.5 6 Q31 6 31.5 7.5 L32.5 9.5 Q33.5 11 35 11 L51 11 Q53 11 53 13 L53 43 Q53 45 51 45 L5 45 Q3 45 3 43 Z';
+  var TAB_PATH   = 'M3 18 L3 13 Q3 11 5 11 L20 11 Q21.5 11 22.5 9.5 L24 7.5 Q25 6 26.5 6 L29.5 6 Q31 6 31.5 7.5 L32.5 9.5 Q33.5 11 35 11 L51 11 Q53 11 53 13 L53 18 Z';
+
+  function folderSVG(color, glyph) {
+    return '<svg viewBox="0 0 56 50" width="56" height="50" fill="none" xmlns="http://www.w3.org/2000/svg">'
+      + '<path d="' + FOLDER_PATH + '" fill="' + color + '"/>'
+      + '<path d="' + TAB_PATH + '" fill="white" opacity="0.22"/>'
+      + '<rect x="3" y="18" width="50" height="9" fill="white" opacity="0.1"/>'
+      + '<rect x="3" y="37" width="50" height="8" rx="0 0 4 4" fill="black" opacity="0.06"/>'
+      + glyph
+      + '</svg>';
+  }
+
+  /* Glyphs - white SVG paths, centered at x=28, body area y=18-45, center y≈32 */
+  var GLYPHS = {
+    profil:
+      '<circle cx="28" cy="27" r="4.5" fill="white" opacity="0.9"/>'
+      + '<path d="M17 43 C17 36 22 33 28 33 C34 33 39 36 39 43" fill="white" opacity="0.85"/>',
+
+    valeurs:
+      '<path d="M28 22 L35.5 32 L28 42 L20.5 32 Z" fill="white" opacity="0.88"/>',
+
+    passions:
+      '<path d="M28 39 C28 39 18 31 18 25.5 C18 21.5 21 19 24.5 19 C26.3 19 27.7 19.9 28 20.6 C28.3 19.9 29.7 19 31.5 19 C35 19 38 21.5 38 25.5 C38 31 28 39 28 39 Z" fill="white" opacity="0.88"/>',
+
+    vision:
+      '<circle cx="28" cy="32" r="10" stroke="white" stroke-width="1.5" fill="none" opacity="0.7"/>'
+      + '<circle cx="28" cy="32" r="5.5" stroke="white" stroke-width="1.5" fill="none" opacity="0.8"/>'
+      + '<circle cx="28" cy="32" r="2.5" fill="white" opacity="0.95"/>',
+
+    manifesto:
+      '<rect x="18" y="25" width="20" height="2" rx="1" fill="white" opacity="0.9"/>'
+      + '<rect x="18" y="31" width="20" height="2" rx="1" fill="white" opacity="0.9"/>'
+      + '<rect x="18" y="37" width="14" height="2" rx="1" fill="white" opacity="0.9"/>',
+
+    pourquoi:
+      '<path d="M31 21 L22.5 33 L28.5 33 L26 43 L34 31 L28 31 Z" fill="white" opacity="0.9"/>',
+
+    parcours:
+      '<line x1="16" y1="32" x2="38" y2="32" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.9"/>'
+      + '<path d="M33 27 L39 32 L33 37" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.9"/>'
+      + '<circle cx="20" cy="32" r="2.5" fill="white" opacity="0.7"/>'
+      + '<circle cx="27" cy="32" r="2.5" fill="white" opacity="0.7"/>',
+
+    expertise:
+      '<path d="M28 21 L35.5 25.5 L35.5 34.5 L28 39 L20.5 34.5 L20.5 25.5 Z" stroke="white" stroke-width="2" stroke-linejoin="round" fill="none" opacity="0.9"/>'
+      + '<circle cx="28" cy="30" r="2.5" fill="white" opacity="0.8"/>',
+
+    methode:
+      '<path d="M28 22 L37 31 L28 40 L19 31 Z" stroke="white" stroke-width="2" stroke-linejoin="round" fill="rgba(255,255,255,0.12)" opacity="0.9"/>'
+      + '<circle cx="28" cy="31" r="3" fill="white" opacity="0.9"/>',
+
+    collaboration:
+      '<path d="M17 26 L27 26 M22 21 L17 26 L22 31" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.9"/>'
+      + '<path d="M39 38 L29 38 M34 43 L39 38 L34 33" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.9"/>',
+
+    stack:
+      '<rect x="16" y="22" width="24" height="6" rx="2" fill="white" opacity="0.38"/>'
+      + '<rect x="16" y="30" width="24" height="6" rx="2" fill="white" opacity="0.62"/>'
+      + '<rect x="16" y="38" width="24" height="6" rx="2" fill="white" opacity="0.9"/>',
+
+    mobilite:
+      '<path d="M28 20 C23.5 20 20 23.5 20 28 C20 34 28 43 28 43 C28 43 36 34 36 28 C36 23.5 32.5 20 28 20 Z" fill="white" opacity="0.88"/>'
+      + '<circle cx="28" cy="28" r="4" fill="black" opacity="0.2"/>'
+  };
+
+  /* Icon colors */
+  var ICON_COLORS = {
+    profil:        '#6D28D9',
+    valeurs:       '#BE185D',
+    passions:      '#B45309',
+    vision:        '#0F766E',
+    manifesto:     '#3730A3',
+    pourquoi:      '#7E22CE',
+    parcours:      '#1D4ED8',
+    expertise:     '#5B21B6',
+    methode:       '#0E7490',
+    collaboration: '#C026D3',
+    stack:         '#059669',
+    mobilite:      '#C2410C'
+  };
+
+  /* ── iOS APP ICON BUILDER ── */
+  var IOS_COLORS = {
+    profil:        ['#7C3AED','#4F46E5'],
+    valeurs:       ['#DB2777','#E11D48'],
+    passions:      ['#EA580C','#DC2626'],
+    vision:        ['#0D9488','#0891B2'],
+    manifesto:     ['#4338CA','#6D28D9'],
+    pourquoi:      ['#9333EA','#7C3AED'],
+    parcours:      ['#2563EB','#1D4ED8'],
+    expertise:     ['#6D28D9','#4F46E5'],
+    methode:       ['#0891B2','#0D9488'],
+    collaboration: ['#C026D3','#9333EA'],
+    stack:         ['#059669','#0D9488'],
+    mobilite:      ['#EA580C','#D97706']
+  };
+
+  var IOS_GLYPHS = {
+    profil:
+      '<circle cx="30" cy="24" r="7" fill="white" opacity="0.95"/>'
+      +'<path d="M15 46C15 37 22 33 30 33C38 33 45 37 45 46" fill="white" opacity="0.9"/>',
+    valeurs:
+      '<path d="M30 20L40 33L30 46L20 33Z" fill="white" opacity="0.92"/>',
+    passions:
+      '<path d="M30 43C30 43 17 33 17 25C17 20 20.5 17 24.5 17C26.7 17 28.5 18.2 30 19.5C31.5 18.2 33.3 17 35.5 17C39.5 17 43 20 43 25C43 33 30 43 30 43Z" fill="white" opacity="0.92"/>',
+    vision:
+      '<circle cx="30" cy="30" r="12" stroke="white" stroke-width="2" fill="none" opacity="0.7"/>'
+      +'<circle cx="30" cy="30" r="7" stroke="white" stroke-width="2" fill="none" opacity="0.82"/>'
+      +'<circle cx="30" cy="30" r="3" fill="white" opacity="0.95"/>',
+    manifesto:
+      '<rect x="18" y="21" width="24" height="2.5" rx="1.25" fill="white" opacity="0.92"/>'
+      +'<rect x="18" y="28" width="24" height="2.5" rx="1.25" fill="white" opacity="0.92"/>'
+      +'<rect x="18" y="35" width="16" height="2.5" rx="1.25" fill="white" opacity="0.92"/>',
+    pourquoi:
+      '<path d="M33 18L22 31L28.5 31L26 42L38 29L31 29Z" fill="white" opacity="0.92"/>',
+    parcours:
+      '<line x1="14" y1="30" x2="38" y2="30" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>'
+      +'<path d="M34 24L41 30L34 36" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.9"/>'
+      +'<circle cx="19" cy="30" r="3" fill="white" opacity="0.7"/>'
+      +'<circle cx="27" cy="30" r="3" fill="white" opacity="0.7"/>',
+    expertise:
+      '<path d="M30 18L39 23L39 33L30 38L21 33L21 23Z" stroke="white" stroke-width="2.5" stroke-linejoin="round" fill="none" opacity="0.9"/>'
+      +'<circle cx="30" cy="28.5" r="3" fill="white" opacity="0.85"/>',
+    methode:
+      '<path d="M30 19L41 30L30 41L19 30Z" stroke="white" stroke-width="2.5" stroke-linejoin="round" fill="rgba(255,255,255,0.12)" opacity="0.9"/>'
+      +'<circle cx="30" cy="30" r="3.5" fill="white" opacity="0.95"/>',
+    collaboration:
+      '<path d="M16 25L27 25M21 20L16 25L21 30" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.9"/>'
+      +'<path d="M44 35L33 35M39 40L44 35L39 30" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.9"/>',
+    stack:
+      '<rect x="16" y="20" width="28" height="7" rx="2.5" fill="white" opacity="0.35"/>'
+      +'<rect x="16" y="29" width="28" height="7" rx="2.5" fill="white" opacity="0.62"/>'
+      +'<rect x="16" y="38" width="28" height="7" rx="2.5" fill="white" opacity="0.92"/>',
+    mobilite:
+      '<path d="M30 16C24.5 16 20 20.5 20 26C20 33.5 30 44 30 44C30 44 40 33.5 40 26C40 20.5 35.5 16 30 16Z" fill="white" opacity="0.92"/>'
+      +'<circle cx="30" cy="26" r="5" fill="rgba(0,0,0,0.2)"/>'
+  };
+
+  function iosIconSVG(key, glyph) {
+    var cols = IOS_COLORS[key] || ['#6D28D9','#4F46E5'];
+    var gradId = 'ig' + key;
+    return '<svg viewBox="0 0 60 60" width="60" height="60" fill="none" xmlns="http://www.w3.org/2000/svg">'
+      + '<defs><linearGradient id="' + gradId + '" x1="0" y1="0" x2="0.7" y2="1">'
+      + '<stop offset="0%" stop-color="' + cols[0] + '"/>'
+      + '<stop offset="100%" stop-color="' + cols[1] + '"/>'
+      + '</linearGradient></defs>'
+      + '<rect width="60" height="60" rx="13" fill="url(#' + gradId + ')"/>'
+      + '<rect width="60" height="60" rx="13" fill="white" opacity="0.06"/>'
+      + glyph
+      + '</svg>';
+  }
+
+  /* Inject SVGs - folder for desktop, iOS icon for mobile */
+  document.querySelectorAll('.ab-icon-img').forEach(function (img) {
+    var btn = img.closest('[data-modal]');
+    var key = btn.getAttribute('data-modal');
+    if (btn.hasAttribute('data-ios')) {
+      img.innerHTML = iosIconSVG(key, IOS_GLYPHS[key] || '');
+    } else {
+      img.innerHTML = folderSVG(ICON_COLORS[key] || '#6D28D9', GLYPHS[key] || '');
+    }
+  });
+
+  /* ── CUSTOM CURSOR ── */
+  var cursorWrap = document.getElementById('abCursor');
+  if (cursorWrap && window.matchMedia('(pointer: fine)').matches) {
+    var mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+    var curX = mouseX, curY = mouseY;
+
+    document.addEventListener('mousemove', function (e) { mouseX = e.clientX; mouseY = e.clientY; });
+
+    (function loop() {
+      curX += (mouseX - curX) * 0.38;
+      curY += (mouseY - curY) * 0.38;
+      cursorWrap.style.transform = 'translate(' + curX + 'px,' + curY + 'px)';
+      requestAnimationFrame(loop);
+    })();
+
+    document.addEventListener('mouseleave', function () { cursorWrap.style.opacity = '0'; });
+    document.addEventListener('mouseenter', function () { cursorWrap.style.opacity = '1'; });
+
+    var cursorLabel = cursorWrap.querySelector('.ab-cursor-label');
+    document.addEventListener('mouseover', function (e) {
+      var folder = e.target.closest('.ab-icon[data-modal]');
+      var t = e.target.closest('button,a,[data-modal],[role="button"]');
+      if (folder) {
+        var lbl = folder.querySelector('.ab-icon-label');
+        cursorLabel.textContent = lbl ? lbl.textContent.trim() : 'Ouvrir';
+        cursorLabel.style.transform = 'scale(1.08)';
+        cursorLabel.style.boxShadow = '0 4px 16px rgba(109,40,217,0.5)';
+      } else {
+        cursorLabel.textContent = 'Karine';
+        cursorLabel.style.transform = t ? 'scale(1.05)' : 'scale(1)';
+        cursorLabel.style.boxShadow = t ? '0 4px 16px rgba(109,40,217,0.45)' : '';
+      }
+    });
+  }
+
+
+  /* ── MODAL CONTENT ── */
+  var MODALS = {
+    profil: {
+      icon:'◉', type:'DOSSIER PERSONNEL', title:'Profil',
+      body: function() {
+        return '<div class="ab-profil-card"><div class="ab-profil-avatar">KT</div><div>'
+          +'<span class="ab-profil-name">Karine Timoneda</span>'
+          +'<span class="ab-profil-sub">Product Strategist · Freelance</span>'
+          +'<span class="ab-profil-age">'+age+' ans · Paris &amp; remote</span>'
+          +'</div></div>'
+          +'<p>Je suis Karine. Stratège produit depuis 6 ans, j\'accompagne des start-ups et scale-ups qui veulent construire des produits qui ont vraiment du sens, pas juste des features qui remplissent un backlog.</p>'
+          +'<p>Avant de me spécialiser en stratégie produit, j\'ai commencé dans le développement front-end. Ce double background tech + design me permet de parler vrai avec les équipes dev, d\'arbitrer des contraintes techniques et de penser systèmes plutôt que slides.</p>'
+          +'<p>J\'ai été COO d\'une agence UX, j\'ai lancé des produits de zéro, j\'ai redesigné des plateformes entières. Aujourd\'hui, je travaille en freelance parce que c\'est le format qui me correspond.</p>'
+          +'<div class="ab-section-head">En quelques mots</div>'
+          +'<ul class="ab-list"><li>+6 ans en design &amp; stratégie produit</li><li>Background front-end → UX → Product Strategy</li><li>Expérience COO en agence UX</li><li>Mobilité France entière, remote-friendly</li></ul>';
+      }
+    },
+    valeurs: {
+      icon:'◆', type:'DOSSIER PERSONNEL', title:'Valeurs',
+      body: function() {
+        return '<p class="ab-intro">Ce qui guide mes décisions, au quotidien et en mission.</p>'
+          +'<div class="ab-val"><div class="ab-val-title">L\'honnêteté avant la complaisance</div><p class="ab-val-desc">Je préfère une conversation difficile à une relation confortable qui ne mène nulle part. L\'honnêteté est un service rendu, pas un manque de tact.</p></div>'
+          +'<div class="ab-val"><div class="ab-val-title">La simplicité avant la sophistication</div><p class="ab-val-desc">Un framework simple qu\'on utilise vraiment vaut mieux qu\'une méthodologie complexe qui impressionne en réunion et s\'arrête là.</p></div>'
+          +'<div class="ab-val"><div class="ab-val-title">L\'impact avant les processus</div><p class="ab-val-desc">Les rituels et les outils ne sont que des moyens. Ce qui compte, c\'est ce qu\'ils permettent de faire, et si ça ne sert à rien, on arrête.</p></div>'
+          +'<div class="ab-val"><div class="ab-val-title">L\'utilisateur avant l\'organisation</div><p class="ab-val-desc">Quand tout le monde défend ses intérêts en réunion, je défends ceux de l\'utilisateur. C\'est souvent là que se trouve la bonne décision produit.</p></div>';
+      }
+    },
+    passions: {
+      icon:'♡', type:'DOSSIER PERSONNEL', title:'Passions',
+      body: function() {
+        return '<p class="ab-intro">Ce que je suis en dehors du bureau.</p>'
+          +'<div class="ab-val"><div class="ab-val-title">🎹 Musique &amp; piano</div><p class="ab-val-desc">Je joue du piano. La musique est ma façon de débrancher, de me reconnecter à quelque chose d\'instinctif et de non-rationnel. Un contrepoint bienvenu à un métier très cérébral.</p></div>'
+          +'<div class="ab-val"><div class="ab-val-title">📚 Lecture</div><p class="ab-val-desc">Essais, biographies, fiction. J\'ai une affection particulière pour les livres qui changent une façon de voir, pas juste d\'apprendre.</p></div>'
+          +'<div class="ab-val"><div class="ab-val-title">🏃 Sport</div><p class="ab-val-desc">Le mouvement m\'aide à penser. Course à pied, natation, yoga, je ne fonctionne pas bien sans activité physique régulière.</p></div>'
+          +'<div class="ab-val"><div class="ab-val-title">✈️ Voyage &amp; mobilité</div><p class="ab-val-desc">Je me déplace facilement et souvent. Le changement de contexte m\'est naturel. Travailler depuis des endroits différents, c\'est quelque chose qui me nourrit.</p></div>';
+      }
+    },
+    vision: {
+      icon:'◎', type:'DOSSIER PERSONNEL', title:'Vision',
+      body: function() {
+        return '<p class="ab-intro">Pourquoi le freelance ? Ce n\'est pas un choix par défaut. C\'est une décision réfléchie, qui correspond à ce que je suis vraiment.</p>'
+          +'<div class="ab-val"><div class="ab-val-title">La liberté de choisir mes missions</div><p class="ab-val-desc">Je travaille avec des organisations dans lesquelles je crois, sur des sujets qui m\'intéressent vraiment. Ce n\'est pas possible en CDI.</p></div>'
+          +'<div class="ab-val"><div class="ab-val-title">L\'intensité par mission</div><p class="ab-val-desc">Je m\'implique entièrement là où je suis. Le format freelance me permet d\'apporter une énergie de 100&nbsp;% sur chaque mission.</p></div>'
+          +'<div class="ab-val"><div class="ab-val-title">La mobilité comme avantage</div><p class="ab-val-desc">Paris, Bordeaux, Toulouse, La Rochelle, Niort, Toulon, la géographie n\'est pas une contrainte pour moi, c\'est une liberté.</p></div>'
+          +'<div class="ab-val"><div class="ab-val-title">L\'indépendance de jugement</div><p class="ab-val-desc">En freelance, je peux dire ce que je pense sans filtre politique. C\'est ce qui rend mes interventions réellement utiles.</p></div>';
+      }
+    },
+    manifesto: {
+      icon:'≡', type:'DOSSIER PERSONNEL', title:'Manifesto',
+      body: function() {
+        return '<p class="ab-intro">Ce qui me drive au quotidien.</p>'
+          +'<div class="ab-quote">Je crois que les meilleurs produits sont construits par des gens qui s\'écoutent vraiment, entre eux, et avec leurs utilisateurs.</div>'
+          +'<div class="ab-quote">Je crois que la plupart des problèmes produit sont des problèmes de communication déguisés en problèmes techniques.</div>'
+          +'<div class="ab-quote">Je crois que la simplicité est une forme d\'élégance intellectuelle, et qu\'elle est beaucoup plus difficile à atteindre que la complexité.</div>'
+          +'<div class="ab-quote">Je crois qu\'on ne change pas une organisation avec des slides, mais avec des gens qui osent dire les vraies choses en réunion.</div>'
+          +'<div class="ab-quote">Je crois que travailler avec liberté n\'est pas un luxe, c\'est une condition pour faire du travail de qualité.</div>'
+          +'<div class="ab-quote">Je crois que l\'impact réel d\'une mission se mesure à ce qui reste quand je ne suis plus là.</div>';
+      }
+    },
+    pourquoi: {
+      icon:'✦', type:'DOSSIER PERSONNEL', title:'Pourquoi ce métier',
+      body: function() {
+        return '<p class="ab-intro">Ce n\'est pas une carrière que j\'ai planifiée. C\'est une évidence qui s\'est imposée.</p>'
+          +'<div class="ab-val"><div class="ab-val-title">La fascination pour les décisions</div><p class="ab-val-desc">Ce qui m\'attire dans le produit, c\'est l\'art de décider dans l\'incertitude. Prioriser sans données parfaites, trancher sans consensus évident, c\'est là que le travail devient vraiment intéressant.</p></div>'
+          +'<div class="ab-val"><div class="ab-val-title">L\'amour des zones floues</div><p class="ab-val-desc">J\'aime arriver là où les gens disent "on ne sait pas trop ce qu\'on veut faire". Transformer l\'ambiguïté en direction claire, c\'est devenu mon terrain naturel.</p></div>'
+          +'<div class="ab-val"><div class="ab-val-title">Le contact avec la réalité</div><p class="ab-val-desc">J\'ai commencé par coder. Puis j\'ai rencontré les utilisateurs. Ce moment où on réalise que ce qu\'on construit ne correspond pas à ce que les gens font vraiment, c\'est là que j\'ai compris pourquoi le design produit existe.</p></div>'
+          +'<div class="ab-val"><div class="ab-val-title">L\'envie d\'un impact visible</div><p class="ab-val-desc">Je veux voir ce que je construis utilisé. Pas un livrable dans un drive. Un produit en production, des équipes autonomes, une direction qui tient dans le temps.</p></div>';
+      }
+    },
+    parcours: {
+      icon:'⊳', type:'DOSSIER PROFESSIONNEL', title:'Parcours',
+      body: function() {
+        return '<div class="ab-timeline-item"><div class="ab-timeline-left"><span class="ab-timeline-period">2021 – auj.</span></div><div><p class="ab-timeline-role">Stratège Produit &amp; UX Designer · Freelance</p><p class="ab-timeline-desc">Missions en stratégie produit et design UX/UI pour des start-ups et scale-ups en France. Accompagnement de la phase 0→1 à la refonte complète : vision, parcours, interfaces, site vitrine.</p></div></div>'
+          +'<div class="ab-timeline-item"><div class="ab-timeline-left"><span class="ab-timeline-period">2022 – 2026</span></div><div><p class="ab-timeline-role">Directrice des Opérations · ipsoon, agence UX</p><p class="ab-timeline-desc">Pilotage opérationnel et stratégique d\'une agence spécialisée en design produit. Management d\'équipe, structuration des processus, double casquette COO et Product Designer.</p></div></div>'
+          +'<div class="ab-timeline-item"><div class="ab-timeline-left"><span class="ab-timeline-period">2020 – 2022</span></div><div><p class="ab-timeline-role">UX Designer · ObiOne <span style="font-weight:400;color:var(--text-muted);font-size:0.78rem;">· Alternance</span></p><p class="ab-timeline-desc">Refonte UX du logiciel PIM d\'ObiOne en collaboration avec l\'équipe développement. Première confrontation avec la réalité d\'un produit B2B complexe.</p></div></div>'
+          +'<div class="ab-timeline-item"><div class="ab-timeline-left"><span class="ab-timeline-period">2020 – 2021</span></div><div><p class="ab-timeline-role">Cheffe de projet / UX Designer Junior · FredgieAttitude</p><p class="ab-timeline-desc">Création d\'une plateforme digitale de A à Z : cadrage, conception des parcours et livraison des maquettes.</p></div></div>'
+          +'<div class="ab-timeline-item"><div class="ab-timeline-left"><span class="ab-timeline-period">2019 – 2020</span></div><div><p class="ab-timeline-role">Développeuse front-end Junior · heaven &amp; WEB Stratégies</p><p class="ab-timeline-desc">Début de carrière dans le développement front-end à Paris, puis Bordeaux. C\'est là que j\'ai découvert ma passion pour la tech et l\'UX, avant de pivoter vers le design produit.</p></div></div>';
+      }
+    },
+    expertise: {
+      icon:'⬡', type:'DOSSIER PROFESSIONNEL', title:'Expertise',
+      body: function() {
+        return '<div class="ab-profil-card"><div style="flex:1"><span style="font-family:\'Courier New\',monospace;font-size:0.58rem;letter-spacing:0.12em;color:var(--violet);text-transform:uppercase;display:block;margin-bottom:0.2rem;">Rôle</span><p style="margin:0;font-weight:700;color:var(--text-primary);font-size:1rem;line-height:1.2;">Product Strategist · Senior</p><p style="margin:0.2rem 0 0;font-size:0.78rem;color:var(--text-secondary);">Freelance · France &amp; remote</p></div></div>'
+          +'<div class="ab-section-head">Spécialisations</div>'
+          +'<ul class="ab-list"><li>Stratégie produit (0→1, refontes, priorisation)</li><li>UX Research &amp; Design</li><li>UI Design, interfaces web &amp; mobile</li><li>Product Management &amp; roadmap</li><li>Advisory &amp; cadrage stratégique</li><li>Facilitation d\'ateliers</li></ul>'
+          +'<div class="ab-section-head">Types de missions</div>'
+          +'<ul class="ab-list"><li>Lancement de produits 0→1</li><li>Refonte UX/UI complète</li><li>Structuration de la fonction produit</li><li>Advisory CTO / CPO / CEO</li><li>Ateliers de cadrage et facilitation</li></ul>'
+          +'<div class="ab-section-head">Secteurs</div>'
+          +'<div class="ab-tags"><span class="ab-tag">SaaS</span><span class="ab-tag">EdTech</span><span class="ab-tag">Marketplace</span><span class="ab-tag">Santé</span><span class="ab-tag">B2B Enterprise</span><span class="ab-tag">Startups early-stage</span></div>';
+      }
+    },
+    methode: {
+      icon:'◈', type:'DOSSIER PROFESSIONNEL', title:'Méthode',
+      body: function() {
+        return '<p class="ab-intro">Pas de méthode universelle. Une façon d\'être qui reste la même, quel que soit le contexte.</p>'
+          +'<div class="ab-val"><div class="ab-val-title">Écoute d\'abord</div><p class="ab-val-desc">Je ne débarque pas avec des solutions. Je prends le temps de comprendre votre contexte, vos équipes, vos contraintes réelles, avant de proposer quoi que ce soit.</p></div>'
+          +'<div class="ab-val"><div class="ab-val-title">Collaboration, pas substitution</div><p class="ab-val-desc">Mon rôle n\'est pas de remplacer vos équipes. À la fin d\'une mission, elles doivent être plus fortes et plus autonomes, pas dépendantes de moi.</p></div>'
+          +'<div class="ab-val"><div class="ab-val-title">Concret à chaque étape</div><p class="ab-val-desc">Pas de rapport final que personne ne lit. À chaque étape, vous avez quelque chose d\'utilisable : une décision documentée, un atelier avancé, un outil réutilisable.</p></div>'
+          +'<div class="ab-val"><div class="ab-val-title">Franchise totale</div><p class="ab-val-desc">Si une décision est mauvaise, je le dis, avec respect et arguments. La complaisance n\'aide personne.</p></div>';
+      }
+    },
+    stack: {
+      icon:'⊞', type:'DOSSIER PROFESSIONNEL', title:'Stack',
+      body: function() {
+        return '<p class="ab-intro">Mon environnement de travail au quotidien.</p>'
+          +'<div class="ab-stack-group"><span class="ab-stack-label">Design &amp; Produit</span><div class="ab-tags"><span class="ab-tag">Figma</span><span class="ab-tag">Notion</span><span class="ab-tag">Miro / FigJam</span><span class="ab-tag">Maze</span><span class="ab-tag">Useberry</span></div></div>'
+          +'<div class="ab-stack-group"><span class="ab-stack-label">Stratégie &amp; Analyse</span><div class="ab-tags"><span class="ab-tag">Amplitude</span><span class="ab-tag">Mixpanel</span><span class="ab-tag">Linear</span><span class="ab-tag">Jira</span><span class="ab-tag">Airtable</span></div></div>'
+          +'<div class="ab-stack-group"><span class="ab-stack-label">Communication &amp; Collaboration</span><div class="ab-tags"><span class="ab-tag">Slack / Teams</span><span class="ab-tag">Loom</span><span class="ab-tag">Cal.com</span><span class="ab-tag">Google Workspace</span></div></div>'
+          +'<div class="ab-stack-group"><span class="ab-stack-label">Développement (lecture &amp; collaboration)</span><div class="ab-tags"><span class="ab-tag">HTML / CSS / JS</span><span class="ab-tag">GitHub</span><span class="ab-tag">Webflow</span><span class="ab-tag">Framer</span></div></div>';
+      }
+    },
+    collaboration: {
+      icon:'⟷', type:'DOSSIER PROFESSIONNEL', title:'Collaboration',
+      body: function() {
+        return '<p class="ab-intro">Je mets toute mon énergie dans chaque mission. En échange, j\'ai des attentes simples mais non négociables.</p>'
+          +'<ul class="ab-check">'
+          +'<li><strong>Accès réel aux équipes et aux données</strong><span>Pas une version filtrée de la réalité. Je travaille avec ce qui est vrai, pas ce qu\'on veut me montrer.</span></li>'
+          +'<li><strong>Un décisionnaire disponible</strong><span>CEO, CTO ou quelqu\'un qui a le mandat de décider. Les missions échouent quand les décisions restent bloquées.</span></li>'
+          +'<li><strong>L\'envie d\'entendre des vérités difficiles</strong><span>C\'est là que se cachent les vraies opportunités. Si vous n\'êtes pas prêt pour ça, je ne suis pas la bonne personne.</span></li>'
+          +'<li><strong>Une culture de la confiance</strong><span>Je travaille mieux quand on peut parler franchement, même en interne.</span></li>'
+          +'<li><strong>Un engagement dans la durée</strong><span>Les changements réels ne se font pas en une semaine.</span></li>'
+          +'</ul>'
+          +'<div style="margin-top:1.25rem;padding:0.875rem 1rem;border:1px solid var(--border-strong);border-radius:var(--radius-md);text-align:center;">'
+          +'<p style="margin:0 0 0.75rem;font-size:0.85rem;color:var(--text-secondary);">Prêt·e à collaborer ?</p>'
+          +'<a href="https://calendar.app.google/DLCuiwxWRqKBqRqp9" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.4rem;padding:0.5rem 1.25rem;background:var(--gradient-vivid);border-radius:100px;color:white;text-decoration:none;font-size:0.825rem;font-weight:600;">Prendre un rendez-vous →</a>'
+          +'</div>';
+      }
+    },
+    mobilite: {
+      icon:'⊙', type:'DOSSIER PROFESSIONNEL', title:'Mobilité',
+      body: function() {
+        return '<p class="ab-intro">Je me déplace là où les décisions se prennent. La géographie n\'est pas une contrainte, c\'est une liberté.</p>'
+          +'<div class="ab-city-grid">'
+          +'<div class="ab-city-card"><div class="ab-city-dot"></div><div><div class="ab-city-name">Paris</div><div class="ab-city-sub">Base principale</div></div></div>'
+          +'<div class="ab-city-card"><div class="ab-city-dot"></div><div><div class="ab-city-name">Bordeaux</div><div class="ab-city-sub">Régulier</div></div></div>'
+          +'<div class="ab-city-card"><div class="ab-city-dot"></div><div><div class="ab-city-name">Toulouse</div><div class="ab-city-sub">Régulier</div></div></div>'
+          +'<div class="ab-city-card"><div class="ab-city-dot"></div><div><div class="ab-city-name">La Rochelle</div><div class="ab-city-sub">Régulier</div></div></div>'
+          +'<div class="ab-city-card"><div class="ab-city-dot"></div><div><div class="ab-city-name">Niort</div><div class="ab-city-sub">Régulier</div></div></div>'
+          +'<div class="ab-city-card"><div class="ab-city-dot"></div><div><div class="ab-city-name">Toulon</div><div class="ab-city-sub">Régulier</div></div></div>'
+          +'</div>'
+          +'<div class="ab-section-head">Mode de travail</div>'
+          +'<ul class="ab-list"><li>Full remote ou présentiel selon les besoins</li><li>Disponible pour des missions en régions</li><li>Déplacements courts (ateliers, kick-off, restitutions)</li><li>Basée à Paris, mobilité immédiate France entière</li></ul>'
+          +'<div class="ab-quote">Je travaille là où c\'est utile. Pas là où c\'est confortable.</div>';
+      }
+    }
+  };
+
+  /* ── MODAL LOGIC ── */
+  var overlay   = document.getElementById('abOverlay');
+  var bodyEl    = document.getElementById('abModalBody');
+  var titleEl   = document.getElementById('abModalTitle');
+  var typeEl    = document.getElementById('abModalType');
+  var iconEl    = document.getElementById('abModalIcon');
+  var closeBtn  = document.getElementById('abModalClose');
+  var lastFocus = null;
+
+  function openModal(key) {
+    var data = MODALS[key]; if (!data) return;
+    lastFocus = document.activeElement;
+    iconEl.textContent  = data.icon;
+    typeEl.textContent  = data.type;
+    titleEl.textContent = data.title;
+    bodyEl.innerHTML    = data.body();
+    overlay.setAttribute('aria-hidden','false');
+    overlay.classList.add('ab-open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(function () { closeBtn.focus(); }, 50);
+  }
+
+  function closeModal() {
+    overlay.classList.remove('ab-open');
+    overlay.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+    if (lastFocus) lastFocus.focus();
+  }
+
+  document.querySelectorAll('[data-modal]').forEach(function (el) {
+    el.addEventListener('click', function () { openModal(el.getAttribute('data-modal')); });
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', function (e) { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && overlay.classList.contains('ab-open')) closeModal(); });
+
+  document.getElementById('abPanel').addEventListener('keydown', function (e) {
+    if (e.key !== 'Tab') return;
+    var focusable = this.querySelectorAll('button,a,input,[tabindex]:not([tabindex="-1"])');
+    if (!focusable.length) return;
+    var first = focusable[0], last = focusable[focusable.length-1];
+    if (e.shiftKey) { if (document.activeElement === first) { e.preventDefault(); last.focus(); } }
+    else { if (document.activeElement === last) { e.preventDefault(); first.focus(); } }
+  });
+
+})();
+</script>
+
 </body>
 </html>
