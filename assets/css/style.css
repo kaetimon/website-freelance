@@ -2292,6 +2292,15 @@ p { color: var(--text-secondary); line-height: 1.75; }
   line-height: 1.6;
   flex: 1;
 }
+.topic-card-audience {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--violet);
+  opacity: 0.8;
+  margin-top: var(--space-xs);
+  padding-top: var(--space-xs);
+  border-top: 1px solid var(--border);
+}
 
 /* ─── Formats d'intervention ─────────────────────── */
 .formats-grid {
@@ -2389,9 +2398,15 @@ p { color: var(--text-secondary); line-height: 1.75; }
 .badge-webinaire  { background: rgba(244, 114, 182, 0.10); color: #be185d; }
 .badge-table      { background: rgba(245, 158, 11, 0.10); color: #92400e; }
 .badge-masterclass{ background: rgba(16, 185, 129, 0.10); color: #065f46; }
+.badge-workshop   { background: rgba(59, 130, 246, 0.10); color: #1d4ed8; }
+.badge-formation  { background: rgba(234, 88, 12, 0.10);  color: #9a3412; }
+.badge-conference { background: rgba(124, 58, 237, 0.10); color: #5b21b6; }
 [data-theme="dark"] .badge-webinaire   { color: #f9a8d4; background: rgba(244, 114, 182, 0.12); }
 [data-theme="dark"] .badge-table       { color: #fcd34d; background: rgba(245, 158, 11, 0.12); }
 [data-theme="dark"] .badge-masterclass { color: #6ee7b7; background: rgba(16, 185, 129, 0.12); }
+[data-theme="dark"] .badge-workshop    { color: #93c5fd; background: rgba(59, 130, 246, 0.12); }
+[data-theme="dark"] .badge-formation   { color: #fdba74; background: rgba(234, 88, 12, 0.12); }
+[data-theme="dark"] .badge-conference  { color: #c4b5fd; background: rgba(124, 58, 237, 0.12); }
 .intervention-title {
   font-size: var(--text-sm);
   font-weight: 600;
