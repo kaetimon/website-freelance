@@ -186,6 +186,17 @@ function renderFooter() {
         </nav>
 
         <div class="footer-right">
+          <a href="https://www.malt.fr/profile/karinetimoneda1"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="malt-link"
+             aria-label="Profil Malt de Karine Timoneda (nouvelle fenêtre)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                 viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M21.583 11.742L12.257 2.416a1.215 1.215 0 00-1.716 0L2.417 10.54a1.215 1.215 0 000 1.716l1.458 1.458-1.458 1.458a1.215 1.215 0 000 1.716l2.304 2.304-.63.629a1.215 1.215 0 000 1.717l.858.858a1.215 1.215 0 001.716 0l.63-.63 2.303 2.304a1.215 1.215 0 001.716 0l1.458-1.458 1.458 1.458a1.215 1.215 0 001.716 0l8.124-8.124a1.215 1.215 0 000-1.716l-2.487-2.488z"/>
+            </svg>
+            Malt
+          </a>
           <a href="https://www.linkedin.com/in/karine-timoneda/"
              target="_blank"
              rel="noopener noreferrer"

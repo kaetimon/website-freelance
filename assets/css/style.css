@@ -610,8 +610,8 @@ p { color: var(--text-secondary); line-height: 1.75; }
 }
 .footer-nav-link:hover { color: var(--violet); background: var(--bg-alt); }
 .footer-cta { color: var(--violet); font-weight: 600; }
-.footer-right { display: flex; justify-content: flex-end; }
-.linkedin-link {
+.footer-right { display: flex; gap: 0.5rem; justify-content: flex-end; }
+.linkedin-link, .malt-link {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -623,7 +623,7 @@ p { color: var(--text-secondary); line-height: 1.75; }
   border: 1px solid var(--border);
   transition: all var(--tr-fast);
 }
-.linkedin-link:hover { color: var(--violet); border-color: var(--violet); background: var(--bg-alt); }
+.linkedin-link:hover, .malt-link:hover { color: var(--violet); border-color: var(--violet); background: var(--bg-alt); }
 
 /* ===================================================
    13b. BOTTOM NAV — MOBILE (pill glassmorphism)
@@ -3232,8 +3232,8 @@ p { color: var(--text-secondary); line-height: 1.75; }
 }
 
 .diag-trigger-title {
-  font-size: var(--text-sm);
-  font-weight: 600;
+  font-size: var(--text-base);
+  font-weight: 400;
   color: var(--text-primary);
   line-height: 1.35;
   letter-spacing: -0.01em;
@@ -3307,7 +3307,7 @@ p { color: var(--text-secondary); line-height: 1.75; }
 
 /* Zone visuelle — gradient + icône */
 .diag-card-visual {
-  height: 200px;
+  height: 120px;
   position: relative;
   display: flex;
   align-items: center;
@@ -3334,7 +3334,7 @@ p { color: var(--text-secondary); line-height: 1.75; }
 }
 
 .diag-card-visual-icon {
-  font-size: 4.5rem;
+  font-size: 3rem;
   position: relative;
   z-index: 1;
   filter: drop-shadow(0 4px 20px rgba(0,0,0,0.35));
@@ -3353,6 +3353,47 @@ p { color: var(--text-secondary); line-height: 1.75; }
   padding: var(--space-md);
   background: var(--bg-card);
 }
+
+/* Onglets intérieurs de la card */
+.diag-card-tab-nav {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1rem;
+  gap: 0;
+}
+
+.diag-card-tab-btn {
+  flex: 1;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  padding: 0.5rem 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: var(--font);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: color var(--tr-fast), border-color var(--tr-fast);
+  text-align: center;
+  letter-spacing: 0.01em;
+}
+
+.diag-card-tab-btn:hover { color: var(--text-primary); }
+
+.diag-card-tab-btn.is-active {
+  color: var(--violet);
+  border-bottom-color: var(--violet);
+}
+
+.diag-card-tab-pane {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.diag-card-tab-pane[hidden] { display: none; }
 
 .diag-card-title {
   font-size: var(--text-xl);
@@ -3391,6 +3432,67 @@ p { color: var(--text-secondary); line-height: 1.75; }
   background: var(--gradient-vivid);
 }
 
+/* Sections de contenu structuré */
+.diag-card-sections {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.diag-card-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--border);
+}
+
+.diag-card-section:last-of-type {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.diag-card-section-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--accent-rose);
+}
+
+.diag-card-section-text {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin: 0;
+}
+
+.diag-card-section-text + .diag-card-section-text {
+  margin-top: 0.25rem;
+}
+
+.diag-card-cta {
+  display: block;
+  margin-top: var(--space-sm);
+  padding: 0.75rem 1rem;
+  background: transparent;
+  border: 1.5px solid var(--violet);
+  border-radius: var(--radius-md);
+  color: var(--violet);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  font-family: var(--font);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background var(--tr-fast), color var(--tr-fast), border-color var(--tr-fast);
+}
+
+.diag-card-cta:hover {
+  background: var(--violet);
+  color: #fff;
+}
+
 /* ── Accordéon mobile (bodies injectés par JS) ── */
 
 /* Caché sur desktop — visible uniquement en mobile */
@@ -3406,7 +3508,7 @@ p { color: var(--text-secondary); line-height: 1.75; }
 }
 
 .diag-accordion-body.is-open {
-  max-height: 800px;
+  max-height: 1800px;
   opacity: 1;
 }
 

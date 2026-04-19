@@ -209,6 +209,21 @@ function initDiag() {
   });
 }
 
+function initCardTabs() {
+  document.querySelectorAll('.diag-card-content[data-card-tabs]').forEach(content => {
+    const buttons = Array.from(content.querySelectorAll('.diag-card-tab-btn'));
+    const panes   = Array.from(content.querySelectorAll('.diag-card-tab-pane'));
+    buttons.forEach((btn, i) => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('is-active'));
+        panes.forEach(p => p.setAttribute('hidden', ''));
+        btn.classList.add('is-active');
+        panes[i].removeAttribute('hidden');
+      });
+    });
+  });
+}
+
 /* ─── Init global ────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   const theme = getPreferredTheme();
@@ -223,6 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initCountUp();
     initMarquee();
     initDiag();
+    initCardTabs();
   });
 });
 
