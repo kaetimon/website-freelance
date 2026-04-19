@@ -10,16 +10,659 @@
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-PGGFVB7Q');</script>
   <!-- End Google Tag Manager -->
-  <title>Marketplace BtoB · Karine Timoneda</title>
-  <meta name="description" content="Réduction de 50% du temps de mise en vente sur une marketplace BtoB, cas client détaillé.">
+  <title>Marketplace BtoB · –50% de mise en vente · Karine Timoneda</title>
+  <meta name="description" content="Refonte du parcours vendeur sur une marketplace BtoB : réduction de 50% du temps de mise en vente, de 22 min à 10 min.">
   <meta name="robots" content="noindex, follow">
   <link rel="canonical" href="https://www.karine-timoneda.com/projets/marketplace-btob.html">
   <link rel="icon" type="image/png" href="../assets/img/favicon-k.png">
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fustat:wght@200;300;400;500;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
   <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    /* ── Case study overrides ── */
+    .cs-hero {
+      padding: calc(var(--header-height) + var(--space-xl)) 0 var(--space-xl);
+      background: var(--bg-alt);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .cs-hero::before {
+      content: '';
+      position: absolute;
+      top: -120px; right: -80px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(109, 40, 217, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    [data-theme="dark"] .cs-hero::before {
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.22) 0%, transparent 70%);
+    }
+    .cs-hero-inner {
+      position: relative; z-index: 1;
+    }
+    .cs-hero-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: var(--space-sm);
+    }
+    .cs-hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--text-secondary);
+      max-width: 680px;
+      line-height: 1.75;
+    }
+
+    /* ── Overview recap ── */
+    .overview-grid {
+      display: grid;
+      grid-template-rows: auto auto;
+      gap: var(--space-md);
+    }
+    .overview-top {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-md) var(--space-lg);
+    }
+    .overview-bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+    }
+    .overview-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-md) var(--space-lg);
+      position: relative;
+      overflow: hidden;
+    }
+    .overview-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gradient-main);
+    }
+    .overview-card.impact-card::before {
+      background: var(--gradient-vivid);
+    }
+    .overview-top-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: var(--space-md);
+    }
+    .overview-field { display: flex; flex-direction: column; gap: 0.25rem; }
+    .overview-field-label {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+    }
+    .overview-field-value {
+      font-size: var(--text-sm);
+      color: var(--text-primary);
+      font-weight: 500;
+      line-height: 1.5;
+    }
+    .overview-card-title {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--violet);
+      margin-bottom: var(--space-sm);
+    }
+    .overview-card.impact-card .overview-card-title { color: var(--rose); }
+    .overview-dl { display: flex; flex-direction: column; gap: var(--space-sm); }
+    .overview-dl dt {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 0.15rem;
+    }
+    .overview-dl dd {
+      font-size: var(--text-sm);
+      color: var(--text-primary);
+      line-height: 1.55;
+    }
+
+    /* Impact metric */
+    .impact-metric {
+      text-align: center;
+      padding: var(--space-sm) 0 var(--space-md);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: var(--space-md);
+    }
+    .impact-numbers {
+      font-family: var(--font-heading);
+      font-size: clamp(1.25rem, 3vw, 1.75rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+    .impact-numbers .arrow {
+      display: inline-block;
+      margin: 0 0.4rem;
+      color: var(--violet);
+      font-weight: 300;
+    }
+    .impact-numbers .highlight {
+      background: var(--gradient-vivid);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .impact-label {
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+      margin-top: 0.35rem;
+    }
+    .impact-bullets { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: var(--space-md); }
+    .impact-bullet {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+    }
+    .impact-bullet .bullet-icon { width: 18px; height: 18px; flex-shrink: 0; }
+    .impact-bullet .up { color: #10B981; }
+    .impact-bullet .down { color: var(--rose); }
+    .methods-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: var(--space-sm);
+    }
+    .method-tag {
+      font-size: var(--text-xs);
+      font-weight: 600;
+      padding: 0.25rem 0.65rem;
+      background: rgba(109, 40, 217, 0.08);
+      border: 1px solid rgba(109, 40, 217, 0.15);
+      border-radius: var(--radius-pill);
+      color: var(--violet);
+    }
+    [data-theme="dark"] .method-tag {
+      background: rgba(144, 97, 249, 0.1);
+      border-color: rgba(144, 97, 249, 0.2);
+      color: var(--lavender);
+    }
+    .why-worked-list { display: flex; flex-direction: column; gap: 0.5rem; margin-top: var(--space-sm); }
+    .why-item {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-size: var(--text-sm); color: var(--text-secondary);
+    }
+    .why-item::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--gradient-vivid);
+      flex-shrink: 0;
+    }
+
+    /* ── Before / After slider ── */
+    .before-after-section {
+      padding: var(--space-xl) 0;
+      background: var(--bg);
+    }
+    .ba-intro {
+      max-width: 680px;
+      margin-bottom: var(--space-lg);
+    }
+    .ba-intro-quote {
+      font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.4;
+      margin-bottom: var(--space-sm);
+      font-family: var(--font-heading);
+    }
+    .ba-intro p { font-size: var(--text-base); color: var(--text-secondary); line-height: 1.75; }
+
+    .slider-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-xl);
+      cursor: ew-resize;
+      user-select: none;
+      touch-action: none;
+    }
+    .slider-img {
+      display: block;
+      width: 100%;
+      height: auto;
+      pointer-events: none;
+      border-radius: var(--radius-lg);
+    }
+    .slider-before-wrap {
+      position: absolute;
+      top: 0; left: 0;
+      width: 50%;
+      height: 100%;
+      overflow: hidden;
+    }
+    .slider-before-wrap .slider-img {
+      position: absolute;
+      top: 0; left: 0;
+      width: auto;
+      height: 100%;
+      max-width: none;
+    }
+    /* fallback when real images not yet added */
+    .slider-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: white;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      height: 480px;
+    }
+    .slider-placeholder.before-ph { background: linear-gradient(135deg, #e2d9f3 0%, #c4b5fd 100%); color: #4c1d95; }
+    .slider-placeholder.after-ph  { background: linear-gradient(135deg, #6D28D9 0%, #fd389f 100%); }
+    .slider-divider {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: white;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 10;
+    }
+    .slider-handle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 44px;
+      height: 44px;
+      background: white;
+      border-radius: 50%;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 11;
+      pointer-events: none;
+    }
+    .slider-handle svg { width: 20px; height: 20px; color: var(--violet); }
+    .slider-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: var(--space-sm);
+    }
+    .slider-label {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .slider-label-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+    }
+    .slider-label-dot.before { background: #c4b5fd; }
+    .slider-label-dot.after  { background: var(--violet); }
+
+    /* ── Content sections ── */
+    .cs-section-intro {
+      font-size: var(--text-xl);
+      font-style: italic;
+      color: var(--text-secondary);
+      max-width: 680px;
+      line-height: 1.75;
+      border-left: 3px solid var(--violet);
+      padding-left: var(--space-md);
+      margin-bottom: var(--space-lg);
+    }
+    .findings-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-md);
+    }
+    .findings-grid .finding-card:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+    }
+    .finding-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .finding-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+      background: var(--bg-alt);
+    }
+    .finding-img-placeholder {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--bg-alt);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-bottom: 1px solid var(--border);
+    }
+    .finding-body {
+      padding: var(--space-md) var(--space-lg);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .finding-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.6rem;
+    }
+    .finding-number {
+      font-family: var(--font-heading);
+      font-size: var(--text-sm);
+      font-weight: 800;
+      background: var(--gradient-vivid);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+    .finding-card h3 {
+      font-size: var(--text-base);
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      color: var(--text-primary);
+      line-height: 1.35;
+    }
+    .finding-card p {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      line-height: 1.7;
+      flex: 1;
+    }
+    .finding-card .finding-tag {
+      display: inline-block;
+      margin-top: 0.875rem;
+      font-size: var(--text-xs);
+      font-weight: 700;
+      color: var(--violet);
+      background: rgba(109, 40, 217, 0.08);
+      border: 1px solid rgba(109, 40, 217, 0.15);
+      border-radius: var(--radius-pill);
+      padding: 0.2rem 0.6rem;
+      align-self: flex-start;
+    }
+    [data-theme="dark"] .finding-card .finding-tag {
+      color: var(--lavender);
+      background: rgba(144, 97, 249, 0.1);
+      border-color: rgba(144, 97, 249, 0.2);
+    }
+
+    /* ── Results ── */
+    .results-kpi {
+      text-align: center;
+      padding: var(--space-xl) var(--space-md);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      margin-bottom: var(--space-lg);
+    }
+    .results-big {
+      font-family: var(--font-heading);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      background: var(--gradient-vivid);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .results-time {
+      font-family: var(--font-heading);
+      font-size: clamp(1.25rem, 3vw, 2rem);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+    .results-time .arrow { color: var(--violet); margin: 0 0.5rem; font-weight: 300; }
+    .results-time .new-time {
+      background: var(--gradient-vivid);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .results-source {
+      font-size: var(--text-xs);
+      color: var(--text-muted);
+      font-style: italic;
+    }
+    .results-bullets {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-sm);
+    }
+    .results-bullet {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--space-sm) var(--space-md);
+    }
+    .results-bullet-icon {
+      width: 36px; height: 36px;
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.125rem;
+      flex-shrink: 0;
+    }
+    .results-bullet-icon.green { background: rgba(16, 185, 129, 0.1); }
+    .results-bullet-icon.violet { background: rgba(109, 40, 217, 0.1); }
+    .results-bullet-icon.rose { background: rgba(253, 56, 159, 0.1); }
+    .results-bullet p { font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.55; }
+    .results-bullet strong { color: var(--text-primary); display: block; font-size: var(--text-base); }
+
+    /* ── Sticky CTA ── */
+    .sticky-cta {
+      position: fixed;
+      bottom: var(--space-md);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .sticky-cta-pill {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-pill);
+      padding: 0.6rem 1.25rem;
+      box-shadow: var(--shadow-lg);
+      white-space: nowrap;
+    }
+    .sticky-cta-pill .cta-text {
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .sticky-cta-pill .btn {
+      font-size: var(--text-xs);
+      padding: 0.45rem 1rem;
+    }
+    .sticky-cta.hidden { opacity: 0; pointer-events: none; transform: translateX(-50%) translateY(20px); }
+
+    /* ── Before/After intro text (below slider) ── */
+    .ba-caption {
+      max-width: 780px;
+      margin: var(--space-lg) auto 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md) var(--space-lg);
+    }
+    .ba-caption p {
+      font-size: var(--text-base);
+      color: var(--text-secondary);
+      line-height: 1.75;
+    }
+    .ba-caption p:first-child {
+      grid-column: 1 / -1;
+      font-size: var(--text-xl);
+      font-weight: 700;
+      font-family: var(--font-heading);
+      color: var(--text-primary);
+      font-style: normal;
+    }
+
+    /* ── Mobile stacked before/after ── */
+    .ba-mobile {
+      display: none;
+    }
+    .ba-mobile-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .ba-mobile-item + .ba-mobile-item { margin-top: var(--space-md); }
+    .ba-mobile-label {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .ba-mobile-label .dot { width: 8px; height: 8px; border-radius: 50%; }
+    .ba-mobile-label .dot.before { background: #c4b5fd; }
+    .ba-mobile-label .dot.after  { background: var(--violet); }
+    .ba-mobile-img {
+      width: 100%;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      display: block;
+    }
+    .ba-mobile-ph {
+      width: 100%;
+      aspect-ratio: 4/3;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--text-xs);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .ba-mobile-ph.before-ph { background: linear-gradient(135deg, #e2d9f3 0%, #c4b5fd 100%); color: #4c1d95; }
+    .ba-mobile-ph.after-ph  { background: linear-gradient(135deg, #6D28D9 0%, #fd389f 100%); color: white; }
+
+    /* ── Final CTA section ── */
+    .final-cta-section {
+      text-align: center;
+      padding: var(--space-2xl) 0;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #160430 0%, #2a0d5c 50%, #0d0318 100%);
+    }
+    .final-cta-section::before {
+      content: '';
+      position: absolute;
+      top: -140px; left: 30%;
+      transform: translateX(-50%);
+      width: 600px; height: 450px;
+      background: radial-gradient(ellipse, rgba(167, 139, 250, 0.18) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .final-cta-section::after {
+      content: '';
+      position: absolute;
+      bottom: -100px; right: 12%;
+      width: 420px; height: 320px;
+      background: radial-gradient(ellipse, rgba(253, 56, 159, 0.14) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .final-cta-block {
+      max-width: 640px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .final-cta-block .section-label {
+      color: #c4b5fd;
+      background: rgba(167, 139, 250, 0.15);
+      border-color: rgba(167, 139, 250, 0.3);
+    }
+    .final-cta-block h2 {
+      font-size: clamp(1.75rem, 4vw, 2.75rem);
+      margin-bottom: var(--space-sm);
+      background: linear-gradient(135deg, #E9D5FF 0%, #F9A8D4 50%, #fd389f 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .final-cta-block p {
+      font-size: var(--text-lg);
+      color: rgba(255,255,255,0.65);
+      line-height: 1.75;
+      margin-bottom: var(--space-lg);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .overview-bottom { grid-template-columns: 1fr; }
+      .overview-top-grid { grid-template-columns: 1fr 1fr; }
+      .slider-placeholder { height: 280px; }
+      .findings-grid { grid-template-columns: 1fr; }
+      .findings-grid .finding-card:last-child:nth-child(odd) { grid-column: auto; }
+      .results-bullets { grid-template-columns: 1fr; }
+      .sticky-cta-pill .cta-text { display: none; }
+      .ba-caption { grid-template-columns: 1fr; }
+      .ba-caption p:first-child { grid-column: auto; }
+      /* Hide desktop slider, show stacked images */
+      .ba-slider-desktop { display: none; }
+      .ba-mobile { display: flex; flex-direction: column; }
+    }
+    @media (max-width: 480px) {
+      .overview-top-grid { grid-template-columns: 1fr; }
+    }
+  </style>
   <script>
     (function () {
       try {
@@ -39,39 +682,429 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div id="header-placeholder"></div>
 
 <main id="main-content">
-  <section class="page-hero" aria-labelledby="case-title">
-    <div class="hero-orb hero-orb-1" aria-hidden="true" style="width:300px;height:300px;top:-60px;right:-40px;animation-delay:-2s"></div>
-    <div class="container">
-      <a href="../projets" class="section-label page-hero-label" style="text-decoration:none;display:inline-flex;align-items:center;gap:0.4rem;">
+
+  <!-- ═══════════════ HERO ═══════════════ -->
+  <section class="cs-hero" aria-labelledby="cs-title">
+    <div class="container cs-hero-inner">
+      <a href="../projets" class="section-label" style="text-decoration:none;display:inline-flex;align-items:center;gap:0.4rem;margin-bottom:var(--space-md);">
         ← Interventions
       </a>
-      <h1 class="page-hero-title text-gradient" id="case-title">
-        Marketplace BtoB :<br>–50 % de temps de mise en vente
+      <h1 class="cs-hero-title text-gradient" id="cs-title">
+        Réduction de 50&nbsp;% du temps<br>de mise en vente produit
       </h1>
-      <p class="page-hero-desc">
-        Ce cas client est en cours de rédaction. Revenez bientôt.
+      <p class="cs-hero-subtitle">
+        Refonte stratégique du parcours vendeur sur une marketplace BtoB pour réduire le churn et accélérer la publication d'annonces.
       </p>
     </div>
   </section>
 
-  <section class="section">
+  <!-- ═══════════════ PRODUCT OVERVIEW ═══════════════ -->
+  <section class="section" aria-label="Vue d'ensemble du projet">
     <div class="container">
-      <div class="expectations-block reveal" style="max-width:640px;margin:0 auto;text-align:center;padding:var(--space-2xl) var(--space-md)">
-        <p style="font-size:3rem;margin-bottom:var(--space-md)">🚧</p>
-        <p style="font-size:var(--text-lg);color:var(--text-secondary);line-height:1.75">
-          Ce cas est en cours de rédaction.<br>
-          Vous souhaitez en savoir plus dès maintenant ?
+      <div class="section-header reveal">
+        <span class="section-label" aria-hidden="true">Contexte</span>
+        <h2 class="section-title">Vue d'ensemble du projet</h2>
+      </div>
+      <div class="overview-grid reveal">
+
+        <!-- Bloc haut : résumé en ligne -->
+        <div class="overview-top">
+          <div class="overview-top-grid">
+            <div class="overview-field">
+              <span class="overview-field-label">Client</span>
+              <span class="overview-field-value">Marketplace BtoB de déstockage produits <span style="color:var(--text-muted);font-size:var(--text-xs)">(anonymisé)</span></span>
+            </div>
+            <div class="overview-field">
+              <span class="overview-field-label">Problématique</span>
+              <span class="overview-field-value">Churn vendeur élevé lié à des parcours de vente trop complexes</span>
+            </div>
+            <div class="overview-field">
+              <span class="overview-field-label">Mission</span>
+              <span class="overview-field-value">Repenser les parcours vendeurs prioritaires pour réduire la friction et augmenter la conversion</span>
+            </div>
+            <div class="overview-field">
+              <span class="overview-field-label">Focus</span>
+              <span class="overview-field-value">Le parcours de création d'annonce</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Blocs bas côte à côte -->
+        <div class="overview-bottom">
+
+          <!-- Gauche : Project overview -->
+          <div class="overview-card">
+            <p class="overview-card-title">Project overview</p>
+            <dl class="overview-dl">
+              <div>
+                <dt>Mon rôle</dt>
+                <dd>Product Designer — UX · UI · Discovery · Product strategy</dd>
+              </div>
+              <div>
+                <dt>Collaboration</dt>
+                <dd>1 jour / semaine dont 1h de réunion hebdomadaire</dd>
+              </div>
+              <div style="margin-top:var(--space-sm)">
+                <dt>Méthodes utilisées</dt>
+                <dd>
+                  <div class="methods-list">
+                    <span class="method-tag">User interviews</span>
+                    <span class="method-tag">User shadowing</span>
+                    <span class="method-tag">Analyse comportementale (Heap)</span>
+                    <span class="method-tag">Priorisation parcours</span>
+                    <span class="method-tag">Refonte UX/UI</span>
+                  </div>
+                </dd>
+              </div>
+            </dl>
+          </div>
+
+          <!-- Droite : Impact -->
+          <div class="overview-card impact-card">
+            <p class="overview-card-title">Impact</p>
+            <div class="impact-metric">
+              <div class="impact-numbers">
+                <span>22 min 37</span>
+                <span class="arrow">→</span>
+                <span class="highlight">10 min 07</span>
+              </div>
+              <p class="impact-label">de temps moyen pour créer une annonce</p>
+            </div>
+
+            <div class="impact-bullets">
+              <div class="impact-bullet">
+                <svg class="bullet-icon up" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M8 3L14 9H10V13H6V9H2L8 3Z" fill="currentColor"/></svg>
+                Plus d'annonces publiées
+              </div>
+              <div class="impact-bullet">
+                <svg class="bullet-icon up" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M8 3L14 9H10V13H6V9H2L8 3Z" fill="currentColor"/></svg>
+                Plus de ventes
+              </div>
+              <div class="impact-bullet">
+                <svg class="bullet-icon down" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M8 13L2 7H6V3H10V7H14L8 13Z" fill="currentColor"/></svg>
+                Moins de churn vendeur
+              </div>
+            </div>
+
+            <div>
+              <p style="font-size:var(--text-xs);font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:0.5rem;">Pourquoi ça a marché</p>
+              <div class="why-worked-list">
+                <div class="why-item">Moins de friction</div>
+                <div class="why-item">Moins de charge cognitive</div>
+                <div class="why-item">Plus de réassurance</div>
+                <div class="why-item">Meilleure aide à la décision</div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /overview-bottom -->
+      </div><!-- /overview-grid -->
+    </div>
+  </section>
+
+  <!-- ═══════════════ BEFORE / AFTER SLIDER ═══════════════ -->
+  <section class="before-after-section" aria-labelledby="ba-title">
+    <div class="container">
+
+      <div class="section-header reveal">
+        <span class="section-label" aria-hidden="true">Avant / Après</span>
+        <h2 class="section-title" id="ba-title">Le formulaire avant et après refonte</h2>
+      </div>
+
+      <!-- Desktop slider -->
+      <div class="ba-slider-desktop reveal">
+        <div class="slider-wrapper" id="ba-slider" role="img" aria-label="Comparaison avant / après le redesign du formulaire de création d'annonce">
+          <!-- AFTER image (background, full width — revealed on the right) -->
+          <img
+            src="../assets/img/projets/use-case-1/usecase1-apres.png"
+            alt="Formulaire après refonte"
+            class="slider-img"
+            id="slider-after"
+            onerror="this.style.display='none';document.getElementById('after-ph').style.display='flex'">
+          <div class="slider-placeholder after-ph" id="after-ph" style="display:none">Après — formulaire redesigné</div>
+
+          <!-- BEFORE image (clipped overlay from left — drag right to reveal After) -->
+          <div class="slider-before-wrap" id="slider-before-wrap">
+            <img
+              src="../assets/img/projets/use-case-1/usecase1-avant.png"
+              alt="Formulaire avant refonte"
+              class="slider-img"
+              id="slider-before"
+              onerror="this.style.display='none';document.getElementById('before-ph').style.display='flex'">
+            <div class="slider-placeholder before-ph" id="before-ph" style="display:none;position:absolute;inset:0;height:100%">Avant — formulaire original</div>
+          </div>
+
+          <!-- Divider + handle -->
+          <div class="slider-divider" id="slider-divider"></div>
+          <div class="slider-handle" id="slider-handle" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 18l-6-6 6-6"/>
+              <path d="M15 6l6 6-6 6"/>
+            </svg>
+          </div>
+        </div>
+        <!-- Labels -->
+        <div class="slider-labels">
+          <div class="slider-label"><span class="slider-label-dot before"></span>Avant</div>
+          <div class="slider-label">Après<span class="slider-label-dot after"></span></div>
+        </div>
+      </div>
+
+      <!-- Mobile stacked images -->
+      <div class="ba-mobile reveal">
+        <div class="ba-mobile-item">
+          <div class="ba-mobile-label"><span class="dot before"></span>Avant</div>
+          <img src="../assets/img/projets/usecase1-avant.png" alt="Formulaire avant refonte" class="ba-mobile-img"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="ba-mobile-ph before-ph" style="display:none">Avant — formulaire original</div>
+        </div>
+        <div class="ba-mobile-item">
+          <div class="ba-mobile-label"><span class="dot after"></span>Après</div>
+          <img src="../assets/img/projets/usecase1-apres.png" alt="Formulaire après refonte" class="ba-mobile-img"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="ba-mobile-ph after-ph" style="display:none">Après — formulaire redesigné</div>
+        </div>
+      </div>
+
+      <!-- Texte d'explication sous les images -->
+      <div class="ba-caption reveal">
+        <p>Le problème n'était pas visuel.</p>
+        <p>Le vrai sujet était l'effort demandé à l'utilisateur pour vendre sur la plateforme. Chaque champ inutile, chaque doute, chaque aller-retour augmentait le risque d'abandon.</p>
+        <p>L'objectif&nbsp;: rendre la mise en vente simple, rapide et rassurante.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════ CE QUI A ÉTÉ FAIT ═══════════════ -->
+  <section class="section bg-alt" aria-labelledby="findings-title">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label" aria-hidden="true">Ce qui a été fait</span>
+        <h2 class="section-title" id="findings-title">Cinq leviers,<br>un seul objectif&nbsp;: moins d'effort</h2>
+      </div>
+
+      <div class="findings-grid">
+
+        <div class="finding-card reveal">
+          <img src="../assets/img/projets/use-case-1/levier1.png" alt="Réduction des champs" class="finding-img"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="finding-img-placeholder" style="display:none">Capture à venir</div>
+          <div class="finding-body">
+            <div class="finding-meta">
+              <span class="finding-number">01</span>
+            </div>
+            <h3>Réduction de moitié des champs à compléter</h3>
+            <p>Plusieurs champs affichés comme éditables étaient en réalité alimentés par la base de données interne. Ils ont été déplacés dans un encart dédié non modifiable, avec une affordance claire.</p>
+            <span class="finding-tag">Moins de confusion · Moins d'erreurs</span>
+          </div>
+        </div>
+
+        <div class="finding-card reveal">
+          <img src="../assets/img/projets/use-case-1/levier2.png" alt="Réassurance visuel produit" class="finding-img"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="finding-img-placeholder" style="display:none">Capture à venir</div>
+          <div class="finding-body">
+            <div class="finding-meta">
+              <span class="finding-number">02</span>
+            </div>
+            <h3>Réassurance immédiate grâce au visuel produit</h3>
+            <p>Ajout de la photo produit directement dans le parcours. Le vendeur confirme instantanément qu'il a sélectionné le bon produit, sans devoir vérifier un code article. Une image évite ici plusieurs étapes de vérification.</p>
+            <span class="finding-tag">Moins de charge cognitive</span>
+          </div>
+        </div>
+
+        <div class="finding-card reveal">
+          <img src="../assets/img/projets/use-case-1/levier3.png" alt="Fusion prix et remise" class="finding-img"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="finding-img-placeholder" style="display:none">Capture à venir</div>
+          <div class="finding-body">
+            <div class="finding-meta">
+              <span class="finding-number">03</span>
+            </div>
+            <h3>Fusion des champs prix + remise</h3>
+            <p>Le prix proposé et la remise étaient deux champs séparés alors qu'ils dépendaient l'un de l'autre. Ils ont été fusionnés dans une seule logique d'action. L'utilisateur comprend immédiatement quoi renseigner.</p>
+            <span class="finding-tag">Clarté · Gain de temps</span>
+          </div>
+        </div>
+
+        <div class="finding-card reveal">
+          <img src="../assets/img/projets/use-case-1/levier4.png" alt="Analyse concurrentielle" class="finding-img"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="finding-img-placeholder" style="display:none">Capture à venir</div>
+          <div class="finding-body">
+            <div class="finding-meta">
+              <span class="finding-number">04</span>
+            </div>
+            <h3>Analyse concurrentielle intégrée au parcours</h3>
+            <p>Les vendeurs quittaient systématiquement le formulaire pour comparer les prix ailleurs. Nous avons intégré cette aide directement dans la colonne latérale&nbsp;: prix recommandés, concurrence récente, anciennes ventes personnelles.</p>
+            <span class="finding-tag">Moins de navigation parasite · Meilleure décision</span>
+          </div>
+        </div>
+
+        <div class="finding-card reveal">
+          <img src="../assets/img/projets/use-case-1/levier5.png" alt="Accès rapide aux actions" class="finding-img"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="finding-img-placeholder" style="display:none">Capture à venir</div>
+          <div class="finding-body">
+            <div class="finding-meta">
+              <span class="finding-number">05</span>
+            </div>
+            <h3>Accès rapide aux actions</h3>
+            <p>CTA fixes en bas d'écran, accès direct à la gestion des annonces, liens externes ouverts sans perte de progression. L'objectif&nbsp;: ne jamais casser l'élan de mise en vente.</p>
+            <span class="finding-tag">Fluidité · Continuité</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ RÉSULTATS ═══════════════ -->
+  <section class="section" aria-labelledby="results-title">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label" aria-hidden="true">Résultats</span>
+        <h2 class="section-title" id="results-title">Quand on réduit l'effort,<br>on réduit l'abandon</h2>
+        <p class="section-intro">En seulement 3 mois après mise en production&nbsp;:</p>
+      </div>
+
+      <div class="results-kpi reveal">
+        <p class="results-big">−50%</p>
+        <p class="results-time">
+          <span>22 min 37</span>
+          <span class="arrow">→</span>
+          <span class="new-time">10 min 07</span>
         </p>
-        <div class="cta-buttons" style="margin-top:var(--space-md)">
-          <a href="https://calendar.app.google/DLCuiwxWRqKBqRqp9" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Parlons-en directement →</a>
+        <p class="results-time" style="font-size:var(--text-base);font-weight:400;">de temps moyen pour créer une annonce</p>
+        <p class="results-source">mesuré via Heap</p>
+      </div>
+
+      <div class="results-bullets reveal">
+        <div class="results-bullet">
+          <div class="results-bullet-icon green" aria-hidden="true">📈</div>
+          <div>
+            <strong>Volume d'annonces</strong>
+            <p>Augmentation du nombre d'annonces publiées par les vendeurs actifs</p>
+          </div>
+        </div>
+        <div class="results-bullet">
+          <div class="results-bullet-icon violet" aria-hidden="true">🔁</div>
+          <div>
+            <strong>Rétention vendeur</strong>
+            <p>Amélioration de la rétention sur les premières semaines d'utilisation</p>
+          </div>
+        </div>
+        <div class="results-bullet">
+          <div class="results-bullet-icon rose" aria-hidden="true">📉</div>
+          <div>
+            <strong>Churn marketplace</strong>
+            <p>Réduction du churn vendeur sur la plateforme</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════ FINAL CTA ═══════════════ -->
+  <section class="final-cta-section" id="final-cta" aria-labelledby="cta-title">
+    <div class="container reveal">
+      <div class="final-cta-block">
+        <span class="section-label" aria-hidden="true">Envie d'en parler&nbsp;?</span>
+        <h2 id="cta-title">Votre parcours<br>freine vos ventes&nbsp;?</h2>
+        <p>Le problème n'est pas votre produit, c'est la friction qu'il impose à vos utilisateurs. Je vous aide à identifier ce qui bloque vraiment et à transformer votre produit en levier de croissance.</p>
+        <div class="cta-buttons">
+          <a href="https://calendar.app.google/DLCuiwxWRqKBqRqp9" class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">
+            Parlons de votre produit →
+          </a>
         </div>
       </div>
     </div>
   </section>
+
 </main>
+
+<!-- ═══════════════ STICKY CTA ═══════════════ -->
+<aside class="sticky-cta" id="sticky-cta" aria-label="Contact rapide">
+  <div class="sticky-cta-pill">
+    <span class="cta-text">Vous voyez un parallèle avec votre produit&nbsp;?</span>
+    <a href="https://calendar.app.google/DLCuiwxWRqKBqRqp9" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+      Parlons-en →
+    </a>
+  </div>
+</aside>
 
 <div id="footer-placeholder"></div>
 <script src="../assets/js/components.js"></script>
 <script src="../assets/js/main.js"></script>
+<script>
+  /* ── Before/After Slider ── */
+  (function () {
+    const wrapper = document.getElementById('ba-slider');
+    const afterWrap = document.getElementById('slider-before-wrap');
+    const divider  = document.getElementById('slider-divider');
+    const handle   = document.getElementById('slider-handle');
+    if (!wrapper) return;
+
+    let dragging = false;
+
+    function setPosition(x) {
+      const rect = wrapper.getBoundingClientRect();
+      let pct = (x - rect.left) / rect.width;
+      pct = Math.max(0.03, Math.min(0.97, pct));
+      const pctStr = (pct * 100).toFixed(2) + '%';
+      afterWrap.style.width  = pctStr;
+      divider.style.left     = pctStr;
+      handle.style.left      = pctStr;
+    }
+
+    // Init at 50%
+    afterWrap.style.width = '50%';
+    divider.style.left    = '50%';
+    handle.style.left     = '50%';
+
+    wrapper.addEventListener('mousedown',  (e) => { dragging = true; setPosition(e.clientX); e.preventDefault(); });
+    document.addEventListener('mousemove', (e) => { if (dragging) setPosition(e.clientX); });
+    document.addEventListener('mouseup',   ()  => { dragging = false; });
+
+    wrapper.addEventListener('touchstart', (e) => { dragging = true; setPosition(e.touches[0].clientX); }, { passive: true });
+    document.addEventListener('touchmove', (e) => { if (dragging) setPosition(e.touches[0].clientX); }, { passive: true });
+    document.addEventListener('touchend',  ()  => { dragging = false; });
+  })();
+
+  /* ── Sticky CTA — hide when final CTA is visible ── */
+  (function () {
+    const stickyCta = document.getElementById('sticky-cta');
+    const finalCta  = document.getElementById('final-cta');
+    if (!stickyCta || !finalCta) return;
+
+    // Show after a bit of scroll
+    stickyCta.classList.add('hidden');
+    let shown = false;
+
+    const showObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          stickyCta.classList.add('hidden');
+        } else {
+          if (shown) stickyCta.classList.remove('hidden');
+        }
+      });
+    }, { threshold: 0.1 });
+    showObserver.observe(finalCta);
+
+    // Show sticky CTA after scrolling past hero
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400 && !shown) {
+        shown = true;
+        const rect = finalCta.getBoundingClientRect();
+        if (rect.top > window.innerHeight) {
+          stickyCta.classList.remove('hidden');
+        }
+      }
+    }, { passive: true });
+  })();
+</script>
 </body>
 </html>
