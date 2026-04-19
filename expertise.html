@@ -232,6 +232,61 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
 
+      <!-- Bouton filtre mobile (caché sur desktop via CSS) -->
+      <button class="filter-mobile-btn reveal" id="filter-mobile-btn" aria-label="Filtrer les clients" aria-expanded="false" aria-controls="filter-side-panel">
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
+        Filtrer
+        <span class="filter-mobile-badge" id="filter-mobile-badge" aria-hidden="true"></span>
+      </button>
+
+      <!-- Overlay + side panel filtres (mobile uniquement) -->
+      <div class="filter-panel-overlay" id="filter-panel-overlay"></div>
+      <div class="filter-side-panel" id="filter-side-panel" role="dialog" aria-labelledby="filter-panel-title" aria-modal="true">
+        <div class="filter-panel-header">
+          <span id="filter-panel-title">Filtres</span>
+          <button class="filter-panel-close" id="filter-panel-close" aria-label="Fermer les filtres">&times;</button>
+        </div>
+        <div class="filter-panel-body">
+          <div class="filter-row">
+            <span class="filter-row-label">Secteur</span>
+            <div class="filter-pills">
+              <button class="filter-pill active" data-group="sector" data-value="all">Tous</button>
+              <button class="filter-pill" data-group="sector" data-value="commerce-distribution">Commerce &amp; distribution</button>
+              <button class="filter-pill" data-group="sector" data-value="commerce-publicite">Commerce &amp; publicité</button>
+              <button class="filter-pill" data-group="sector" data-value="cybersecurite">Cybersécurité</button>
+              <button class="filter-pill" data-group="sector" data-value="evenementiel">Événementiel</button>
+              <button class="filter-pill" data-group="sector" data-value="funeraire">Funéraire</button>
+              <button class="filter-pill" data-group="sector" data-value="immobilier">Immobilier</button>
+              <button class="filter-pill" data-group="sector" data-value="rh-recrutement">RH / Recrutement</button>
+              <button class="filter-pill" data-group="sector" data-value="sante">Santé</button>
+              <button class="filter-pill" data-group="sector" data-value="secteur-public">Secteur public</button>
+              <button class="filter-pill" data-group="sector" data-value="services-entreprises">Services aux entreprises</button>
+            </div>
+          </div>
+          <div class="filter-row">
+            <span class="filter-row-label">Type de produit</span>
+            <div class="filter-pills">
+              <button class="filter-pill active" data-group="product" data-value="all">Tous</button>
+              <button class="filter-pill" data-group="product" data-value="saas">SaaS</button>
+              <button class="filter-pill" data-group="product" data-value="app">App mobile</button>
+              <button class="filter-pill" data-group="product" data-value="e-commerce">E-commerce</button>
+              <button class="filter-pill" data-group="product" data-value="site-vitrine">Site vitrine</button>
+            </div>
+          </div>
+          <div class="filter-row">
+            <span class="filter-row-label">Modèle</span>
+            <div class="filter-pills">
+              <button class="filter-pill active" data-group="model" data-value="all">Tous</button>
+              <button class="filter-pill" data-group="model" data-value="btob">BtoB</button>
+              <button class="filter-pill" data-group="model" data-value="btoc">BtoC</button>
+            </div>
+          </div>
+        </div>
+        <div class="filter-panel-footer">
+          <button class="filter-reset-btn" id="filter-reset-btn">Réinitialiser les filtres</button>
+        </div>
+      </div>
+
       <!--
         Logos clients - pour ajouter un vrai logo :
         1. Déposez le fichier dans assets/img/logos/ (ex: huby-up.svg)
@@ -852,12 +907,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           (activeFilters.model   === 'all' || models.includes(activeFilters.model));
 
         if (ok) {
-          // Remettre dans le flux avant de lancer la transition d'entrée
           item.style.display = 'flex';
           item.getBoundingClientRect(); // force reflow
           item.classList.remove('filtered-out');
         } else {
-          // Déclencher la transition de sortie, puis retirer du flux
           item.classList.add('filtered-out');
           setTimeout(() => {
             if (item.classList.contains('filtered-out')) {
@@ -868,15 +921,68 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       });
     }
 
-    document.querySelectorAll('.client-filters .filter-pill').forEach(pill => {
+    function syncPills(group, value) {
+      document.querySelectorAll(`.filter-pill[data-group="${group}"]`).forEach(p => {
+        p.classList.toggle('active', p.dataset.value === value);
+      });
+    }
+
+    function updateBadge() {
+      const badge = document.getElementById('filter-mobile-badge');
+      if (!badge) return;
+      const count = Object.values(activeFilters).filter(v => v !== 'all').length;
+      badge.textContent = count;
+      badge.classList.toggle('visible', count > 0);
+    }
+
+    // Tous les pills (inline desktop + panel mobile) partagent la même logique
+    document.querySelectorAll('.filter-pill').forEach(pill => {
       pill.addEventListener('click', () => {
         const group = pill.dataset.group;
         const value = pill.dataset.value;
-        document.querySelectorAll(`.filter-pill[data-group="${group}"]`).forEach(p => p.classList.remove('active'));
-        pill.classList.add('active');
+        syncPills(group, value);
         activeFilters[group] = value;
         applyFilters();
+        updateBadge();
       });
+    });
+
+    // ─── Side panel mobile ───────────────────────
+    const trigger  = document.getElementById('filter-mobile-btn');
+    const overlay  = document.getElementById('filter-panel-overlay');
+    const panel    = document.getElementById('filter-side-panel');
+    const closeBtn = document.getElementById('filter-panel-close');
+    const resetBtn = document.getElementById('filter-reset-btn');
+
+    function openPanel() {
+      panel.classList.add('open');
+      overlay.classList.add('open');
+      trigger.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+    function closePanel() {
+      panel.classList.remove('open');
+      overlay.classList.remove('open');
+      trigger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    trigger  && trigger.addEventListener('click', openPanel);
+    closeBtn && closeBtn.addEventListener('click', closePanel);
+    overlay  && overlay.addEventListener('click', closePanel);
+
+    resetBtn && resetBtn.addEventListener('click', () => {
+      Object.keys(activeFilters).forEach(k => { activeFilters[k] = 'all'; });
+      document.querySelectorAll('.filter-pill').forEach(p => {
+        p.classList.toggle('active', p.dataset.value === 'all');
+      });
+      applyFilters();
+      updateBadge();
+    });
+
+    // Fermeture par Escape
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && panel.classList.contains('open')) closePanel();
     });
   })();
 

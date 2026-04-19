@@ -1463,6 +1463,16 @@ p { color: var(--text-secondary); line-height: 1.75; }
   font-size: var(--text-sm);
   font-weight: 700;
   flex-shrink: 0;
+  overflow: hidden;
+  position: relative;
+}
+.testimonial-avatar-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }
 .testimonial-name {
   font-size: var(--text-sm);
@@ -1861,6 +1871,117 @@ p { color: var(--text-secondary); line-height: 1.75; }
   color: #fff;
   font-weight: 600;
 }
+
+/* ─── Bouton filtre mobile ────────────────────────── */
+.filter-mobile-btn {
+  display: none; /* caché par défaut, visible via media query mobile */
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+  font-family: var(--font);
+  margin-bottom: var(--space-lg);
+  transition: all var(--tr-fast);
+}
+.filter-mobile-btn:hover { border-color: var(--violet); color: var(--violet); }
+.filter-mobile-badge {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.2rem;
+  height: 1.2rem;
+  padding: 0 0.2rem;
+  border-radius: 9999px;
+  background: var(--violet);
+  color: #fff;
+  font-size: 0.6rem;
+  font-weight: 700;
+  line-height: 1;
+}
+.filter-mobile-badge.visible { display: inline-flex; }
+
+/* ─── Side panel filtres mobile ───────────────────── */
+.filter-panel-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 300;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+.filter-panel-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+.filter-side-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(320px, 92vw);
+  background: var(--bg);
+  z-index: 301;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
+  overflow-y: auto;
+}
+.filter-side-panel.open { transform: translateX(0); }
+.filter-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  font-weight: 700;
+  font-size: var(--text-base);
+  flex-shrink: 0;
+}
+.filter-panel-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.6rem;
+  color: var(--text-muted);
+  padding: 0 0.25rem;
+  line-height: 1;
+  transition: color var(--tr-fast);
+}
+.filter-panel-close:hover { color: var(--text); }
+.filter-panel-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex: 1;
+}
+.filter-panel-footer {
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.filter-reset-btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: 0.45rem 1rem;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-family: var(--font);
+  width: 100%;
+  transition: all var(--tr-fast);
+}
+.filter-reset-btn:hover { border-color: var(--violet); color: var(--violet); }
 
 .clients-grid {
   display: grid;
@@ -2628,10 +2749,23 @@ p { color: var(--text-secondary); line-height: 1.75; }
   border-radius: var(--radius-pill);
   white-space: nowrap;
   line-height: 1.4;
+  position: relative;
+  z-index: 1;
 }
 [data-theme="dark"] .pcase-img-chip {
   background: rgba(0,0,0,0.35);
   color: var(--lavender);
+}
+
+/* ── Image réelle dans les cards ── */
+.pcase-img-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  z-index: 0;
 }
 
 /* ── Corps ── */
@@ -3598,7 +3732,8 @@ p { color: var(--text-secondary); line-height: 1.75; }
   .intervention-meta { text-align: left; }
   .tools-grid-interactive { grid-template-columns: repeat(2, 1fr); }
   .tools-tabs { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 0; }
-  .client-filters { gap: var(--space-md); }
+  .client-filters { display: none; }
+  .filter-mobile-btn { display: inline-flex; }
 
   .bento-grid { grid-template-columns: 1fr; }
   .bento-card.large { grid-column: span 1; }
@@ -3606,26 +3741,76 @@ p { color: var(--text-secondary); line-height: 1.75; }
   .expertise-preview-grid,
   .projects-preview-grid { grid-template-columns: 1fr; }
 
-  /* Diagnostic interactif → accordéon mobile */
+  /* Diagnostic interactif → empilement mobile (plus d'accordéon) */
   .diag-wrapper {
     display: block;
   }
 
   .diag-panels {
-    display: none; /* Remplacé par accordéons inline */
+    display: none;
   }
 
+  /* diag-triggers devient un flex-column, chaque trigger+body form un groupe */
   .diag-triggers {
-    gap: 0.375rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
   }
 
+  /* Hero CTAs — centrer le lien ghost */
+  .hero-ctas .btn-ghost {
+    justify-content: center;
+  }
+
+  /* Chaque trigger = en-tête de section, fondu dans sa card */
   .diag-trigger {
-    flex-wrap: wrap;
-    border-radius: var(--radius-md);
+    flex-wrap: nowrap;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    border-bottom: none;
+    cursor: default;
+    pointer-events: none;
+    padding: 0.875rem 1rem;
+    margin-bottom: 0;
   }
 
-  .diag-trigger.is-active .diag-trigger-chevron::after {
-    transform: rotate(45deg);
+  /* Style uniforme — tous les triggers */
+  .diag-trigger,
+  .diag-trigger.is-active {
+    background: var(--bg-card);
+    border-color: var(--border);
+    box-shadow: none;
+    transform: none;
+  }
+
+  .diag-trigger::before,
+  .diag-trigger.is-active::before { opacity: 0; }
+
+  .diag-trigger-hint { color: var(--accent-light); }
+  .diag-trigger.is-active .diag-trigger-icon { background: transparent; }
+
+  /* Masquer le chevron */
+  .diag-trigger-chevron { display: none; }
+
+  /* Accordion body — toujours visible, collé au trigger */
+  .diag-accordion-body {
+    max-height: none !important;
+    opacity: 1 !important;
+    overflow: visible;
+    transition: none;
+    margin-top: 0;
+    margin-bottom: 1.25rem;
+  }
+
+  /* Card : coins plats en haut (soudé au trigger), arrondis en bas */
+  .diag-accordion-body .diag-card {
+    margin-top: 0;
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    border-top: none;
+  }
+
+  /* Masquer l'illustration */
+  .diag-accordion-body .diag-card-visual {
+    display: none;
   }
 
   .method-steps { grid-template-columns: 1fr; }
@@ -3662,7 +3847,6 @@ p { color: var(--text-secondary); line-height: 1.75; }
   .stats-grid { grid-template-columns: 1fr; }
   .stat-card + .stat-card::before { display: none; }
   .clients-grid { grid-template-columns: repeat(2, 1fr); }
-  .client-filters { flex-direction: column; }
   .tools-grid-interactive { grid-template-columns: 1fr; }
   .topics-grid  { grid-template-columns: 1fr; }
   .formats-grid { grid-template-columns: 1fr; }
