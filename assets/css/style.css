@@ -320,7 +320,6 @@ p { color: var(--text-secondary); line-height: 1.75; }
 .section-intro {
   font-size: var(--text-lg);
   color: var(--text-secondary);
-  max-width: 580px;
   margin-bottom: var(--space-lg);
   line-height: 1.75;
 }
