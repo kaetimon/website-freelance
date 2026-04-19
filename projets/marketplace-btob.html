@@ -354,17 +354,25 @@
       display: flex;
       flex-direction: column;
     }
+    /* Image wrapper — keeps 16:9 ratio and anchors the overlay tag */
+    .finding-img-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      background: var(--bg-alt);
+      flex-shrink: 0;
+    }
     .finding-img {
       width: 100%;
-      aspect-ratio: 16/9;
+      height: 100%;
       object-fit: cover;
+      object-position: top;
       display: block;
-      background: var(--bg-alt);
     }
     .finding-img-placeholder {
-      width: 100%;
-      aspect-ratio: 16/9;
-      background: var(--bg-alt);
+      position: absolute;
+      inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -373,7 +381,26 @@
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      border-bottom: 1px solid var(--border);
+    }
+    /* Tag overlaid on image — always readable */
+    .finding-tag {
+      position: absolute;
+      bottom: var(--space-sm);
+      left: var(--space-sm);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: var(--text-xs);
+      font-weight: 700;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: var(--radius-pill);
+      padding: 0.25rem 0.7rem;
+      white-space: nowrap;
+      z-index: 2;
     }
     .finding-body {
       padding: var(--space-md) var(--space-lg);
@@ -381,21 +408,16 @@
       display: flex;
       flex-direction: column;
     }
-    .finding-meta {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      margin-bottom: 0.6rem;
-    }
     .finding-number {
       font-family: var(--font-heading);
-      font-size: var(--text-sm);
+      font-size: var(--text-xs);
       font-weight: 800;
       background: var(--gradient-vivid);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       line-height: 1;
+      margin-bottom: 0.4rem;
     }
     .finding-card h3 {
       font-size: var(--text-base);
@@ -408,24 +430,6 @@
       font-size: var(--text-sm);
       color: var(--text-secondary);
       line-height: 1.7;
-      flex: 1;
-    }
-    .finding-card .finding-tag {
-      display: inline-block;
-      margin-top: 0.875rem;
-      font-size: var(--text-xs);
-      font-weight: 700;
-      color: var(--violet);
-      background: rgba(109, 40, 217, 0.08);
-      border: 1px solid rgba(109, 40, 217, 0.15);
-      border-radius: var(--radius-pill);
-      padding: 0.2rem 0.6rem;
-      align-self: flex-start;
-    }
-    [data-theme="dark"] .finding-card .finding-tag {
-      color: var(--lavender);
-      background: rgba(144, 97, 249, 0.1);
-      border-color: rgba(144, 97, 249, 0.2);
     }
 
     /* ── Results ── */
@@ -887,72 +891,72 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="findings-grid">
 
         <div class="finding-card reveal">
-          <img src="../assets/img/projets/use-case-1/levier1.png" alt="Réduction des champs" class="finding-img"
-            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="finding-img-placeholder" style="display:none">Capture à venir</div>
-          <div class="finding-body">
-            <div class="finding-meta">
-              <span class="finding-number">01</span>
-            </div>
-            <h3>Réduction de moitié des champs à compléter</h3>
-            <p>Plusieurs champs affichés comme éditables étaient en réalité alimentés par la base de données interne. Ils ont été déplacés dans un encart dédié non modifiable, avec une affordance claire.</p>
+          <div class="finding-img-wrap">
+            <img src="../assets/img/projets/use-case-1/levier1.png" alt="Réduction des champs" class="finding-img"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="finding-img-placeholder" style="display:none">Capture à venir</div>
             <span class="finding-tag">Moins de confusion · Moins d'erreurs</span>
           </div>
+          <div class="finding-body">
+            <span class="finding-number">01</span>
+            <h3>Réduction de moitié des champs à compléter</h3>
+            <p>Plusieurs champs affichés comme éditables étaient en réalité alimentés par la base de données interne. Ils ont été déplacés dans un encart dédié non modifiable, avec une affordance claire.</p>
+          </div>
         </div>
 
         <div class="finding-card reveal">
-          <img src="../assets/img/projets/use-case-1/levier2.png" alt="Réassurance visuel produit" class="finding-img"
-            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="finding-img-placeholder" style="display:none">Capture à venir</div>
-          <div class="finding-body">
-            <div class="finding-meta">
-              <span class="finding-number">02</span>
-            </div>
-            <h3>Réassurance immédiate grâce au visuel produit</h3>
-            <p>Ajout de la photo produit directement dans le parcours. Le vendeur confirme instantanément qu'il a sélectionné le bon produit, sans devoir vérifier un code article. Une image évite ici plusieurs étapes de vérification.</p>
+          <div class="finding-img-wrap">
+            <img src="../assets/img/projets/use-case-1/levier2.png" alt="Réassurance visuel produit" class="finding-img"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="finding-img-placeholder" style="display:none">Capture à venir</div>
             <span class="finding-tag">Moins de charge cognitive</span>
           </div>
+          <div class="finding-body">
+            <span class="finding-number">02</span>
+            <h3>Réassurance immédiate grâce au visuel produit</h3>
+            <p>Ajout de la photo produit directement dans le parcours. Le vendeur confirme instantanément qu'il a sélectionné le bon produit, sans devoir vérifier un code article. Une image évite ici plusieurs étapes de vérification.</p>
+          </div>
         </div>
 
         <div class="finding-card reveal">
-          <img src="../assets/img/projets/use-case-1/levier3.png" alt="Fusion prix et remise" class="finding-img"
-            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="finding-img-placeholder" style="display:none">Capture à venir</div>
-          <div class="finding-body">
-            <div class="finding-meta">
-              <span class="finding-number">03</span>
-            </div>
-            <h3>Fusion des champs prix + remise</h3>
-            <p>Le prix proposé et la remise étaient deux champs séparés alors qu'ils dépendaient l'un de l'autre. Ils ont été fusionnés dans une seule logique d'action. L'utilisateur comprend immédiatement quoi renseigner.</p>
+          <div class="finding-img-wrap">
+            <img src="../assets/img/projets/use-case-1/levier3.png" alt="Fusion prix et remise" class="finding-img"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="finding-img-placeholder" style="display:none">Capture à venir</div>
             <span class="finding-tag">Clarté · Gain de temps</span>
           </div>
-        </div>
-
-        <div class="finding-card reveal">
-          <img src="../assets/img/projets/use-case-1/levier4.png" alt="Analyse concurrentielle" class="finding-img"
-            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="finding-img-placeholder" style="display:none">Capture à venir</div>
           <div class="finding-body">
-            <div class="finding-meta">
-              <span class="finding-number">04</span>
-            </div>
-            <h3>Analyse concurrentielle intégrée au parcours</h3>
-            <p>Les vendeurs quittaient systématiquement le formulaire pour comparer les prix ailleurs. Nous avons intégré cette aide directement dans la colonne latérale&nbsp;: prix recommandés, concurrence récente, anciennes ventes personnelles.</p>
-            <span class="finding-tag">Moins de navigation parasite · Meilleure décision</span>
+            <span class="finding-number">03</span>
+            <h3>Fusion des champs prix + remise</h3>
+            <p>Le prix proposé et la remise étaient deux champs séparés alors qu'ils dépendaient l'un de l'autre. Ils ont été fusionnés dans une seule logique d'action. L'utilisateur comprend immédiatement quoi renseigner.</p>
           </div>
         </div>
 
         <div class="finding-card reveal">
-          <img src="../assets/img/projets/use-case-1/levier5.png" alt="Accès rapide aux actions" class="finding-img"
-            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="finding-img-placeholder" style="display:none">Capture à venir</div>
+          <div class="finding-img-wrap">
+            <img src="../assets/img/projets/use-case-1/levier4.png" alt="Analyse concurrentielle" class="finding-img"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="finding-img-placeholder" style="display:none">Capture à venir</div>
+            <span class="finding-tag">Moins de navigation parasite · Meilleure décision</span>
+          </div>
           <div class="finding-body">
-            <div class="finding-meta">
-              <span class="finding-number">05</span>
-            </div>
+            <span class="finding-number">04</span>
+            <h3>Analyse concurrentielle intégrée au parcours</h3>
+            <p>Les vendeurs quittaient systématiquement le formulaire pour comparer les prix ailleurs. Nous avons intégré cette aide directement dans la colonne latérale&nbsp;: prix recommandés, concurrence récente, anciennes ventes personnelles.</p>
+          </div>
+        </div>
+
+        <div class="finding-card reveal">
+          <div class="finding-img-wrap">
+            <img src="../assets/img/projets/use-case-1/levier5.png" alt="Accès rapide aux actions" class="finding-img"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="finding-img-placeholder" style="display:none">Capture à venir</div>
+            <span class="finding-tag">Fluidité · Continuité</span>
+          </div>
+          <div class="finding-body">
+            <span class="finding-number">05</span>
             <h3>Accès rapide aux actions</h3>
             <p>CTA fixes en bas d'écran, accès direct à la gestion des annonces, liens externes ouverts sans perte de progression. L'objectif&nbsp;: ne jamais casser l'élan de mise en vente.</p>
-            <span class="finding-tag">Fluidité · Continuité</span>
           </div>
         </div>
 

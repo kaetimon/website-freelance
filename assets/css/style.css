@@ -2683,18 +2683,19 @@ p { color: var(--text-secondary); line-height: 1.75; }
   outline-offset: 3px;
 }
 
-/* ── Zone images ── */
+/* ── Zone images — ratio 16:9 ── */
 .pcase-visuals {
   position: relative;
-  height: 200px;
+  height: 0;
+  padding-bottom: 56.25%; /* 9/16 = ratio 16:9 */
   margin: var(--space-md) var(--space-md) 0;
   flex-shrink: 0;
   z-index: 2;
-  transition: opacity 0.3s ease, height 0.4s cubic-bezier(0.4, 0, 0.2, 1), margin 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.3s ease, padding-bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1), margin 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .pcase-card:hover .pcase-visuals {
   opacity: 0;
-  height: 0;
+  padding-bottom: 0;
   margin-top: 0;
   margin-bottom: 0;
   overflow: hidden;
@@ -2741,20 +2742,17 @@ p { color: var(--text-secondary); line-height: 1.75; }
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  background: rgba(255,255,255,0.72);
+  background: rgba(0,0,0,0.55);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  color: var(--violet);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: #fff;
   padding: 0.2rem 0.55rem;
   border-radius: var(--radius-pill);
   white-space: nowrap;
   line-height: 1.4;
   position: relative;
   z-index: 1;
-}
-[data-theme="dark"] .pcase-img-chip {
-  background: rgba(0,0,0,0.35);
-  color: var(--lavender);
 }
 
 /* ── Image réelle dans les cards ── */
@@ -2896,7 +2894,7 @@ p { color: var(--text-secondary); line-height: 1.75; }
 /* ── Mobile & tablette : description toujours visible, pas de hover coloré ── */
 @media (hover: none), (max-width: 1024px) {
   .pcase-card:hover { background: var(--bg-card) !important; }
-  .pcase-card:hover .pcase-visuals { opacity: 1 !important; height: 200px !important; margin: var(--space-md) var(--space-md) 0 !important; }
+  .pcase-card:hover .pcase-visuals { opacity: 1 !important; padding-bottom: 56.25% !important; margin: var(--space-md) var(--space-md) 0 !important; }
   .pcase-card:hover .pcase-tags .tag { background: var(--bg-alt); color: var(--violet); border-color: var(--border); }
   .pcase-card:hover .pcase-title { color: var(--text-primary); }
   .pcase-card:hover .pcase-client { color: var(--text-muted); }
