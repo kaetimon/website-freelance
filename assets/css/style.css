@@ -2805,10 +2805,6 @@ p { color: var(--text-secondary); line-height: 1.75; }
   opacity: 0.7;
   font-weight: 500;
 }
-.pcase-client::before {
-  content: '🔒';
-  font-size: 0.7rem;
-}
 .pcase-client-name {
   filter: blur(4px);
   user-select: none;
