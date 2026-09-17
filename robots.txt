@@ -1,7 +1,6 @@
 User-agent: *
 Allow: /
 
-Disallow: /projets/marketplace-btob.html
 Disallow: /projets/app-evenementiel.html
 Disallow: /projets/saas-immobilier.html
 
